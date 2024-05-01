@@ -18,9 +18,9 @@ return new class extends Migration
             $table->string('logo_path')->nullable();
             $table->string('home_center')->nullable();
             $table->string('home_center_path')->nullable();
-            $table->string('home_left');
+            $table->string('home_left')->nullable();
             $table->string('home_left_path')->nullable();
-            $table->string('home_right');
+            $table->string('home_right')->nullable();
             $table->string('home_right_path')->nullable();
             $table->string('bottom_img')->nullable();
             $table->string('bottom_img_path')->nullable();

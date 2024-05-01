@@ -28,6 +28,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::post('/save-images', [ImageController::class, 'saveImages']);
+Route::post('/save-images', [ImageController::class, 'SaveImage']);
 
 require __DIR__.'/auth.php';
