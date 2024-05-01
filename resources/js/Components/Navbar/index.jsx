@@ -72,14 +72,10 @@ function Navbar() {
                         <div className="col-lg-3 col-md-3 col-8 d-flex align-items-center justify-content-center col-right">
                             <div className="nav-right-col">
                                 <div className="nav-acc-info">
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    {/* <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"> */}
+                                    <a href="/login">
                                         <img src={Person} alt="" />
                                     </a>
-                                    {/* <!-- Button trigger modal --> */}
-                                    {/* <button type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Launch demo modal
-                                    </button> */}
-
                                     {/* <!-- Modal --> */}
                                     <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div className="modal-dialog">
