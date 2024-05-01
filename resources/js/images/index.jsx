@@ -5,5 +5,7 @@ import sideBanner from "../images/side_banner.png";
 import Person from "../images/Login.svg";
 import Mode from "../images/mode.svg";
 import LightMode from "../images/lightMode.svg";
+import AdsBig from '../images/adsBig.png';
+import AdsLarge from '../images/adsLarge.png';
 
-export { Logo, arrow_green, arrow_red, sideBanner, Person, Mode, LightMode };
+export { Logo, arrow_green, arrow_red, sideBanner, Person, Mode, LightMode, AdsBig, AdsLarge };
