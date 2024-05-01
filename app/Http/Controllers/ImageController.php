@@ -14,7 +14,7 @@ use Inertia\Response;
 class ImageController extends Controller
 {
 
-    public function SaveImage(Request $request)
+    public function SaveImage(Request $request): RedirectResponse
     {
         // Save the logo image
         $logoName = $request->file('logo')->getClientOriginalName();
@@ -31,7 +31,8 @@ class ImageController extends Controller
         $logoSave->home_center_path = $centerBannerDbPath[2];
         $logoSave->save();
 
-        return response('success');
+        // return response('success');
+        return Redirect::route('updateBanners');
     }
 
 

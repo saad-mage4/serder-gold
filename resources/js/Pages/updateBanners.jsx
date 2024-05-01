@@ -10,15 +10,26 @@ export default function updateBanners({ auth }) {
     const user = usePage().props.auth.user;
     // console.log(user);
 
-    const { data, setData, post, errors, processing, recentlySuccessful } =
-        useForm({
-            logo: null,
-            centerBanner: null,
-        });
+    const {
+        data,
+        setData,
+        post,
+        errors,
+        processing,
+        recentlySuccessful,
+    } = useForm({
+        logo: null,
+        centerBanner: null,
+    });
 
     const submit = (e) => {
         e.preventDefault();
-        post("/save-images");
+        // post("/save-images");
+        post(route("save-images"), {
+            preserveScroll: true,
+            onSuccess: () => {
+            },
+        });
     };
 
     return (
