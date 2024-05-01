@@ -101,7 +101,7 @@ const GoldPricesNews = () => {
                             <th>Döviz</th>
                             <th>Olay</th>
                             <th>Önem</th>
-                            <th>Açıklanan</th>
+                            <th>Açiklanan</th>
                             <th className="tar">Beklenti</th>
                             <th className="tar">Önceki</th>
                           </tr>
@@ -120,7 +120,7 @@ const GoldPricesNews = () => {
                                 <i className="fa-solid fa-star light"></i>
                               </div>
                             </td>
-                            <td data-label="Açıklanan">&nbsp;</td>
+                            <td data-label="Açiklanan">&nbsp;</td>
                             <td data-label="Beklenti" className="tar">
                               0,20%
                             </td>
@@ -141,7 +141,7 @@ const GoldPricesNews = () => {
                                 <i className="fa-solid fa-star light"></i>
                               </div>
                             </td>
-                            <td data-label="Açıklanan">&nbsp;</td>
+                            <td data-label="Açiklanan">&nbsp;</td>
                             <td data-label="Beklenti" className="tar">
                               0,51%
                             </td>
@@ -162,7 +162,7 @@ const GoldPricesNews = () => {
                                 <i className="fa-solid fa-star light"></i>
                               </div>
                             </td>
-                            <td data-label="Açıklanan">&nbsp;</td>
+                            <td data-label="Açiklanan">&nbsp;</td>
                             <td data-label="Beklenti" className="tar">
                               0,20%
                             </td>
@@ -183,7 +183,7 @@ const GoldPricesNews = () => {
                                 <i className="fa-solid fa-star light"></i>
                               </div>
                             </td>
-                            <td data-label="Açıklanan">&nbsp;</td>
+                            <td data-label="Açiklanan">&nbsp;</td>
                             <td data-label="Beklenti" className="tar">
                               0,51%
                             </td>
@@ -204,7 +204,7 @@ const GoldPricesNews = () => {
                                 <i className="fa-solid fa-star light"></i>
                               </div>
                             </td>
-                            <td data-label="Açıklanan">&nbsp;</td>
+                            <td data-label="Açiklanan">&nbsp;</td>
                             <td data-label="Beklenti" className="tar">
                               0,20%
                             </td>
@@ -225,7 +225,7 @@ const GoldPricesNews = () => {
                                 <i className="fa-solid fa-star light"></i>
                               </div>
                             </td>
-                            <td data-label="Açıklanan">&nbsp;</td>
+                            <td data-label="Açiklanan">&nbsp;</td>
                             <td data-label="Beklenti" className="tar">
                               0,51%
                             </td>
@@ -246,7 +246,7 @@ const GoldPricesNews = () => {
                                 <i className="fa-solid fa-star light"></i>
                               </div>
                             </td>
-                            <td data-label="Açıklanan">&nbsp;</td>
+                            <td data-label="Açiklanan">&nbsp;</td>
                             <td data-label="Beklenti" className="tar">
                               0,20%
                             </td>
@@ -267,7 +267,7 @@ const GoldPricesNews = () => {
                                 <i className="fa-solid fa-star light"></i>
                               </div>
                             </td>
-                            <td data-label="Açıklanan">&nbsp;</td>
+                            <td data-label="Açiklanan">&nbsp;</td>
                             <td data-label="Beklenti" className="tar">
                               0,51%
                             </td>
@@ -289,7 +289,7 @@ const GoldPricesNews = () => {
                             <th>Döviz</th>
                             <th>Olay</th>
                             <th>Önem</th>
-                            <th>Açıklanan</th>
+                            <th>Açiklanan</th>
                             <th className="tar">Beklenti</th>
                             <th className="tar">Önceki</th>
                           </tr>
@@ -361,7 +361,7 @@ const GoldPricesNews = () => {
                   </div>
                 </div>
                 <div className="col-12 bottom-sec">
-                  <a href="#!">Tüm Olayları Göster</a>
+                  <a href="#!">Tüm Olaylari Göster</a>
                 </div>
               </div>
             </div>

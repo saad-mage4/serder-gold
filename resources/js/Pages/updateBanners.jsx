@@ -50,16 +50,17 @@ export default function updateBanners({ auth }) {
 
                                 <form
                                     onSubmit={submit}
-                                    className="mt-6 space-y-6"
+                                    className="mt-6 grid grid-cols-2 gap-5"
                                 >
-                                    <div>
+                                    <div className="form-group">
                                         <InputLabel
                                             htmlFor="logo"
                                             value="Logo Image"
+                                            className="block mb-2 text-sm font-medium text-gray-900"
                                         />
                                         <TextInput
                                             id="logo"
-                                            className="mt-1 block w-full"
+                                            className="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none  dark:placeholder-gray-400"
                                             type="file"
                                             onChange={(e) =>
                                                 setData(
@@ -75,14 +76,15 @@ export default function updateBanners({ auth }) {
                                             message={errors.logo}
                                         />
                                     </div>
-                                    <div>
+                                    <div className="form-group">
                                         <InputLabel
                                             htmlFor="centerBanner"
                                             value="Center Banner Image"
+                                            className="block mb-2 text-sm font-medium text-gray-900"
                                         />
                                         <TextInput
                                             id="centerBanner"
-                                            className="mt-1 block w-full"
+                                            className="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none  dark:placeholder-gray-400"
                                             type="file"
                                             onChange={(e) =>
                                                 setData(
