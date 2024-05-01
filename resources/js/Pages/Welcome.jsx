@@ -6,6 +6,7 @@ import MainContent from '@/Components/MainContent';
 import GoldGuide from '@/Components/GoldGuide';
 import GoldPricesNews from '@/Components/GoldPricesNews';
 import Layout from '@/Layouts/Layout';
+import NewsSection from '@/Components/NewsSection';
 const Welcome = () => {
   return (
     <Layout>
@@ -13,6 +14,7 @@ const Welcome = () => {
       <MainContent/>
       <GoldGuide />
       <GoldPricesNews />
+      <NewsSection/>
     </Layout>
   )
 }
