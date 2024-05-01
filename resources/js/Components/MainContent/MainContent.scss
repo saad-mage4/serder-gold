@@ -142,7 +142,7 @@
                     appearance: none;
                     padding-right: 25px;
                     position: relative;
-                    background-image: url(./src/images/drop-down.svg);
+                    background-image: url(/resources/js/images/drop-down.svg);
                     background-size: 20%;
                     background-position: right;
                     background-repeat: no-repeat;
@@ -199,7 +199,7 @@
                           transform: translateY(-50%);
                           width: 15px;
                           height: 10px;
-                          background-image: url(./src/images/arrow-green-up.svg);
+                          background-image: url(/resources/js/images/arrow-green-up.svg);
                           background-size: cover;
                         }
                       }
@@ -213,7 +213,7 @@
                           transform: translateY(-50%);
                           width: 15px;
                           height: 10px;
-                          background-image: url(./src/images/arrow-red-down.svg);
+                          background-image: url('/resources/js/images/arrow-red-down.svg');
                           background-size: cover;
                         }
                       }

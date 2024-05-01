@@ -50,7 +50,7 @@ body.dark_theme .addsTable-main-wrapper .row > div.middle-col .black-box-col .se
 
 body.dark_theme .addsTable-main-wrapper .row > div.middle-col .black-box-col .select-dd-wrap .drop-down select
 {
-  background-image: url(./src/images/drop-down-white.svg)  !important; 
+  background-image: url(/resources/js/images/drop-down-white.svg)  !important; 
 }
 
 body.dark_theme .addsTable-main-wrapper .row > div.middle-col .black-bg-head{
