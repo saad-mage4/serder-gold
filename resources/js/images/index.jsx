@@ -14,5 +14,6 @@ import Sabah from "../images/Sabah.svg";
 import Obilet from "../images/Obilet.svg";
 import Spotify from "../images/Spotify.svg";
 import appStore from "../images/appStrore.svg";
+import Favicon from "../images/favIcon.svg";
 
-export { Logo, arrow_green, arrow_red, sideBanner, Person, Mode, LightMode, AdsBig, AdsLarge, side_banner, LogoWhite, Sabah, Obilet, Spotify, appStore, Ellipse };
+export { Logo, arrow_green, arrow_red, sideBanner, Person, Mode, LightMode, AdsBig, AdsLarge, side_banner, LogoWhite, Sabah, Obilet, Spotify, appStore, Ellipse, Favicon };
