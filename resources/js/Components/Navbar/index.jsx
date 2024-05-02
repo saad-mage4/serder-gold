@@ -4,6 +4,7 @@ import { Logo, Person, Mode, LightMode } from "@/images";
 import { Link } from "@inertiajs/react";
 import Dropdown from "../Dropdown";
 import axios from "axios";
+import LiveClockUpdate from "../Clock";
 
 function Navbar({ userID, userName }) {
     const [HeaderLogo, setHeaderLogo] = useState("");
@@ -117,7 +118,9 @@ function Navbar({ userID, userName }) {
                                                 <a
                                                     href="/dashboard"
                                                     className="d-block m-1 pl-2 text-black no-underline"
-                                                >Dashboard</a>
+                                                >
+                                                    Dashboard
+                                                </a>
                                                 <Link
                                                     className="d-block m-1 pl-2 text-black no-underline"
                                                     method="post"
@@ -229,11 +232,12 @@ function Navbar({ userID, userName }) {
                                     </button>
                                 </div>
                                 <span id="curr-time">
-                                    <span id="hrs">00</span>
+                                    {/* <span id="hrs">00</span>
                                     <span>:</span>
                                     <span id="min">00</span>
                                     <span>:</span>
-                                    <span id="sec">00</span>
+                                    <span id="sec">00</span> */}
+                                    <LiveClockUpdate showSeconds={true} />
                                 </span>
                             </div>
                         </div>
