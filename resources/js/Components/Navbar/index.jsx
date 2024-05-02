@@ -8,21 +8,21 @@ import axios from "axios";
 function Navbar({ userID, userName }) {
     const [HeaderLogo, setHeaderLogo] = useState("");
 
-    function displayTime() {
-        var currentTime = new Date();
-        var hrs = currentTime.getHours();
-        var min =
-            (currentTime.getMinutes() < 10 ? "0" : "") +
-            currentTime.getMinutes();
-        var sec =
-            (currentTime.getSeconds() < 10 ? "0" : "") +
-            currentTime.getSeconds();
+    // function displayTime() {
+    //     var currentTime = new Date();
+    //     var hrs = currentTime.getHours();
+    //     var min =
+    //         (currentTime.getMinutes() < 10 ? "0" : "") +
+    //         currentTime.getMinutes();
+    //     var sec =
+    //         (currentTime.getSeconds() < 10 ? "0" : "") +
+    //         currentTime.getSeconds();
 
-        document.getElementById("hrs").innerHTML = hrs;
-        document.getElementById("min").innerHTML = min;
-        document.getElementById("sec").innerHTML = sec;
-    }
-    setInterval(displayTime, 1000);
+    //     document.getElementById("hrs").innerHTML = hrs;
+    //     document.getElementById("min").innerHTML = min;
+    //     document.getElementById("sec").innerHTML = sec;
+    // }
+    // setInterval(displayTime, 1000);
 
     const [myStyle, setMyyStyle] = useState({
         color: "#fff",
@@ -108,12 +108,16 @@ function Navbar({ userID, userName }) {
                                                 </a>
                                             </Dropdown.Trigger>
                                             <Dropdown.Content>
-                                                <Link
+                                                {/* <Link
                                                     className="d-block m-1 pl-2 text-black no-underline"
                                                     href={route("dashboard")}
                                                 >
                                                     Dashboard
-                                                </Link>
+                                                </Link> */}
+                                                <a
+                                                    href="/dashboard"
+                                                    className="d-block m-1 pl-2 text-black no-underline"
+                                                >Dashboard</a>
                                                 <Link
                                                     className="d-block m-1 pl-2 text-black no-underline"
                                                     method="post"

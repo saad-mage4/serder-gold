@@ -16,16 +16,16 @@ const GoldPricesNews = () => {
       });
   }, []);
 
-  function displayTime() {
-    var currentTime = new Date();
-    var hrs = currentTime.getHours();
-    var min =
-      (currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes();
+  // function displayTime() {
+  //   var currentTime = new Date();
+  //   var hrs = currentTime.getHours();
+  //   var min =
+  //     (currentTime.getMinutes() < 10 ? "0" : "") + currentTime.getMinutes();
 
-    document.querySelector(".hour").innerHTML = hrs;
-    document.querySelector(".mints").innerHTML = min;
-  }
-  setInterval(displayTime, 1000);
+  //   document.querySelector(".hour").innerHTML = hrs;
+  //   document.querySelector(".mints").innerHTML = min;
+  // }
+  // setInterval(displayTime, 1000);
 
   const getIndex = (event) => {
     const index = event.target.getAttribute("data-index");
