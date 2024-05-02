@@ -80,7 +80,7 @@ class ImageController extends Controller
         /* Saving the images */
         $imgSave->save();
 
-        return Redirect::route('updateBanners')->with('success', 'Images saved successfully!');
+        return Redirect::route('updateImages')->with('success', 'Images saved successfully!');
     }
 
     public function getImages()

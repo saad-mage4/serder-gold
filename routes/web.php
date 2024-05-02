@@ -27,9 +27,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
-    Route::get('/updateBanners', function () {
-        return Inertia::render('updateBanners');
-    })->name('updateBanners');
+    Route::get('/updateImages', function () {
+        return Inertia::render('updateImages');
+    })->name('updateImages');
 
     Route::post('/save-images', [ImageController::class, 'SaveImages'])->name('save-images');
     Route::get('/get-images', [ImageController::class, 'getImages'])->name('get-images');
