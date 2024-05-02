@@ -8,6 +8,7 @@ const GoldPricesNews = () => {
     axios
       .get("http://127.0.0.1:8000/get-images")
       .then((res) => {
+        // console.log(res.data);
         SetRightImg(res.data.bottom_img);
       })
       .catch((err) => {
