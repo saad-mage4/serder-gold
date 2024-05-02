@@ -76,7 +76,7 @@ export default function updateImages({ auth }) {
                                                     e.target.files[0]
                                                 )
                                             }
-                                            required
+                                            // required
                                         />
 
                                         <InputError

@@ -1,20 +1,19 @@
 import "./goldPricesNews.scss";
 import { side_banner } from "@/images";
-// import { useEffect } from "react";
-// import { useState } from "react";
-// import axios from "axios";
+import { useEffect, useState } from "react";
+import axios from "axios";
 const GoldPricesNews = () => {
-//   const [RightImg, SetRightImg] = useState("");
-//   useEffect(() => {
-//     axios
-//       .get("http://127.0.0.1:8000/api/Banners")
-//       .then((res) => {
-//         SetRightImg(res.data.bottom_img);
-//       })
-//       .catch((err) => {
-//         console.log(err);
-//       });
-//   }, []);
+  const [RightImg, SetRightImg] = useState("");
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/get-images")
+      .then((res) => {
+        SetRightImg(res.data.bottom_img);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   function displayTime() {
     var currentTime = new Date();
@@ -367,7 +366,7 @@ const GoldPricesNews = () => {
             </div>
           </div>
           <div className="col-12 col-lg-4">
-            <img src={side_banner} alt="side-banner" />
+            <img src={RightImg} alt="side-banner" />
           </div>
         </div>
       </div>
