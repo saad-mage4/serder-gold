@@ -32,7 +32,7 @@ class ImageController extends Controller
         $logoSave->save();
 
         // return response('success');
-        return Redirect::route('updateBanners');
+        return Redirect::route('updateImages');
     }
 
 

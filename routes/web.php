@@ -18,9 +18,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/updateBanners', function () {
-    return Inertia::render('updateBanners');
-})->middleware(['auth', 'verified'])->name('updateBanners');
+Route::get('/updateImages', function () {
+    return Inertia::render('updateImages');
+})->middleware(['auth', 'verified'])->name('updateImages');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
