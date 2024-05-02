@@ -18,8 +18,13 @@ export default function updateImages({ auth }) {
         processing,
         recentlySuccessful,
     } = useForm({
-        logo: null,
+        siteTitle: null,
+        logo_header: null,
+        logo_footer: null,
         centerBanner: null,
+        LeftBanner: null,
+        rightBanner: null,
+        bottomBanner: null,
     });
 
     const submit = (e) => {
