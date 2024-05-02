@@ -21,7 +21,7 @@ class ImageController extends Controller
             'RightBanner.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'bottomBanner.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-
+        // dd($request);
         /* Checking if exist already */
         $imgSave = Images::first();
 
@@ -35,8 +35,8 @@ class ImageController extends Controller
         }
 
         /* Setting the images to their respective columns */
-        if ($request->hasFile('logo')) {
-            $logoHeader = $request->file('logo');
+        if ($request->hasFile('logo_header')) {
+            $logoHeader = $request->file('logo_header');
             $logoHeaderName = time() . '_' . $logoHeader->getClientOriginalName();
             $logoHeader->move(public_path('images'), $logoHeaderName);
             $imgSave->logo_header = 'images/' . $logoHeaderName;

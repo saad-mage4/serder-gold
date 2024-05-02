@@ -10,30 +10,23 @@ export default function updateImages({ auth }) {
     const user = usePage().props.auth.user;
     // console.log(user);
 
-    const {
-        data,
-        setData,
-        post,
-        errors,
-        processing,
-        recentlySuccessful,
-    } = useForm({
-        siteTitle: null,
-        logo_header: null,
-        logo_footer: null,
-        centerBanner: null,
-        LeftBanner: null,
-        rightBanner: null,
-        bottomBanner: null,
-    });
+    const { data, setData, post, errors, processing, recentlySuccessful } =
+        useForm({
+            siteTitle: null,
+            logo_header: null,
+            logo_footer: null,
+            centerBanner: null,
+            LeftBanner: null,
+            rightBanner: null,
+            bottomBanner: null,
+        });
 
     const submit = (e) => {
         e.preventDefault();
         // post("/save-images");
         post(route("save-images"), {
             preserveScroll: true,
-            onSuccess: () => {
-            },
+            onSuccess: () => {},
         });
     };
 
@@ -59,8 +52,7 @@ export default function updateImages({ auth }) {
                                     </h2>
 
                                     <p className="mt-1 text-sm text-gray-600">
-                                        Update your home page
-                                        information.
+                                        Update your home page information.
                                     </p>
                                 </header>
 
@@ -80,7 +72,7 @@ export default function updateImages({ auth }) {
                                             type="file"
                                             onChange={(e) =>
                                                 setData(
-                                                    "logo",
+                                                    "logo_header",
                                                     e.target.files[0]
                                                 )
                                             }
@@ -89,17 +81,41 @@ export default function updateImages({ auth }) {
 
                                         <InputError
                                             className="mt-2"
-                                            message={errors.logo}
+                                            message={errors.logo_header}
                                         />
                                     </div>
                                     <div className="form-group">
                                         <InputLabel
-                                            htmlFor="centerBanner"
+                                            htmlFor="logoFooter"
                                             value="Logo Footer"
                                             className="block mb-2 text-sm font-medium text-gray-900"
                                         />
                                         <TextInput
-                                            id="centerBanner"
+                                            id="logoFooter"
+                                            className="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none  dark:placeholder-gray-400"
+                                            type="file"
+                                            onChange={(e) =>
+                                                setData(
+                                                    "logo_footer",
+                                                    e.target.files[0]
+                                                )
+                                            }
+                                            // required
+                                        />
+
+                                        <InputError
+                                            className="mt-2"
+                                            message={errors.logo_footer}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <InputLabel
+                                            htmlFor="centerAd"
+                                            value="Center Ad"
+                                            className="block mb-2 text-sm font-medium text-gray-900"
+                                        />
+                                        <TextInput
+                                            id="centerAd"
                                             className="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none  dark:placeholder-gray-400"
                                             type="file"
                                             onChange={(e) =>
@@ -108,12 +124,84 @@ export default function updateImages({ auth }) {
                                                     e.target.files[0]
                                                 )
                                             }
-                                            required
+                                            // required
                                         />
 
                                         <InputError
                                             className="mt-2"
                                             message={errors.centerBanner}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <InputLabel
+                                            htmlFor="leftAd"
+                                            value="Left Ad"
+                                            className="block mb-2 text-sm font-medium text-gray-900"
+                                        />
+                                        <TextInput
+                                            id="leftAd"
+                                            className="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none  dark:placeholder-gray-400"
+                                            type="file"
+                                            onChange={(e) =>
+                                                setData(
+                                                    "leftBanner",
+                                                    e.target.files[0]
+                                                )
+                                            }
+                                            // required
+                                        />
+
+                                        <InputError
+                                            className="mt-2"
+                                            message={errors.leftBanner}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <InputLabel
+                                            htmlFor="rightAd"
+                                            value="Right Ad"
+                                            className="block mb-2 text-sm font-medium text-gray-900"
+                                        />
+                                        <TextInput
+                                            id="rightAd"
+                                            className="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none  dark:placeholder-gray-400"
+                                            type="file"
+                                            onChange={(e) =>
+                                                setData(
+                                                    "rightBanner",
+                                                    e.target.files[0]
+                                                )
+                                            }
+                                            // required
+                                        />
+
+                                        <InputError
+                                            className="mt-2"
+                                            message={errors.rightBanner}
+                                        />
+                                    </div>
+                                    <div className="form-group">
+                                        <InputLabel
+                                            htmlFor="bottomAd"
+                                            value="Bottom Ad"
+                                            className="block mb-2 text-sm font-medium text-gray-900"
+                                        />
+                                        <TextInput
+                                            id="bottomAd"
+                                            className="block w-full text-lg text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none  dark:placeholder-gray-400"
+                                            type="file"
+                                            onChange={(e) =>
+                                                setData(
+                                                    "bottomBanner",
+                                                    e.target.files[0]
+                                                )
+                                            }
+                                            // required
+                                        />
+
+                                        <InputError
+                                            className="mt-2"
+                                            message={errors.bottomAd}
                                         />
                                     </div>
 

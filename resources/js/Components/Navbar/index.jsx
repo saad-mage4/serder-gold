@@ -3,8 +3,11 @@ import "./Navbar.scss";
 import { Logo, Person, Mode, LightMode } from "@/images";
 import { Link } from "@inertiajs/react";
 import Dropdown from "../Dropdown";
+import axios from "axios";
 
 function Navbar({ userID, userName }) {
+    const [HeaderLogo, setHeaderLogo] = useState("");
+
     function displayTime() {
         var currentTime = new Date();
         var hrs = currentTime.getHours();
@@ -41,6 +44,16 @@ function Navbar({ userID, userName }) {
     };
 
     useEffect(() => {
+        axios
+            .get("http://127.0.0.1:8000/get-images")
+            .then((res) => {
+                // console.log(res.data);
+                setHeaderLogo(res.data.logo_header);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
         const sectionTop = document.querySelector("#navbar");
         window.addEventListener("scroll", function () {
             if (window.scrollY >= 80) {
@@ -63,7 +76,11 @@ function Navbar({ userID, userName }) {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-4 col-md-3 d-flex align-items-center col-logo">
-                            <img src={Logo} alt="" />
+                            {HeaderLogo != null ? (
+                                <img src={HeaderLogo} alt="Logo" />
+                            ) : (
+                                <h3>Your Logo</h3>
+                            )}
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12">
                             <form className="d-flex" role="search">
