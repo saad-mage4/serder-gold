@@ -39,10 +39,24 @@ function MainContent() {
             <div className="container addsTable-main-wrapper">
                 <div className="row">
                     <div className="col-lg-2 col-md-4">
-                        <img src={LeftAd} alt="" className="ad-side" />
+                        {LeftAd != null ? (
+                            <img src={LeftAd} alt="" className="ad-side" />
+                        ) : (
+                            <img
+                                src="https://dummyimage.com/216x500/000/f0b90b"
+                                alt="left-img"
+                            />
+                        )}
                     </div>
                     <div className="col-lg-8 col-md-8 middle-col">
-                        <img src={CenterAd} alt="" />
+                        {LeftAd != null ? (
+                            <img src={CenterAd} alt="" />
+                        ) : (
+                            <img
+                                src="https://dummyimage.com/936x240/000/f0b90b"
+                                alt="left-img"
+                            />
+                        )}
 
                         <table className="table">
                             <thead>
@@ -394,7 +408,14 @@ function MainContent() {
                         </div>
                     </div>
                     <div className="col-lg-2 col-md-4">
-                        <img src={RightAd} alt="" className="ad-side" />
+                        {LeftAd != null ? (
+                            <img src={RightAd} alt="" className="ad-side" />
+                        ) : (
+                            <img
+                                src="https://dummyimage.com/216x500/000/f0b90b"
+                                alt="left-img"
+                            />
+                        )}
                     </div>
                 </div>
             </div>

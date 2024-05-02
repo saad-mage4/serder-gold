@@ -80,7 +80,10 @@ function Navbar({ userID, userName }) {
                             {HeaderLogo != null ? (
                                 <img src={HeaderLogo} alt="Logo" />
                             ) : (
-                                <h3>Your Logo</h3>
+                                <img
+                                    src="https://dummyimage.com/148x35/000/f0b90b"
+                                    alt="left-img"
+                                />
                             )}
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12">

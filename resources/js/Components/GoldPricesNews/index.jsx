@@ -513,7 +513,14 @@ const GoldPricesNews = () => {
                         </div>
                     </div>
                     <div className="col-12 col-lg-4">
-                        <img src={RightImg} alt="side-banner" />
+                        {RightImg != null ? (
+                            <img src={RightImg} alt="side-banner" />
+                        ) : (
+                            <img
+                                src="https://dummyimage.com/411x523/000/f0b90b"
+                                alt="left-img"
+                            />
+                        )}
                     </div>
                 </div>
             </div>
