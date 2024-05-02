@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react'
 import './Navbar.scss'
 import { Logo, Person, Mode, LightMode } from '@/images';
+import { Link } from '@inertiajs/react';
 
-function Navbar() {
+function Navbar({userID}) {
 
 
     function displayTime() {
@@ -73,9 +74,11 @@ function Navbar() {
                             <div className="nav-right-col">
                                 <div className="nav-acc-info">
                                     {/* <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"> */}
-                                    <a href="/login">
+                                    {
+                                        (userID != null) ? <Link className='text-white no-underline' method="post" href={route('logout')}>Logout</Link>: <a href="/login">
                                         <img src={Person} alt="" />
                                     </a>
+                                    }
                                     {/* <!-- Modal --> */}
                                     <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div className="modal-dialog">

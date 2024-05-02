@@ -7,9 +7,9 @@ import GoldGuide from '@/Components/GoldGuide';
 import GoldPricesNews from '@/Components/GoldPricesNews';
 import Layout from '@/Layouts/Layout';
 import NewsSection from '@/Components/NewsSection';
-const Welcome = () => {
+const Welcome = ({auth}) => {
   return (
-    <Layout>
+    <Layout user={auth.user}>
       <TabsSection/>
       <MainContent/>
       <GoldGuide />

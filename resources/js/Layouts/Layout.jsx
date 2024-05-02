@@ -1,10 +1,10 @@
 import Footer from "@/Components/Footer";
 import Navbar from "@/Components/Navbar";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, user }) => {
     return (
         <>
-            <Navbar />
+            <Navbar userID={user?.id} />
             {children}
             <Footer/>
         </>
