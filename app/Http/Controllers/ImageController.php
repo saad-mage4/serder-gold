@@ -2,43 +2,89 @@
 
 namespace App\Http\Controllers;
 
-use App\helper;
 use App\Models\Images;
 use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
-use Inertia\Inertia;
-use Inertia\Response;
+
 
 class ImageController extends Controller
 {
-
-    public function SaveImage(Request $request): RedirectResponse
+    public function SaveImages(Request $request): RedirectResponse
     {
-        // Save the logo image
-        $logoName = $request->file('logo')->getClientOriginalName();
-        $logoPath = $request->file('logo')->store('public/images');
-        $logoDbPath = explode('/', $logoPath);
-        $centerBannerName = $request->file('centerBanner')->getClientOriginalName();
-        $centerBannerPath = $request->file('centerBanner')->store('public/images');
-        $centerBannerDbPath = explode('/', $centerBannerPath);
+        $request->validate([
+            'logo_header.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'logo_footer.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'centerBanner.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'LeftBanner.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'RightBanner.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'bottomBanner.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
 
-        $logoSave = new Images();
-        $logoSave->logo = $logoName;
-        $logoSave->logo_path = $logoDbPath[2];
-        $logoSave->home_center = $centerBannerName;
-        $logoSave->home_center_path = $centerBannerDbPath[2];
-        $logoSave->save();
+        /* Checking if exist already */
+        $imgSave = Images::first();
 
-        // return response('success');
-        return Redirect::route('updateBanners');
+        if (!$imgSave) {
+            /* Image model initializing */
+            $imgSave = new Images();
+        }
+
+        if ($request->has('siteTitle')) {
+            $imgSave->site_title = $request->siteTitle;
+        }
+
+        /* Setting the images to their respective columns */
+        if ($request->hasFile('logo')) {
+            $logoHeader = $request->file('logo');
+            $logoHeaderName = time() . '_' . $logoHeader->getClientOriginalName();
+            $logoHeader->move(public_path('images'), $logoHeaderName);
+            $imgSave->logo_header = 'images/' . $logoHeaderName;
+        }
+
+        if ($request->hasFile('logo_footer')) {
+            $logoFooter = $request->file('logo_footer');
+            $logoFooterName = time() . '_' . $logoFooter->getClientOriginalName();
+            $logoFooter->move(public_path('images'), $logoFooterName);
+            $imgSave->logo_footer = 'images/' . $logoFooterName;
+        }
+
+        if ($request->hasFile('centerBanner')) {
+            $centerBannerFile = $request->file('centerBanner');
+            $centerImgName = time() . '_' . $centerBannerFile->getClientOriginalName();
+            $centerBannerFile->move(public_path('images'), $centerImgName);
+            $imgSave->home_center = 'images/' . $centerImgName;
+        }
+
+        if ($request->hasFile('leftBanner')) {
+            $leftBannerFile = $request->file('leftBanner');
+            $leftBannerName = time() . '_' . $leftBannerFile->getClientOriginalName();
+            $leftBannerFile->move(public_path('images'), $leftBannerName);
+            $imgSave->home_left = 'images/' . $leftBannerName;
+        }
+
+        if ($request->hasFile('rightBanner')) {
+            $rightBannerFile = $request->file('rightBanner');
+            $rightBannerName = time() . '_' . $rightBannerFile->getClientOriginalName();
+            $rightBannerFile->move(public_path('images'), $rightBannerName);
+            $imgSave->home_right = 'images/' . $rightBannerName;
+        }
+
+        if ($request->hasFile('bottomBanner')) {
+            $bottomBannerFile = $request->file('bottomBanner');
+            $bottomBannerName = time() . '_' . $bottomBannerFile->getClientOriginalName();
+            $bottomBannerFile->move(public_path('images'), $bottomBannerName);
+            $imgSave->bottom_img = 'images/' . $bottomBannerName;
+        }
+
+        /* Saving the images */
+        $imgSave->save();
+
+        return Redirect::route('updateBanners')->with('success', 'Images saved successfully!');
     }
 
-
-    /*public function saveImages(Request $request): RedirectResponse
+    public function getImages()
     {
-        dd($request->files);
-        return helper::class->saveOrUpdateEntity(Images::class, $request, $request->key);
-    }*/
+        return DB::table('images')->first();
+    }
 }

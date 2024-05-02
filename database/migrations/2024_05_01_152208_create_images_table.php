@@ -14,16 +14,12 @@ return new class extends Migration
         Schema::create('images', function (Blueprint $table) {
             $table->id();
             $table->string('site_title')->nullable();
-            $table->string('logo')->nullable();
-            $table->string('logo_path')->nullable();
+            $table->string('logo_header')->nullable();
+            $table->string('logo_footer')->nullable();
             $table->string('home_center')->nullable();
-            $table->string('home_center_path')->nullable();
             $table->string('home_left')->nullable();
-            $table->string('home_left_path')->nullable();
             $table->string('home_right')->nullable();
-            $table->string('home_right_path')->nullable();
             $table->string('bottom_img')->nullable();
-            $table->string('bottom_img_path')->nullable();
             $table->timestamps();
         });
     }
