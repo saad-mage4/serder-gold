@@ -5,10 +5,21 @@ import InputLabel from "@/Components/InputLabel";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
 import { Transition } from "@headlessui/react";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function updateImages({ auth }) {
     const user = usePage().props.auth.user;
-    // console.log(user);
+    const [Logo, SetLogo] = useState();
+    useEffect(()=>{
+        axios.get("http://127.0.0.1:8000/get-images")
+            .then(res => {
+
+            })
+            .catch(err => {
+
+            })
+    },[]);
 
     const { data, setData, post, errors, processing, recentlySuccessful } =
         useForm({

@@ -1,4 +1,4 @@
-import Logo from "../images/Logo.png";
+import Logo from "../images/Logo.svg";
 import arrow_green from "../images/arrow-green-up.svg";
 import arrow_red from "../images/arrow-red-down.svg";
 import sideBanner from "../images/side_banner.png";
