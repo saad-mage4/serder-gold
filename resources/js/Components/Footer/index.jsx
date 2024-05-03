@@ -7,7 +7,7 @@ function Footer() {
     const [footerLogo, setFooterLogo] = useState("");
     useEffect(() => {
         axios
-            .get("http://127.0.0.1:8000/get-images")
+            .get("/get-images")
             .then((res) => {
                 console.log(res.data);
                 setFooterLogo(res.data.logo_footer);

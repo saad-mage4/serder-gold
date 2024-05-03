@@ -12,7 +12,7 @@ function MainContent() {
 
     useEffect(() => {
         axios
-            .get("http://127.0.0.1:8000/get-images")
+            .get("/get-images")
             .then((res) => {
                 console.log(res.data);
                 setCenterAd(res.data.home_center);

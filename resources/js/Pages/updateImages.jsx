@@ -18,7 +18,7 @@ export default function updateImages({ auth }) {
     const [BottomAd, SetBottomAd] = useState("");
     useEffect(() => {
         axios
-            .get("http://127.0.0.1:8000/get-images")
+            .get("/get-images")
             .then((res) => {
                 console.log(res.data);
                 SetHeaderLogo(res.data.logo_header);
