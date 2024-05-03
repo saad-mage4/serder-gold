@@ -70,3 +70,36 @@ body.dark_theme .goldPricesNews *{
 body.dark_theme .new-container-main *:not(a.post-link){
   color: #fff !important;
 }
+
+
+
+.not-login-page {
+  background-color: #181a1f;
+}
+
+.not-login-page .form-wrap{
+  background-color: #1e2328;
+}
+
+.not-login-page .form-wrap form label, .not-login-page .form-wrap form a.underline{
+  color: #fff;
+}
+
+.not-login-page .form-wrap form input{
+  background-color: transparent;
+  border-color: #848e9c;
+  accent-color: #f0b90b !important;
+  color: #fff;
+}
+.not-login-page .form-wrap form input:focus{
+  box-shadow: none;
+  outline: none;
+}
+
+
+
+.not-login-page .form-wrap form button, .not-login-page .form-wrap form a:not(a.underline){
+  background-color: #f0b90b !important; 
+  color: #000;
+
+}
