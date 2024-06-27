@@ -1,6 +1,10 @@
 <?php
 
-use App\Http\Controllers\{ArticlesController, ProfileController, ImageController, UserController};
+use App\Http\Controllers\{ArticlesController,
+    ProfileController,
+    ImageController,
+    StockRecordsController,
+    UserController};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -50,5 +54,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 Route::get('/get-images', [ImageController::class, 'getImages'])->name('get-images');
+Route::get('/get-records', [StockRecordsController::class, 'getRecords'])->name('get-records');
 
 require __DIR__.'/auth.php';
