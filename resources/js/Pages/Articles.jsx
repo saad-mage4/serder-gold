@@ -1,5 +1,8 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import { Paginator } from 'primereact/paginator';
 const Articles = ({ auth }) => {
     return (
         <>
@@ -27,6 +30,40 @@ const Articles = ({ auth }) => {
                                             list of all articles.
                                         </p>
                                     </header>
+                                    <DataTable
+                                        stripedRows
+                                        value={[
+                                            {
+                                                name: "Saad",
+                                                age: 30,
+                                                email: "saad@mage4.com",
+                                            },
+                                            {
+                                                name: "Daniyal",
+                                                age: 26,
+                                                email: "daniyal@mage4.com",
+                                            },
+                                            {
+                                                name: "Abdul Basit",
+                                                age: 24,
+                                                email: "abdul.basit@mage4.com",
+                                            },
+                                        ]}
+                                        tableStyle={{ minWidth: "50rem" }}
+                                    >
+                                        <Column
+                                            field="name"
+                                            header="Name"
+                                        ></Column>
+                                        <Column
+                                            field="age"
+                                            header="Age"
+                                        ></Column>
+                                        <Column
+                                            field="email"
+                                            header="Email"
+                                        ></Column>
+                                    </DataTable>
                                 </section>
                             </div>
                         </div>
