@@ -33,6 +33,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/save-images', [ImageController::class, 'SaveImages'])->name('save-images');
 });
+
 Route::get('/get-images', [ImageController::class, 'getImages'])->name('get-images');
 
 require __DIR__.'/auth.php';
