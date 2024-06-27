@@ -11,6 +11,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
     const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
+        avatar: user.avatar,
     });
 
     const submit = (e) => {
@@ -18,6 +19,17 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
 
         patch(route('profile.update'));
     };
+    // const image = document.getElementById("img-preview");
+
+    const addFile = (event) => {
+        console.log(event.target.files[0]);
+        console.log(event.target.files[0].name);
+
+        const image = document.getElementById("img-preview");
+        const src = URL.createObjectURL(event.target.files[0]);
+        image.src = src;
+        setData('avatar', src);
+    }
 
     return (
         <section className={className}>
@@ -30,6 +42,19 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
+                <div>
+                    <InputLabel htmlFor="img-preview" value="Upload Profile Image" />
+                    <div className='img-uploader-wrap'>
+                        <img
+                            id="img-preview"
+                            src="https://st3.depositphotos.com/11433294/i/600/depositphotos_142980917-stock-photo-stylish-handsome-man.jpg"
+                        />
+                        <label htmlFor="img-file-input" className='uploader-btn'><i className="fa-solid fa-camera"></i></label>
+                        <TextInput accept="image/*" type="file" id="img-file-input"
+                         onChange={(e) => setData('avatar', e.target.files[0])}
+                         />
+                    </div>
+                </div>
                 <div>
                     <InputLabel htmlFor="name" value="Name" />
 

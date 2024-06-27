@@ -29,6 +29,15 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+        dd($request);
+        // if ($request->hasFile('avatar')) {
+        //     $bottomBannerFile = $request->file('avatar');
+        //     $bottomBannerName = time() . '_' . $bottomBannerFile->getClientOriginalName();
+        //     $bottomBannerFile->move(public_path('images'), $bottomBannerName);
+        //     $imgSave->bottom_img = 'images/' . $bottomBannerName;
+        // }
+
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
