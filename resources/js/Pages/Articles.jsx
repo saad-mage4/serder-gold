@@ -1,9 +1,28 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import { PrimeReactProvider } from "primereact/api";
 import { Head } from "@inertiajs/react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { Paginator } from 'primereact/paginator';
+import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 const Articles = ({ auth }) => {
+    const users = [
+        {
+            name: "Saad",
+            age: 30,
+            email: "saad@mage4.com",
+        },
+        {
+            name: "Daniyal",
+            age: 26,
+            email: "daniyal@mage4.com",
+        },
+        {
+            name: "Abdul Basit",
+            age: 24,
+            email: "abdul.basit@mage4.com",
+        },
+    ];
+
     return (
         <>
             <AuthenticatedLayout
@@ -30,40 +49,28 @@ const Articles = ({ auth }) => {
                                             list of all articles.
                                         </p>
                                     </header>
-                                    <DataTable
-                                        stripedRows
-                                        value={[
-                                            {
-                                                name: "Saad",
-                                                age: 30,
-                                                email: "saad@mage4.com",
-                                            },
-                                            {
-                                                name: "Daniyal",
-                                                age: 26,
-                                                email: "daniyal@mage4.com",
-                                            },
-                                            {
-                                                name: "Abdul Basit",
-                                                age: 24,
-                                                email: "abdul.basit@mage4.com",
-                                            },
-                                        ]}
-                                        tableStyle={{ minWidth: "50rem" }}
-                                    >
-                                        <Column
-                                            field="name"
-                                            header="Name"
-                                        ></Column>
-                                        <Column
-                                            field="age"
-                                            header="Age"
-                                        ></Column>
-                                        <Column
-                                            field="email"
-                                            header="Email"
-                                        ></Column>
-                                    </DataTable>
+                                    <PrimeReactProvider>
+                                        <DataTable
+                                            stripedRows
+                                            paginator
+                                            rows={10}
+                                            value={users}
+                                            tableStyle={{ minWidth: "50rem" }}
+                                        >
+                                            <Column
+                                                field="name"
+                                                header="Name"
+                                            ></Column>
+                                            <Column
+                                                field="age"
+                                                header="Age"
+                                            ></Column>
+                                            <Column
+                                                field="email"
+                                                header="Email"
+                                            ></Column>
+                                        </DataTable>
+                                    </PrimeReactProvider>
                                 </section>
                             </div>
                         </div>
