@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Images;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,21 +30,21 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        dd($request);
-        // if ($request->hasFile('avatar')) {
-        //     $bottomBannerFile = $request->file('avatar');
-        //     $bottomBannerName = time() . '_' . $bottomBannerFile->getClientOriginalName();
-        //     $bottomBannerFile->move(public_path('images'), $bottomBannerName);
-        //     $imgSave->bottom_img = 'images/' . $bottomBannerName;
-        // }
-
-
+        $imgSave = new Images();
+        if ($request->hasFile('avatar')) {
+            $bottomBannerFile = $request->file('avatar');
+            $bottomBannerName = time() . '_' . $bottomBannerFile->getClientOriginalName();
+            $bottomBannerFile->move(public_path('images'), $bottomBannerName);
+            $imgSave->avatar = 'images/' . $bottomBannerName;
+        }
+        
         $request->user()->fill($request->validated());
 
+        $request->user()->avatar = $imgSave->avatar;
         if ($request->user()->isDirty('email')) {
             $request->user()->email_verified_at = null;
         }
-
+        
         $request->user()->save();
 
         return Redirect::route('profile.edit');

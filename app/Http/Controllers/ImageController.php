@@ -31,7 +31,7 @@ class ImageController extends Controller
         if ($request->has('siteTitle')) {
             $imgSave->site_title = $request->siteTitle;
         }
-
+        dd($request);
         /* Setting the images to their respective columns */
         if ($request->hasFile('logo_header')) {
             $logoHeader = $request->file('logo_header');

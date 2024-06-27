@@ -8,16 +8,21 @@ import { Transition } from '@headlessui/react';
 export default function UpdateProfileInformation({ mustVerifyEmail, status, className = '' }) {
     const user = usePage().props.auth.user;
 
-    const { data, setData, patch, errors, processing, recentlySuccessful } = useForm({
+    const { data, setData, post, errors, processing, recentlySuccessful } = useForm({
         name: user.name,
         email: user.email,
-        avatar: user.avatar,
+        avatar: null,
     });
 
     const submit = (e) => {
         e.preventDefault();
 
-        patch(route('profile.update'));
+        // patch(route('profile.update'));
+        post(route('profile.update'), {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        });
     };
     // const image = document.getElementById("img-preview");
 
@@ -28,7 +33,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         const image = document.getElementById("img-preview");
         const src = URL.createObjectURL(event.target.files[0]);
         image.src = src;
-        setData('avatar', src);
+        setData('avatar', event.target.files[0]);
     }
 
     return (
@@ -50,8 +55,8 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                             src="https://st3.depositphotos.com/11433294/i/600/depositphotos_142980917-stock-photo-stylish-handsome-man.jpg"
                         />
                         <label htmlFor="img-file-input" className='uploader-btn'><i className="fa-solid fa-camera"></i></label>
-                        <TextInput accept="image/*" type="file" id="img-file-input"
-                         onChange={(e) => setData('avatar', e.target.files[0])}
+                        <input accept="image/*" type="file" id="img-file-input"
+                         onChange={addFile}
                          />
                     </div>
                 </div>
