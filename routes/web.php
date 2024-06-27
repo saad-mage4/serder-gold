@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{ProfileController, ImageController};
+use App\Http\Controllers\{ArticlesController, ProfileController, ImageController};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,13 +27,22 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
 
+    /* Sponsorships */
     Route::get('/updateImages', function () {
         return Inertia::render('updateImages');
     })->name('updateImages');
 
     Route::post('/save-images', [ImageController::class, 'SaveImages'])->name('save-images');
+
+    /* Articles */
+    Route::get('/updateArticle', function () {
+        return Inertia::render('updateArticle');
+    })->name('updateArticle');
+
+    Route::post('/save-articles', [ArticlesController::class, 'saveArticle'])->name('save-articles');
 });
 
 Route::get('/get-images', [ImageController::class, 'getImages'])->name('get-images');
+Route::get('/get-articles', [ArticlesController::class, 'getArticles'])->name('get-articles');
 
 require __DIR__.'/auth.php';

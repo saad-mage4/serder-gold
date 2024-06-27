@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Images;
-use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\{Request, RedirectResponse};
+use Illuminate\Support\Facades\{DB, Redirect};
 
 
 class ImageController extends Controller
@@ -21,7 +19,7 @@ class ImageController extends Controller
             'RightBanner.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'bottomBanner.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
-        // dd($request);
+
         /* Checking if exist already */
         $imgSave = Images::first();
 
