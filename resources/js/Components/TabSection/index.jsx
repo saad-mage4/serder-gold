@@ -1,8 +1,35 @@
 import "./TabsSection.scss";
 import { arrow_green, arrow_red } from "@/images";
 import { useEffect } from "react";
-import tabs_data from "./TabSection.config";
+import { tabs_data, tabs_data_2 } from "./TabSection.config";
+import axios from "axios";
 const TabsSection = () => {
+    useEffect(() => {
+        // var myHeaders = new Headers();
+        // myHeaders.append("x-access-token", "goldapi-126tslvgu39sh-io");
+        // myHeaders.append("Content-Type", "application/json");
+        // var requestOptions = {
+        //   method: "GET",
+        //   headers: myHeaders,
+        //   redirect: "follow",
+        // };
+        // fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
+        //   .then((response) => response.text())
+        //   .then((result) => )
+        //   .catch((error) => console.log("error", error));
+        axios
+            .get("https://dummyjson.com/users", {
+                headers: {
+                    "Access-Control-Allow-Origin": "*",
+                },
+            })
+            .then((res) => {
+                console.log(res.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
     // const getval = (e) => {
     //     const index = e.target.getAttribute("data-id");
     //     const tabs_ = document.querySelector(
@@ -36,21 +63,33 @@ const TabsSection = () => {
         });
     });
 
-    useEffect(() => {
-        // var myHeaders = new Headers();
-        // myHeaders.append("x-access-token", "goldapi-126tslvgu39sh-io");
-        // myHeaders.append("Content-Type", "application/json");
-        // var requestOptions = {
-        //   method: "GET",
-        //   headers: myHeaders,
-        //   redirect: "follow",
-        // };
-        // fetch("https://www.goldapi.io/api/XAU/USD", requestOptions)
-        //   .then((response) => response.text())
-        //   .then((result) => )
-        //   .catch((error) => console.log("error", error));
-    }, []);
     const show_itmes = tabs_data.map((value, index) => {
+        return (
+            <div
+                key={index}
+                className="item d-flex align-items-center justify-content-center"
+            >
+                <div className="content d-flex flex-column gap-2">
+                    <span className="title">{value.title}</span>
+                    <span className="value">{value.rates}</span>
+                    <div
+                        className={`ratio__ ${
+                            value.status == "up" ? "green" : "red"
+                        } d-flex align-items-center gap-2`}
+                    >
+                        <img
+                            src={value.status == "up" ? arrow_green : arrow_red}
+                            alt={"arrow-" + value.status}
+                        />
+                        <span className="percent__">{value.percent}</span>
+                        <span className="number__">{value.number}</span>
+                    </div>
+                </div>
+            </div>
+        );
+    });
+
+    const show_itmes_2 = tabs_data_2.map((value, index) => {
         return (
             <div
                 key={index}
@@ -118,7 +157,7 @@ const TabsSection = () => {
                         <div className="col-12 d-none">
                             <div className="tabs-content d-grid gap-5">
                                 {/* items start */}
-                                {show_itmes}
+                                {show_itmes_2}
                                 {/* items end */}
                             </div>
                         </div>
