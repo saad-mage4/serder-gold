@@ -62,7 +62,7 @@ export default function updateImages({ auth }) {
                 </h2>
             }
         >
-            <Head title="Update - Images" />
+            <Head title="Update - Images | " />
 
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
