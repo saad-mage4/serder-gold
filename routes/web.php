@@ -35,16 +35,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/save-images', [ImageController::class, 'SaveImages'])->name('save-images');
 
     /* Articles */
-    Route::get('/updateArticle', function () {
-        return Inertia::render('updateArticle');
-    })->name('updateArticle');
+    Route::get('/Articles', function () {
+        return Inertia::render('Articles');
+    })->name('Articles');
     Route::get('/get-articles', [ArticlesController::class, 'getArticles'])->name('get-articles');
     Route::post('/save-articles', [ArticlesController::class, 'saveArticle'])->name('save-articles');
 
     /* Users */
-    Route::get('/updateUsers', function () {
-        return Inertia::render('updateUsers');
-    })->name('updateUsers');
+    Route::get('/Users', function () {
+        return Inertia::render('Users');
+    })->name('Users');
     Route::get('/get-users', [UserController::class, 'getUsers'])->name('get-users');
     Route::post('/save-users', [UserController::class, 'saveUser'])->name('save-users');
 });
