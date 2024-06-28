@@ -1,6 +1,88 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from "@inertiajs/react";
+import { useEffect, useState } from "react";
+import { PrimeReactProvider } from "primereact/api";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
+import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
+import axios from "axios";
+import { InputText } from "primereact/inputtext";
+
+
+
 const Users = ({ auth }) => {
+    // const [articles, setArticles] = useState([]);
+    const [products, setProducts] = useState([]);
+    useEffect(() => {
+        axios
+            .get("/get-articles")
+            .then((res) => {
+                setProducts(res?.data);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+
+    const BannerTemplate = (banner) => {
+        return (
+            <div className="flex align-items-center gap-2">
+                <img alt={banner.name} src={`${banner.banner}`} width={32} />
+            </div>
+        );
+    };
+
+    const textEditor = (options) => {
+        return (
+            <InputText
+                type="text"
+                value={options.value}
+                onChange={(e) => options.editorCallback(e.target.value)}
+            />
+        );
+    };
+
+    const imgEditor = (options) => {
+        return (
+            <InputText
+                type="file"
+                onChange={(e) => options.editorCallback(e.target.files[0])}
+            />
+        );
+    };
+
+    const onRowEditComplete = async (e) => {
+        let _products = [...products];
+        let { newData, index } = e;
+
+        _products[index] = newData;
+
+        setProducts(_products);
+
+        const formData = new FormData();
+        for (let key in newData) {
+            formData.append(key, newData[key]);
+        }
+
+        try {
+            const response = await axios.post("/update-articles", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
+            });
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+
+    const allowEdit = (rowData) => {
+        return rowData.name !== "Blue Band";
+    };
+
+
+
+
+
     return (
         <>
             <AuthenticatedLayout
@@ -27,6 +109,57 @@ const Users = ({ auth }) => {
                                             list of all users.
                                         </p>
                                     </header>
+                                    <PrimeReactProvider>
+                                        <DataTable
+                                            editMode="row"
+                                            lazy
+                                            stripedRows
+                                            paginator
+                                            rows={10}
+                                            scrollable
+                                            scrollHeight="450px"
+                                            value={products}
+                                            tableStyle={{ minWidth: "50rem" }}
+                                            onRowEditComplete={
+                                                onRowEditComplete
+                                            }
+                                        >
+                                            <Column
+                                                field="id"
+                                                header="ID"
+                                            ></Column>
+                                            <Column
+                                                field="title"
+                                                header="Title"
+                                                editor={(options) =>
+                                                    textEditor(options)
+                                                }
+                                            ></Column>
+                                            <Column
+                                                field="banner"
+                                                header="Banner"
+                                                body={BannerTemplate}
+                                                editor={(options) =>
+                                                    imgEditor(options)
+                                                }
+                                            ></Column>
+                                            <Column
+                                                field="description"
+                                                header="Description"
+                                                editor={(options) =>
+                                                    textEditor(options)
+                                                }
+                                            ></Column>
+                                            <Column
+                                                field="status"
+                                                header="Status"
+                                            ></Column>
+                                            <Column
+                                                header="Action"
+                                                rowEditor={allowEdit}
+                                            ></Column>
+                                        </DataTable>
+                                    </PrimeReactProvider>
                                 </section>
                             </div>
                         </div>
