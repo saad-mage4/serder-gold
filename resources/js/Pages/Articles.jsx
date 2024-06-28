@@ -10,7 +10,6 @@ import { InputText } from "primereact/inputtext";
 
 const Articles = ({ auth }) => {
     // const [articles, setArticles] = useState([]);
-    // // post kam
     const [products, setProducts] = useState([]);
     useEffect(() => {
         axios
@@ -23,11 +22,10 @@ const Articles = ({ auth }) => {
             });
     }, []);
 
-    const representativeBodyTemplate = (product) => {
+    const BannerTemplate = (banner) => {
         return (
             <div className="flex align-items-center gap-2">
-                <img alt={product.name} src={`${product.banner}`} width={32} />
-                <span>{product.name}</span>
+                <img alt={banner.name} src={`${banner.banner}`} width={32} />
             </div>
         );
     };
@@ -70,12 +68,10 @@ const Articles = ({ auth }) => {
                     "Content-Type": "multipart/form-data",
                 },
             });
-            console.log(response?.data);
         } catch (error) {
             console.log(error.message);
         }
     };
-    console.table(products);
 
     const allowEdit = (rowData) => {
         return rowData.name !== "Blue Band";
@@ -136,9 +132,7 @@ const Articles = ({ auth }) => {
                                             <Column
                                                 field="banner"
                                                 header="Banner"
-                                                body={
-                                                    representativeBodyTemplate
-                                                }
+                                                body={BannerTemplate}
                                                 editor={(options) =>
                                                     imgEditor(options)
                                                 }
