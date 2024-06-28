@@ -36,7 +36,7 @@ class ArticlesController extends Controller
             $logoHeader = $request->file('banner');
             $logoHeaderName = time() . '_' . $logoHeader->getClientOriginalName();
             $logoHeader->move(public_path('images'), $logoHeaderName);
-            $articleSave->logo_header = 'images/' . $logoHeaderName;
+            $articleSave->banner = 'images/' . $logoHeaderName;
         }
 
         /* Saving the articles */
@@ -53,6 +53,13 @@ class ArticlesController extends Controller
             'description' => $req['description'],
             'status' => $req['status'],
         ]);
+
+        if ($request->hasFile('banner')) {
+            $logoHeader = $request->file('banner');
+            $logoHeaderName = time() . '_' . $logoHeader->getClientOriginalName();
+            $logoHeader->move(public_path('images'), $logoHeaderName);
+            Articles::where('id', '=', $req['id'])->update(['banner' => $req['banner']]);
+        }
     }
 
     public function getArticles()
