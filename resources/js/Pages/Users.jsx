@@ -7,16 +7,16 @@ import { Column } from "primereact/column";
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import axios from "axios";
 import { InputText } from "primereact/inputtext";
-
-
+import { Dropdown } from "primereact/dropdown";
 
 const Users = ({ auth }) => {
-    // const [articles, setArticles] = useState([]);
     const [products, setProducts] = useState([]);
+    const [user_status] = useState(["admin", "user"]);
     useEffect(() => {
         axios
-            .get("/get-articles")
+            .get("/get-users")
             .then((res) => {
+                console.log(res);
                 setProducts(res?.data);
             })
             .catch((err) => {
@@ -24,10 +24,14 @@ const Users = ({ auth }) => {
             });
     }, []);
 
-    const BannerTemplate = (banner) => {
+    const AvatarTemplate = (avatar) => {
         return (
             <div className="flex align-items-center gap-2">
-                <img alt={banner.name} src={`${banner.banner}`} width={32} />
+                <img
+                    className="rounded-full w-8 h-8 object-cover"
+                    alt={avatar.name}
+                    src={`${avatar.avatar}`}
+                />
             </div>
         );
     };
@@ -47,6 +51,17 @@ const Users = ({ auth }) => {
             <InputText
                 type="file"
                 onChange={(e) => options.editorCallback(e.target.files[0])}
+            />
+        );
+    };
+
+    const statusEditor = (options) => {
+        return (
+            <Dropdown
+                value={options.value}
+                options={user_status}
+                onChange={(e) => options.editorCallback(e.value)}
+                placeholder="Select a Status"
             />
         );
     };
@@ -78,10 +93,6 @@ const Users = ({ auth }) => {
     const allowEdit = (rowData) => {
         return rowData.name !== "Blue Band";
     };
-
-
-
-
 
     return (
         <>
@@ -129,30 +140,33 @@ const Users = ({ auth }) => {
                                                 header="ID"
                                             ></Column>
                                             <Column
-                                                field="title"
-                                                header="Title"
+                                                field="name"
+                                                header="Name"
                                                 editor={(options) =>
                                                     textEditor(options)
                                                 }
                                             ></Column>
                                             <Column
-                                                field="banner"
-                                                header="Banner"
-                                                body={BannerTemplate}
+                                                field="email"
+                                                header="Email"
+                                                editor={(options) =>
+                                                    textEditor(options)
+                                                }
+                                            ></Column>
+                                            <Column
+                                                field="user_role"
+                                                header="User Role"
+                                                editor={(options) =>
+                                                    statusEditor(options)
+                                                }
+                                            ></Column>
+                                            <Column
+                                                field="avatar"
+                                                header="Avatar"
+                                                body={AvatarTemplate}
                                                 editor={(options) =>
                                                     imgEditor(options)
                                                 }
-                                            ></Column>
-                                            <Column
-                                                field="description"
-                                                header="Description"
-                                                editor={(options) =>
-                                                    textEditor(options)
-                                                }
-                                            ></Column>
-                                            <Column
-                                                field="status"
-                                                header="Status"
                                             ></Column>
                                             <Column
                                                 header="Action"

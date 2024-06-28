@@ -14,7 +14,7 @@ class UserController extends Controller
      */
     public function getUsers(): Collection
     {
-        return DB::table('users')->whereNot('id', Auth::id())->get();
+        return DB::table('users')->whereNot('user_role', 'admin')->get();
     }
 
     /**

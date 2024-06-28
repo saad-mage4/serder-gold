@@ -4,6 +4,8 @@ import { PrimeReactProvider } from "primereact/api";
 import { Head } from "@inertiajs/react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
+import { Tag } from "primereact/tag";
+import { Dropdown } from "primereact/dropdown";
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import axios from "axios";
 import { InputText } from "primereact/inputtext";
@@ -11,6 +13,8 @@ import { InputText } from "primereact/inputtext";
 const Articles = ({ auth }) => {
     // const [articles, setArticles] = useState([]);
     const [products, setProducts] = useState([]);
+    const [selectedCity, setSelectedCity] = useState(null);
+    const [article_status] = useState(["active", "deactivate"]);
     useEffect(() => {
         axios
             .get("/get-articles")
@@ -49,6 +53,17 @@ const Articles = ({ auth }) => {
         );
     };
 
+    const statusEditor = (options) => {
+        return (
+            <Dropdown
+                value={options.value}
+                options={article_status}
+                onChange={(e) => options.editorCallback(e.value)}
+                placeholder="Select a Status"
+            />
+        );
+    };
+
     const onRowEditComplete = async (e) => {
         let _products = [...products];
         let { newData, index } = e;
@@ -63,11 +78,15 @@ const Articles = ({ auth }) => {
         }
 
         try {
-            const response = await axios.post("/update-articles", formData, {
-                headers: {
-                    "Content-Type": "multipart/form-data",
-                },
-            });
+            const response = await axios
+                .post("/update-articles", formData, {
+                    headers: {
+                        "Content-Type": "multipart/form-data",
+                    },
+                })
+                .then((res) => {
+                    console.log(res);
+                });
         } catch (error) {
             console.log(error.message);
         }
@@ -147,6 +166,9 @@ const Articles = ({ auth }) => {
                                             <Column
                                                 field="status"
                                                 header="Status"
+                                                editor={(options) =>
+                                                    statusEditor(options)
+                                                }
                                             ></Column>
                                             <Column
                                                 header="Action"
