@@ -3,11 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use Illuminate\Support\Collection;
 use Illuminate\Http\{Request, RedirectResponse};
 use Illuminate\Support\Facades\{Auth, DB, Redirect};
 
 class ArticlesController extends Controller
 {
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function saveArticle(Request $request): RedirectResponse
     {
         $request->validate([
@@ -33,10 +38,10 @@ class ArticlesController extends Controller
 
         /* Setting the images to their respective columns */
         if ($request->hasFile('banner')) {
-            $banner = $request->file('banner');
-            $bannerName = time() . '_' . $banner->getClientOriginalName();
-            $banner->move(public_path('images'), $bannerName);
-            $articleSave->banner = 'images/' . $bannerName;
+            $logoHeader = $request->file('banner');
+            $logoHeaderName = time() . '_' . $logoHeader->getClientOriginalName();
+            $logoHeader->move(public_path('images'), $logoHeaderName);
+            $articleSave->banner = 'images/' . $logoHeaderName;
         }
 
         /* Saving the articles */
@@ -45,24 +50,43 @@ class ArticlesController extends Controller
         return Redirect::route('updateArticle')->with('success', 'Article saved successfully!');
     }
 
-    public function updateArticles(Request $request)
+    /**
+     * @param Request $request
+     * @return string
+     */
+    public function updateArticles(Request $request): string
     {
-        // dd($request->id);
-        Articles::where('id', '=', $request->id)->update([
-            'title' => $request->title,
-            'description' => $request->description,
-            'status' => $request->status,
-        ]);
+        $req = $request->newData;
+        $msg = '';
+        if ($request->has('status')) {
+            Articles::where('id', '=', $req['id'])->update(['status' => $req['status']]);
+            $status = $req['status'] == 1 ? 'Activated' : 'Deactivated';
+            $msg = "Article $status";
+        }
 
         if ($request->hasFile('banner')) {
             $banner = $request->file('banner');
             $bannerName = time() . '_' . $banner->getClientOriginalName();
             $banner->move(public_path('images'), $bannerName);
-            Articles::where('id', '=', $request->id)->update(['banner' => 'images/' . $bannerName]);
+            Articles::where('id', '=', $req['id'])->update(['banner' => 'images/' . $bannerName]);
+            $msg = "Banner updated";
         }
+
+        if ($request->has('title') || $request->has('description')) {
+            Articles::where('id', '=', $req['id'])->update([
+                'title' => $req['title'],
+                'description' => $req['description'],
+            ]);
+            $msg = "Article updated successfully!";
+        }
+
+        return $msg;
     }
 
-    public function getArticles()
+    /**
+     * @return Collection
+     */
+    public function getArticles(): Collection
     {
         return DB::table('articles')->get();
     }
