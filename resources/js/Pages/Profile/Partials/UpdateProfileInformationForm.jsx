@@ -52,7 +52,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
                     <div className='img-uploader-wrap'>
                         <img
                             id="img-preview"
-                            src="https://st3.depositphotos.com/11433294/i/600/depositphotos_142980917-stock-photo-stylish-handsome-man.jpg"
+                            src={user?.avatar}
                         />
                         <label htmlFor="img-file-input" className='uploader-btn'><i className="fa-solid fa-camera"></i></label>
                         <input accept="image/*" type="file" id="img-file-input"
