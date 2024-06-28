@@ -56,11 +56,10 @@ class ArticlesController extends Controller
      */
     public function updateArticles(Request $request): string
     {
-        $req = $request->newData;
         $msg = '';
         if ($request->has('status')) {
-            Articles::where('id', '=', $req['id'])->update(['status' => $req['status']]);
-            $status = $req['status'] == 1 ? 'Activated' : 'Deactivated';
+            Articles::where('id', '=', $request->id)->update(['status' => $request->status]);
+            $status = $request->status == 1 ? 'Activated' : 'Deactivated';
             $msg = "Article $status";
         }
 
@@ -68,14 +67,14 @@ class ArticlesController extends Controller
             $banner = $request->file('banner');
             $bannerName = time() . '_' . $banner->getClientOriginalName();
             $banner->move(public_path('images'), $bannerName);
-            Articles::where('id', '=', $req['id'])->update(['banner' => 'images/' . $bannerName]);
+            Articles::where('id', '=', $request->id)->update(['banner' => 'images/' . $bannerName]);
             $msg = "Banner updated";
         }
 
         if ($request->has('title') || $request->has('description')) {
-            Articles::where('id', '=', $req['id'])->update([
-                'title' => $req['title'],
-                'description' => $req['description'],
+            Articles::where('id', '=', $request->id)->update([
+                'title' => $request->title,
+                'description' => $request->description,
             ]);
             $msg = "Article updated successfully!";
         }
