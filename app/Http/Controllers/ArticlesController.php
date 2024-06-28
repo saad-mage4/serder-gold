@@ -45,6 +45,16 @@ class ArticlesController extends Controller
         return Redirect::route('updateArticle')->with('success', 'Article saved successfully!');
     }
 
+    public function updateArticles(Request $request)
+    {
+        $req = $request->newData;
+        Articles::where('id', '=', $req['id'])->update([
+            'title' => $req['title'],
+            'description' => $req['description'],
+            'status' => $req['status'],
+        ]);
+    }
+
     public function getArticles()
     {
         return DB::table('articles')->get();

@@ -1,10 +1,12 @@
 <?php
 
-use App\Http\Controllers\{ArticlesController,
+use App\Http\Controllers\{
+    ArticlesController,
     ProfileController,
     ImageController,
     StockRecordsController,
-    UserController};
+    UserController
+};
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -44,6 +46,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('Articles');
     Route::get('/get-articles', [ArticlesController::class, 'getArticles'])->name('get-articles');
     Route::post('/save-articles', [ArticlesController::class, 'saveArticle'])->name('save-articles');
+    Route::post('/update-articles', [ArticlesController::class, 'updateArticles'])->name('update-articles');
 
     /* Users */
     Route::get('/Users', function () {
@@ -56,4 +59,4 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/get-images', [ImageController::class, 'getImages'])->name('get-images');
 Route::get('/get-records', [StockRecordsController::class, 'getRecords'])->name('get-records');
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

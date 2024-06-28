@@ -6,38 +6,56 @@ import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import axios from "axios";
+import { InputText } from "primereact/inputtext";
 
 const Articles = ({ auth }) => {
-    const [articles, setArticles] = useState([]);
+    // const [articles, setArticles] = useState([]);
+    // // post kam
+    const [products, setProducts] = useState([]);
     useEffect(() => {
         axios
             .get("/get-articles")
             .then((res) => {
-                setArticles(res?.data);
+                setProducts(res?.data);
             })
             .catch((err) => {
                 console.log(err);
             });
     }, []);
-    console.table(articles);
-    //     const users = [
-    //         {
-    //             name: "Saad",
-    //             age: 30,
-    //             email: "saad@mage4.com",
-    //         },
-    //         {
-    //             name: "Daniyal",
-    //             age: 26,
-    //             email: "daniyal@mage4.com",
-    //         },
-    //         {
-    //             name: "Abdul Basit",
-    //             age: 24,
-    //             email: "abdul.basit@mage4.com",
-    //         },
-    //     ];
-    //     console.log(users);
+
+    const textEditor = (options) => {
+        return (
+            <InputText
+                type="text"
+                value={options.value}
+                onChange={(e) => options.editorCallback(e.target.value)}
+            />
+        );
+    };
+
+    const onRowEditComplete = (e) => {
+        let _products = [...products];
+        let { newData, index } = e;
+
+        _products[index] = newData;
+
+        setProducts(_products);
+
+        try {
+            const response = axios.post("/update-articles", {
+                newData,
+            });
+            console.log(response?.data);
+        } catch (error) {
+            console.log(error.message);
+        }
+    };
+    console.table(products);
+
+    const allowEdit = (rowData) => {
+        return rowData.name !== "Blue Band";
+    };
+
     return (
         <>
             <AuthenticatedLayout
@@ -66,23 +84,29 @@ const Articles = ({ auth }) => {
                                     </header>
                                     <PrimeReactProvider>
                                         <DataTable
+                                            editMode="row"
+                                            lazy
                                             stripedRows
                                             paginator
                                             rows={10}
-                                            value={articles}
+                                            scrollable
+                                            scrollHeight="450px"
+                                            value={products}
                                             tableStyle={{ minWidth: "50rem" }}
+                                            onRowEditComplete={
+                                                onRowEditComplete
+                                            }
                                         >
                                             <Column
                                                 field="id"
                                                 header="ID"
                                             ></Column>
                                             <Column
-                                                field="authID"
-                                                header="AuthID"
-                                            ></Column>
-                                            <Column
                                                 field="title"
                                                 header="Title"
+                                                editor={(options) =>
+                                                    textEditor(options)
+                                                }
                                             ></Column>
                                             <Column
                                                 field="banner"
@@ -91,18 +115,17 @@ const Articles = ({ auth }) => {
                                             <Column
                                                 field="description"
                                                 header="Description"
+                                                editor={(options) =>
+                                                    textEditor(options)
+                                                }
                                             ></Column>
                                             <Column
                                                 field="status"
                                                 header="Status"
                                             ></Column>
                                             <Column
-                                                field="created_at"
-                                                header="Created_at"
-                                            ></Column>
-                                            <Column
-                                                field="updated_at"
-                                                header="Updated_at"
+                                                header="Action"
+                                                rowEditor={allowEdit}
                                             ></Column>
                                         </DataTable>
                                     </PrimeReactProvider>
