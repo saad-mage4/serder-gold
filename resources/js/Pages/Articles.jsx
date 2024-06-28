@@ -23,6 +23,15 @@ const Articles = ({ auth }) => {
             });
     }, []);
 
+    const representativeBodyTemplate = (product) => {
+        return (
+            <div className="flex align-items-center gap-2">
+                <img alt={product.name} src={`${product.banner}`} width={32} />
+                <span>{product.name}</span>
+            </div>
+        );
+    };
+
     const textEditor = (options) => {
         return (
             <InputText
@@ -33,7 +42,16 @@ const Articles = ({ auth }) => {
         );
     };
 
-    const onRowEditComplete = (e) => {
+    const imgEditor = (options) => {
+        return (
+            <InputText
+                type="file"
+                onChange={(e) => options.editorCallback(e.target.files[0])}
+            />
+        );
+    };
+
+    const onRowEditComplete = async (e) => {
         let _products = [...products];
         let { newData, index } = e;
 
@@ -41,9 +59,16 @@ const Articles = ({ auth }) => {
 
         setProducts(_products);
 
+        const formData = new FormData();
+        for (let key in newData) {
+            formData.append(key, newData[key]);
+        }
+
         try {
-            const response = axios.post("/update-articles", {
-                newData,
+            const response = await axios.post("/update-articles", formData, {
+                headers: {
+                    "Content-Type": "multipart/form-data",
+                },
             });
             console.log(response?.data);
         } catch (error) {
@@ -111,6 +136,12 @@ const Articles = ({ auth }) => {
                                             <Column
                                                 field="banner"
                                                 header="Banner"
+                                                body={
+                                                    representativeBodyTemplate
+                                                }
+                                                editor={(options) =>
+                                                    imgEditor(options)
+                                                }
                                             ></Column>
                                             <Column
                                                 field="description"

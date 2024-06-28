@@ -33,10 +33,10 @@ class ArticlesController extends Controller
 
         /* Setting the images to their respective columns */
         if ($request->hasFile('banner')) {
-            $logoHeader = $request->file('banner');
-            $logoHeaderName = time() . '_' . $logoHeader->getClientOriginalName();
-            $logoHeader->move(public_path('images'), $logoHeaderName);
-            $articleSave->banner = 'images/' . $logoHeaderName;
+            $banner = $request->file('banner');
+            $bannerName = time() . '_' . $banner->getClientOriginalName();
+            $banner->move(public_path('images'), $bannerName);
+            $articleSave->banner = 'images/' . $bannerName;
         }
 
         /* Saving the articles */
@@ -47,18 +47,18 @@ class ArticlesController extends Controller
 
     public function updateArticles(Request $request)
     {
-        $req = $request->newData;
-        Articles::where('id', '=', $req['id'])->update([
-            'title' => $req['title'],
-            'description' => $req['description'],
-            'status' => $req['status'],
+        // dd($request->id);
+        Articles::where('id', '=', $request->id)->update([
+            'title' => $request->title,
+            'description' => $request->description,
+            'status' => $request->status,
         ]);
 
         if ($request->hasFile('banner')) {
-            $logoHeader = $request->file('banner');
-            $logoHeaderName = time() . '_' . $logoHeader->getClientOriginalName();
-            $logoHeader->move(public_path('images'), $logoHeaderName);
-            Articles::where('id', '=', $req['id'])->update(['banner' => $req['banner']]);
+            $banner = $request->file('banner');
+            $bannerName = time() . '_' . $banner->getClientOriginalName();
+            $banner->move(public_path('images'), $bannerName);
+            Articles::where('id', '=', $request->id)->update(['banner' => 'images/' . $bannerName]);
         }
     }
 
