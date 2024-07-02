@@ -104,8 +104,8 @@ const addUsers = ({ auth }) => {
                                                     <input
                                                         id="email"
                                                         name="email"
-                                                        type="mail"
-                                                        autoComplete="mail"
+                                                        type="email"
+                                                        autoComplete="email"
                                                         value={data.email}
                                                         onChange={(e) => {
                                                             setData(
