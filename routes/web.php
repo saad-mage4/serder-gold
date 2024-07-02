@@ -55,8 +55,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Users', function () {
         return Inertia::render('Users');
     })->name('Users');
+    Route::get('/add-users', function () {
+        return Inertia::render('addUsers');
+    })->name('add-users');
     Route::get('/get-users', [UserController::class, 'getUsers'])->name('get-users');
     Route::post('/save-users', [UserController::class, 'saveUser'])->name('save-users');
+    // Route::post('/update-users', [ArticlesController::class, 'updateUsers'])->name('update-users');
 });
 
 Route::get('/get-images', [ImageController::class, 'getImages'])->name('get-images');

@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
+use Illuminate\Http\{Request, RedirectResponse};
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\{Auth, DB, Hash};
+use Illuminate\Support\Facades\{Auth, DB, Hash, Redirect};
 
 class UserController extends Controller
 {
@@ -19,9 +19,9 @@ class UserController extends Controller
 
     /**
      * @param Request $request
-     * @return string
+     * @return RedirectResponse
      */
-    public function saveUser(Request $request): string
+    public function saveUser(Request $request): RedirectResponse
     {
         User::create([
             'name' => request('name'),
@@ -37,6 +37,7 @@ class UserController extends Controller
             User::where('email', '=', request('email'))->update(['avatar' => 'images/' . $avatarName]);
         }
 
-        return 'New user added successfully';
+        return Redirect::route('Users')->with('success', 'User saved successfully!');
+
     }
 }
