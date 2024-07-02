@@ -44,6 +44,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/Articles', function () {
         return Inertia::render('Articles');
     })->name('Articles');
+    Route::get('/add-articles', function () {
+        return Inertia::render('addArticles');
+    })->name('add-articles');
     Route::get('/get-articles', [ArticlesController::class, 'getArticles'])->name('get-articles');
     Route::post('/save-articles', [ArticlesController::class, 'saveArticle'])->name('save-articles');
     Route::post('/update-articles', [ArticlesController::class, 'updateArticles'])->name('update-articles');

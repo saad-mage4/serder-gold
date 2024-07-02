@@ -4,11 +4,11 @@ import { PrimeReactProvider } from "primereact/api";
 import { Head } from "@inertiajs/react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import { Tag } from "primereact/tag";
 import { Dropdown } from "primereact/dropdown";
 import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import axios from "axios";
 import { InputText } from "primereact/inputtext";
+import NavLink from "@/Components/NavLink";
 
 const Articles = ({ auth }) => {
     // const [articles, setArticles] = useState([]);
@@ -113,7 +113,7 @@ const Articles = ({ auth }) => {
                         <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                             <div className="p-6 text-gray-900">
                                 <section className="articles-section">
-                                    <header>
+                                    <header className="relative">
                                         <h2 className="text-lg font-medium text-gray-900">
                                             List Articles
                                         </h2>
@@ -121,14 +121,19 @@ const Articles = ({ auth }) => {
                                         <p className="mt-1 text-sm text-gray-600">
                                             list of all articles.
                                         </p>
+                                        <NavLink
+                                            href={route("add-articles")}
+                                            className="absolute top-2/4 -translate-y-2/4 right-0 bg-blue-700 text-white px-4 py-1 rounded hover:text-white shadow-none border-2 border-[#f0b90a] focus:text-white"
+                                        >
+                                            Add Article
+                                        </NavLink>
                                     </header>
                                     <PrimeReactProvider>
                                         <DataTable
                                             editMode="row"
-                                            lazy
                                             stripedRows
                                             paginator
-                                            rows={10}
+                                            rows={5}
                                             scrollable
                                             scrollHeight="450px"
                                             value={products}

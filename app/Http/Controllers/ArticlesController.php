@@ -15,6 +15,7 @@ class ArticlesController extends Controller
      */
     public function saveArticle(Request $request): RedirectResponse
     {
+
         $request->validate([
             'banner.*' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
@@ -47,7 +48,7 @@ class ArticlesController extends Controller
         /* Saving the articles */
         $articleSave->save();
 
-        return Redirect::route('updateArticle')->with('success', 'Article saved successfully!');
+        return Redirect::route('Articles')->with('success', 'Article saved successfully!');
     }
 
     /**
