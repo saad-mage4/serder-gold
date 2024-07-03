@@ -9,7 +9,6 @@ function Footer() {
         axios
             .get("/get-images")
             .then((res) => {
-                console.log(res.data);
                 setFooterLogo(res.data.logo_footer);
             })
             .catch((err) => {

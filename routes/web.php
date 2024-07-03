@@ -24,12 +24,16 @@ Route::get('/showArticles', function () {
     return Inertia::render('showArticles');
 });
 
+Route::get('/ArticleDetails/{id}', function ($id) {
+    return Inertia::render('ArticleDetails', ['id' => $id]);
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
+Route::get('/get-articles-details/{id}', [ArticlesController::class, 'getArticleDetails']);
 /* Wrapping up the routes in middleware */
 Route::middleware(['auth', 'verified'])->group(function () {
 

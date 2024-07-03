@@ -90,4 +90,10 @@ class ArticlesController extends Controller
     {
         return DB::table('articles')->get();
     }
+
+    public function getArticleDetails($id)
+    {
+        $article = DB::table('articles')->find($id);
+        return response()->json($article);
+    }
 }
