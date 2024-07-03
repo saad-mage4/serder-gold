@@ -77,14 +77,18 @@ function Navbar({ userID, userName }) {
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-4 col-md-3 d-flex align-items-center col-logo">
-                            {HeaderLogo != null ? (
-                                <img src={HeaderLogo} alt="Logo" />
-                            ) : (
-                                <img
-                                    src="https://dummyimage.com/148x35/000/f0b90b"
-                                    alt="left-img"
-                                />
-                            )}
+                            <Link href="/">
+                                {HeaderLogo != null ? (
+
+                                    <img src={HeaderLogo} alt="Logo" />
+
+                                ) : (
+                                    <img
+                                        src="https://dummyimage.com/148x35/000/f0b90b"
+                                        alt="left-img"
+                                    />
+                                )}
+                            </Link>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12">
                             <form className="d-flex" role="search">
