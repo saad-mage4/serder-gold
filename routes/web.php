@@ -20,6 +20,10 @@ Route::get('/', function () {
     ]);
 });
 
+Route::get('/showArticles', function () {
+    return Inertia::render('showArticles');
+});
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -62,7 +66,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/save-users', [UserController::class, 'saveUser'])->name('save-users');
     // Route::post('/update-users', [ArticlesController::class, 'updateUsers'])->name('update-users');
 });
-
+Route::get('/showArticles', function () {
+    return Inertia::render('showArticles');
+})->name('showArticles');
 Route::get('/get-images', [ImageController::class, 'getImages'])->name('get-images');
 Route::get('/get-records', [StockRecordsController::class, 'getRecords'])->name('get-records');
 
