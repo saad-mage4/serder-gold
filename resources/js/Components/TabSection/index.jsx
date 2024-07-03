@@ -29,6 +29,30 @@ const TabsSection = () => {
             .catch((err) => {
                 console.log(err);
             });
+
+        const links = document.querySelectorAll(".tabs-links a");
+        const tabs = document.querySelectorAll(".stock-tabs .col-12");
+
+        links.forEach((link, index) => {
+            link.addEventListener("click", function (event) {
+                event.preventDefault();
+
+                const id = this.getAttribute("data-id");
+
+                tabs.forEach((tab, tabIndex) => {
+                    if (tabIndex === index) {
+                        tab.classList.remove("d-none");
+                    } else {
+                        tab.classList.add("d-none");
+                    }
+                });
+
+                links.forEach((link) => {
+                    link.classList.remove("active");
+                });
+                this.classList.add("active");
+            });
+        });
     }, []);
     // const getval = (e) => {
     //     const index = e.target.getAttribute("data-id");
@@ -38,31 +62,6 @@ const TabsSection = () => {
     //     tabs_.classList.remove('d-none');
     //     console.log(tabs_);
     // };
-
-    const links = document.querySelectorAll(".tabs-links a");
-    const tabs = document.querySelectorAll(".stock-tabs .col-12");
-
-    links.forEach((link, index) => {
-        link.addEventListener("click", function (event) {
-            event.preventDefault();
-
-            const id = this.getAttribute("data-id");
-
-            tabs.forEach((tab, tabIndex) => {
-                if (tabIndex === index) {
-                    tab.classList.remove("d-none");
-                } else {
-                    tab.classList.add("d-none");
-                }
-            });
-
-            links.forEach((link) => {
-                link.classList.remove("active");
-            });
-            this.classList.add("active");
-        });
-    });
-
     const show_itmes = tabs_data.map((value, index) => {
         return (
             <div
