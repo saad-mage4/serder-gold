@@ -142,6 +142,10 @@ const TabsSection = () => {
                                 <a data-id="7" href="#!">
                                     Community
                                 </a>
+                                {/* <a href={route('showArticles')}> */}
+                                <a href="#!">
+                                    Articles
+                                </a>
                             </div>
                         </div>
                     </div>
