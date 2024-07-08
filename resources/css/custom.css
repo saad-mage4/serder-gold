@@ -93,14 +93,14 @@ body.dark_theme .new-container-main *:not(a.post-link) {
 
 .not-login-page .form-wrap form label,
 .not-login-page .form-wrap form a.underline {
-    color: #fff;
+    /* color: #fff; */
 }
 
 .not-login-page .form-wrap form input {
     background-color: transparent;
     border-color: #848e9c;
     accent-color: #f0b90b !important;
-    color: #fff;
+    /* color: #fff; */
 }
 .not-login-page .form-wrap form input:focus {
     box-shadow: none;

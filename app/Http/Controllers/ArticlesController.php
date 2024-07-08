@@ -86,9 +86,17 @@ class ArticlesController extends Controller
     /**
      * @return Collection
      */
-    public function getArticles(): Collection
+    public function getArticlesAdmin(): Collection
     {
         return DB::table('articles')->get();
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getArticles(): Collection
+    {
+        return DB::table('articles')->where('status', 'active')->get();
     }
 
     public function getArticleDetails($id)

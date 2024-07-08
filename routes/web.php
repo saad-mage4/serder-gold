@@ -32,6 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/get-articles-admin', [ArticlesController::class, 'getArticlesAdmin'])->name('get-articles-admin');
 });
 Route::get('/get-articles-details/{id}', [ArticlesController::class, 'getArticleDetails']);
 /* Wrapping up the routes in middleware */

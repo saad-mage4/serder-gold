@@ -17,7 +17,7 @@ const Articles = ({ auth }) => {
     const [article_status] = useState(["active", "deactivate"]);
     useEffect(() => {
         axios
-            .get("/get-articles")
+            .get("/get-articles-admin")
             .then((res) => {
                 setProducts(res?.data);
             })

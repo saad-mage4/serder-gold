@@ -37,6 +37,8 @@ const showArticles = ({ auth }) => {
         );
     });
 
+    console.log(show);
+
     return (
         <Layout user={auth.user}>
             <div className="container show_articles">
@@ -44,7 +46,7 @@ const showArticles = ({ auth }) => {
                     <div className="col-12 my-3">
                         <h1 className="text-center">Articles List</h1>
                     </div>
-                    {show}
+                    {show?.length == 0 ? <h3 className="text-center">No Record Found!</h3> : show}
                 </div>
             </div>
         </Layout>
