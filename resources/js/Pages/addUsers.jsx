@@ -25,7 +25,7 @@ const addUsers = ({ auth }) => {
     const getName = (e) => {
         let fileName = document.querySelector(".show-file-name");
         fileName.innerHTML = e.target.files[0].name;
-        setData("banner", e.target.files[0]);
+        setData("avatar", e.target.files[0]);
     };
 
 
@@ -88,7 +88,7 @@ const addUsers = ({ auth }) => {
                                                             );
                                                         }}
                                                         required
-                                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                        className="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                     />
                                                 </div>
                                             </div>
@@ -114,7 +114,7 @@ const addUsers = ({ auth }) => {
                                                             );
                                                         }}
                                                         required
-                                                        className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                                                        className="block w-full rounded-md border-2 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                                                     />
                                                 </div>
                                             </div>
@@ -127,8 +127,8 @@ const addUsers = ({ auth }) => {
                                                 </div>
                                                 <div className="mt-2">
                                                     <label
-                                                        className="relative block border border-sky-700 border-dashed w-full h-9 rounded hover:border-indigo-950 hover:border-2"
-                                                        htmlFor="banner"
+                                                        className="relative block border-2 border-sky-700 border-dashed w-full h-9 rounded hover:border-indigo-950 hover:border-2"
+                                                        htmlFor="avatar"
                                                     >
                                                         <span className="show-file-name absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 w-full text-center">
                                                             Click here to upload
@@ -136,10 +136,10 @@ const addUsers = ({ auth }) => {
                                                         </span>
                                                     </label>
                                                     <input
-                                                        id="banner"
-                                                        name="banner"
+                                                        id="avatar"
+                                                        name="avatar"
                                                         type="file"
-                                                        autoComplete="current-banner"
+                                                        autoComplete="current-avatar"
                                                         required
                                                         onChange={getName}
                                                         className="w-0 h-0 opacity-0"

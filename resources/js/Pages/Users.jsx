@@ -17,7 +17,6 @@ const Users = ({ auth }) => {
         axios
             .get("/get-users")
             .then((res) => {
-                console.log(res);
                 setProducts(res?.data);
             })
             .catch((err) => {

@@ -55,10 +55,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/add-articles', function () {
         return Inertia::render('addArticles');
     })->name('add-articles');
-    Route::get('/get-articles', [ArticlesController::class, 'getArticles'])->name('get-articles');
     Route::post('/save-articles', [ArticlesController::class, 'saveArticle'])->name('save-articles');
     Route::post('/update-articles', [ArticlesController::class, 'updateArticles'])->name('update-articles');
-
+    
     /* Users */
     Route::get('/Users', function () {
         return Inertia::render('Users');
@@ -70,6 +69,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/save-users', [UserController::class, 'saveUser'])->name('save-users');
     // Route::post('/update-users', [ArticlesController::class, 'updateUsers'])->name('update-users');
 });
+Route::get('/get-articles', [ArticlesController::class, 'getArticles'])->name('get-articles');
 Route::get('/showArticles', function () {
     return Inertia::render('showArticles');
 })->name('showArticles');

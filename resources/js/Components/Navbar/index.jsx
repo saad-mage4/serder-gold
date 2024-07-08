@@ -80,7 +80,7 @@ function Navbar({ userID, userName }) {
                             <Link href="/">
                                 {HeaderLogo != null ? (
 
-                                    <img src={HeaderLogo} alt="Logo" />
+                                    <img src={`../${HeaderLogo}`} alt="Logo" />
 
                                 ) : (
                                     <img

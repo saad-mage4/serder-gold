@@ -7,6 +7,18 @@ export default function ArticleDetails({ auth, id }) {
     const [desc, getDesc] = useState("");
     const [banner, getBanner] = useState("");
 
+    // function pattern(n){
+    //     for (let i = 1; i <= n; i++) {
+    //         let pat = "";
+    //         for (let j = 1; j < i; j++) {
+    //             pat += "*";
+    //         }
+    //         pat += i;
+    //         console.log(pat);
+    //     }
+    // }
+    // pattern(5);
+
     useEffect(() => {
         axios
             .get(`/get-articles-details/${id}`)
@@ -17,7 +29,6 @@ export default function ArticleDetails({ auth, id }) {
             })
             .catch((error) => console.log(error));
     }, []);
-    console.log(banner);
     return (
         <>
             <Layout user={auth.user}>

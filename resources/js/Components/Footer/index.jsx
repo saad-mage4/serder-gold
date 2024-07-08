@@ -22,7 +22,7 @@ function Footer() {
                     <div className="row ">
                         <div className="col-lg-4 col-md-6 col-12 foot-logo mb-5">
                             {footerLogo != null ? (
-                                <img src={footerLogo} alt="footer-logo" />
+                                <img src={`../${footerLogo}`} alt="footer-logo" />
                             ) : (
                                 <img
                                     src="https://dummyimage.com/192x44/fff/000"

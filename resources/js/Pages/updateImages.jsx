@@ -20,7 +20,6 @@ export default function updateImages({ auth }) {
         axios
             .get("/get-images")
             .then((res) => {
-                console.log(res.data);
                 SetHeaderLogo(res.data.logo_header);
                 SetFooterLogo(res.data.logo_footer);
                 SetCenterAd(res.data.home_center);
