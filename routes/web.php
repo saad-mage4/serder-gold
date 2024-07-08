@@ -67,7 +67,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('add-users');
     Route::get('/get-users', [UserController::class, 'getUsers'])->name('get-users');
     Route::post('/save-users', [UserController::class, 'saveUser'])->name('save-users');
-    // Route::post('/update-users', [ArticlesController::class, 'updateUsers'])->name('update-users');
+    // Route::post('/update-users', [UserController::class, 'updateUsers'])->name('update-users');
 });
 Route::get('/get-articles', [ArticlesController::class, 'getArticles'])->name('get-articles');
 Route::get('/showArticles', function () {

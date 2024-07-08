@@ -49,7 +49,7 @@ function MainContent() {
                         )}
                     </div>
                     <div className="col-lg-8 col-md-8 middle-col">
-                        {LeftAd != null ? (
+                        {CenterAd != null ? (
                             <img src={CenterAd} alt="" />
                         ) : (
                             <img
@@ -408,7 +408,7 @@ function MainContent() {
                         </div>
                     </div>
                     <div className="col-lg-2 col-md-4">
-                        {LeftAd != null ? (
+                        {RightAd != null ? (
                             <img src={RightAd} alt="" className="ad-side" />
                         ) : (
                             <img
