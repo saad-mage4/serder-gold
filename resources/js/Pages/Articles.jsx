@@ -13,7 +13,6 @@ import NavLink from "@/Components/NavLink";
 const Articles = ({ auth }) => {
     // const [articles, setArticles] = useState([]);
     const [products, setProducts] = useState([]);
-    const [selectedCity, setSelectedCity] = useState(null);
     const [article_status] = useState(["active", "deactivate"]);
     useEffect(() => {
         axios
