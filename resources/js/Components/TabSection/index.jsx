@@ -94,7 +94,7 @@ const TabsSection = () => {
     //     );
     // });
 
-    const show_items = tabs_data.map((value, index) => {
+    const show_items = tabs_data?.map((value, index) => {
         return (
             <div
                 key={index}
