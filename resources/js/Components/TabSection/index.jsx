@@ -8,26 +8,28 @@ const TabsSection = () => {
     const [Gold, setGold] = useState([]);
     const [error, setError] = useState(null);
     useEffect(() => {
-        // const fetchData = async () => {
-        //     try {
-        //         const response = await axios.get(
-        //             "https://www.nosyapi.com/apiv2/service/economy/live-exchange-rates",
-        //             {
-        //                 params: {
-        //                     apiKey: "LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF",
-        //                     type: "gold",
-        //                 },
-        //             }
-        //         );
-        //         setGold(response.data);
-        //         console.log(response.data);
-        //     } catch (error) {
-        //         setError(error);
-        //     }
-        // };
-        // const timer  = setTimeout(() => {
-        //     fetchData();
-        // }, 60000);
+        const fetchData = async () => {
+            try {
+                const response = await axios.get(
+                    // https://www.nosyapi.com/apiv2/service/economy/calendar
+                    // "https://www.nosyapi.com/apiv2/service/economy/live-exchange-rates",
+                    "https://www.nosyapi.com/apiv2/service/economy/currency/exchange-rate",
+                    {
+                        params: {
+                            apiKey: "LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF",
+                            type: "gold",
+                        },
+                    }
+                );
+                setGold(response.data);
+                // console.log(response.data);
+            } catch (error) {
+                setError(error);
+            }
+        };
+        const timer = setTimeout(() => {
+            fetchData();
+        }, 12000);
 
         const links = document.querySelectorAll(".tabs-links a");
         const tabs = document.querySelectorAll(".stock-tabs .col-12");
@@ -54,46 +56,46 @@ const TabsSection = () => {
                 });
             }
         });
-        // return () => clearTimeout(timer);
-    }, []);
-    // const GoldData = Gold.data?.slice(0, 7).map((item, index) => {
-    //     let random = Math.floor(Math.random() * 5);
-    //     const formattedNumber = new Intl.NumberFormat('tr-TR', { style: 'decimal', minimumFractionDigits: 2, maximumFractionDigits: 2 }).format(item?.buy);
-    //     return (
-    //         <>
-    //             <div
-    //                 key={index}
-    //                 className="item d-flex align-items-center justify-content-center"
-    //             >
-    //                 <div className="content d-flex flex-column gap-2">
-    //                     <span className="title">{item?.baseCurrencyCode}</span>
-    //                     <span className="value">{formattedNumber}</span>
-    //                     <div
-    //                         className={`ratio__ ${
-    //                             random > 3 ? "green" : "red"
-    //                         } d-flex align-items-center gap-2`}
-    //                     >
-    //                         <img
-    //                             src={
-    //                                 random > 3
-    //                                     ? arrow_green
-    //                                     : arrow_red
-    //                             }
-    //                             alt={"arrow-" + index}
-    //                         />
-    //                         <span className="percent__">
-    //                             %{item?.changeRate?.toFixed(2)}
-    //                         </span>
-    //                         <span className="number__">
-    //                             {(item?.sell / 100)?.toFixed(2)}
-    //                         </span>
-    //                     </div>
-    //                 </div>
-    //             </div>
-    //         </>
-    //     );
-    // });
-
+        return () => clearTimeout(timer);
+    }, [Gold]);
+    const GoldData = Gold.data?.slice(0, 7).map((item, index) => {
+        let random = Math.floor(Math.random() * 5);
+        const formattedNumber = new Intl.NumberFormat("tr-TR", {
+            style: "decimal",
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        }).format(item?.buying);
+        return (
+            <>
+                <div
+                    key={index}
+                    className="item d-flex align-items-center justify-content-center"
+                >
+                    <div className="content d-flex flex-column gap-2">
+                        <span className="title">{item?.FullName}</span>
+                        <span className="value">{formattedNumber}</span>
+                        <div
+                            className={`ratio__ ${
+                                random > 3 ? "green" : "red"
+                            } d-flex align-items-center gap-2`}
+                        >
+                            <img
+                                src={random > 3 ? arrow_green : arrow_red}
+                                alt={"arrow-" + index}
+                            />
+                            <span className="percent__">
+                                %{item?.changeRate?.toFixed(2)}
+                            </span>
+                            <span className="number__">
+                                {(item?.selling / 100)?.toFixed(2)}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </>
+        );
+    });
+    // console.log(Gold);
     const show_items = tabs_data?.map((value, index) => {
         return (
             <div
@@ -183,8 +185,9 @@ const TabsSection = () => {
                         <div className="col-12">
                             <div className="tabs-content d-grid gap-5">
                                 {/* items start */}
+                                {Gold?.length == 0 ? show_items : GoldData}
                                 {/* {GoldData} */}
-                                {show_items}
+                                {/* {show_items} */}
                                 {/* items end */}
                             </div>
                         </div>

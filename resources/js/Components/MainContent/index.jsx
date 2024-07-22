@@ -9,7 +9,7 @@ function MainContent() {
     const [RightAd, setRightAd] = useState("");
     const [valLeft, setvalLeft] = useState("");
     const [valRight, setvalRight] = useState("");
-
+    const [Currency, setCurrency] = useState([]);
     useEffect(() => {
         axios
             .get("/get-images")
@@ -22,7 +22,29 @@ function MainContent() {
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+
+        const Cur_Response = async () => {
+            try {
+                const response = await axios.get(
+                    "https://www.nosyapi.com/apiv2/service/economy/live-exchange-rates",
+                    {
+                        params: {
+                            apiKey: "LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF",
+                        },
+                    }
+                );
+                console.log(response.data);
+                setCurrency(response.data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+
+        const timer = setTimeout(() => {
+            Cur_Response();
+        }, 15000);
+        return () => clearTimeout(timer);
+    }, [Currency]);
 
     const showChangeRight = () => {
         var valueRight = document.getElementById("val-right").value;
@@ -33,7 +55,105 @@ function MainContent() {
         var valueLeft = document.getElementById("val-left").value;
         setvalLeft(valueLeft);
     };
+    
+    const default_list = (
+        <>
+            <li>
+                <div class="est-left">
+                    <span class="country">USDTRY</span>
+                    <span class="currency">TRY</span>
+                </div>
+                <div class="est-right">
+                    <span class="rate-disabled">00.00</span>
+                    <span class="rate-current">00.00</span>
+                    <span class="rate-percentage rate-green">%-0.00</span>
+                </div>
+            </li>
+            <li>
+                <div class="est-left">
+                    <span class="country">USDTRY</span>
+                    <span class="currency">TRY</span>
+                </div>
+                <div class="est-right">
+                    <span class="rate-disabled">00.00</span>
+                    <span class="rate-current">00.00</span>
+                    <span class="rate-percentage rate-green">%-0.00</span>
+                </div>
+            </li>
+            <li>
+                <div class="est-left">
+                    <span class="country">USDTRY</span>
+                    <span class="currency">TRY</span>
+                </div>
+                <div class="est-right">
+                    <span class="rate-disabled">00.00</span>
+                    <span class="rate-current">00.00</span>
+                    <span class="rate-percentage rate-green">%-0.00</span>
+                </div>
+            </li>
+            <li>
+                <div class="est-left">
+                    <span class="country">USDTRY</span>
+                    <span class="currency">TRY</span>
+                </div>
+                <div class="est-right">
+                    <span class="rate-disabled">00.00</span>
+                    <span class="rate-current">00.00</span>
+                    <span class="rate-percentage rate-green">%-0.00</span>
+                </div>
+            </li>
+            <li>
+                <div class="est-left">
+                    <span class="country">USDTRY</span>
+                    <span class="currency">TRY</span>
+                </div>
+                <div class="est-right">
+                    <span class="rate-disabled">00.00</span>
+                    <span class="rate-current">00.00</span>
+                    <span class="rate-percentage rate-green">%-0.00</span>
+                </div>
+            </li>
+            <li>
+                <div class="est-left">
+                    <span class="country">USDTRY</span>
+                    <span class="currency">TRY</span>
+                </div>
+                <div class="est-right">
+                    <span class="rate-disabled">00.00</span>
+                    <span class="rate-current">00.00</span>
+                    <span class="rate-percentage rate-green">%-0.00</span>
+                </div>
+            </li>
+        </>
+    );
 
+    const showCurrency = Currency.data?.slice(0, 6).map((item, index) => {
+        let random = Math.floor(Math.random() * 10);
+        console.log(random);
+        return (
+            <>
+                <li key={index}>
+                    <div className="est-left">
+                        <span className="country">{item?.currencyCode}</span>
+                        <span className="currency">
+                            {item?.targetCurrencyCode}
+                        </span>
+                    </div>
+                    <div className="est-right">
+                        <span className="rate-disabled">{item?.dayHigh}</span>
+                        <span className="rate-current">{item?.dayLow}</span>
+                        <span
+                            className={`rate-percentage ${
+                                random <= 5 ? "rate-green" : "rate-red"
+                            }`}
+                        >
+                            %{item?.changeRate}
+                        </span>
+                    </div>
+                </li>
+            </>
+        );
+    });
     return (
         <>
             <div className="container addsTable-main-wrapper">
@@ -276,132 +396,9 @@ function MainContent() {
 
                                 <div className="country-est-list">
                                     <ul>
-                                        <li>
-                                            <div className="est-left">
-                                                <span className="country">
-                                                    USD
-                                                </span>
-                                                <span className="currency">
-                                                    DOLAR
-                                                </span>
-                                            </div>
-                                            <div className="est-right">
-                                                <span className="rate-disabled">
-                                                    32.3312
-                                                </span>
-                                                <span className="rate-current">
-                                                    32.3769
-                                                </span>
-                                                <span className="rate-percentage rate-red">
-                                                    %0.22
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="est-left">
-                                                <span className="country">
-                                                    USD
-                                                </span>
-                                                <span className="currency">
-                                                    DOLAR
-                                                </span>
-                                            </div>
-                                            <div className="est-right">
-                                                <span className="rate-disabled">
-                                                    34.4441
-                                                </span>
-                                                <span className="rate-current">
-                                                    34.5040
-                                                </span>
-                                                <span className="rate-percentage rate-green">
-                                                    %-0.62
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="est-left">
-                                                <span className="country">
-                                                    USD
-                                                </span>
-                                                <span className="currency">
-                                                    DOLAR
-                                                </span>
-                                            </div>
-                                            <div className="est-right">
-                                                <span className="rate-disabled">
-                                                    40.3762
-                                                </span>
-                                                <span className="rate-current rate-green">
-                                                    40.5786
-                                                </span>
-                                                <span className="rate-percentage rate-green">
-                                                    %-0.76
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="est-left">
-                                                <span className="country">
-                                                    USD
-                                                </span>
-                                                <span className="currency">
-                                                    DOLAR
-                                                </span>
-                                            </div>
-                                            <div className="est-right">
-                                                <span className="rate-disabled">
-                                                    23.5420
-                                                </span>
-                                                <span className="rate-current rate-green">
-                                                    23.6600
-                                                </span>
-                                                <span className="rate-percentage rate-green">
-                                                    %0.24
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="est-left">
-                                                <span className="country">
-                                                    USD
-                                                </span>
-                                                <span className="currency">
-                                                    DOLAR
-                                                </span>
-                                            </div>
-                                            <div className="est-right">
-                                                <span className="rate-disabled">
-                                                    35.4354
-                                                </span>
-                                                <span className="rate-current">
-                                                    35.4971
-                                                </span>
-                                                <span className="rate-percentage  rate-green">
-                                                    %-0.85
-                                                </span>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div className="est-left">
-                                                <span className="country">
-                                                    USD
-                                                </span>
-                                                <span className="currency">
-                                                    DOLAR
-                                                </span>
-                                            </div>
-                                            <div className="est-right">
-                                                <span className="rate-disabled">
-                                                    0.3461
-                                                </span>
-                                                <span className="rate-current">
-                                                    0.3462
-                                                </span>
-                                                <span className="rate-percentage rate-red">
-                                                    %-0.20
-                                                </span>
-                                            </div>
-                                        </li>
+                                        {Currency?.length == 0
+                                            ? default_list
+                                            : showCurrency}
                                     </ul>
                                 </div>
                             </div>

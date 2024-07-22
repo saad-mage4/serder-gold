@@ -5,7 +5,30 @@ import axios from "axios";
 import LiveClockUpdate from "../Clock";
 const GoldPricesNews = () => {
     const [RightImg, SetRightImg] = useState("");
+    const [Calendar, setCalendar] = useState([]);
+    const [Error, setError] = useState("");
     useEffect(() => {
+        const fetchDataCalendar = async () => {
+            try {
+                const response = await axios.get(
+                    // https://www.nosyapi.com/apiv2/service/economy/calendar
+                    "https://www.nosyapi.com/apiv2/service/economy/calendar",
+                    {
+                        params: {
+                            apiKey: "LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF",
+                        },
+                    }
+                );
+                setCalendar(response.data);
+                console.log(response.data);
+            } catch (error) {
+                setError(error);
+            }
+        };
+        const timer = setTimeout(() => {
+            fetchDataCalendar();
+        }, 5000);
+
         axios
             .get("/get-images")
             .then((res) => {
@@ -15,7 +38,35 @@ const GoldPricesNews = () => {
             .catch((err) => {
                 console.log(err);
             });
+        return () => clearTimeout(timer);
     }, []);
+
+    const CalendarData = Calendar.data?.slice(0, 8).map((item, index) => {
+        let random = Math.floor(Math.random() * 20);
+        return (
+            <>
+                <tr key={index}>
+                    <td data-label="Zaman">{random}d</td>
+                    <td data-label="Döviz">{item?.paraBirimi}</td>
+                    <td data-label="Olay">{item?.olay}</td>
+                    <td data-label="Önem" className="d-none">
+                        <div className="stars">
+                            <i className="fa-solid fa-star"></i>
+                            <i className="fa-solid fa-star"></i>
+                            <i className="fa-solid fa-star light"></i>
+                        </div>
+                    </td>
+                    <td data-label="Açiklanan">&nbsp;</td>
+                    <td data-label="Beklenti" className="tar">
+                        {item?.beklenti}
+                    </td>
+                    <td data-label="Önceki" className="tar">
+                        {item?.oncekiDeger}
+                    </td>
+                </tr>
+            </>
+        );
+    });
 
     // function displayTime() {
     //   var currentTime = new Date();
@@ -106,7 +157,7 @@ const GoldPricesNews = () => {
                                                         <th>Zaman</th>
                                                         <th>Döviz</th>
                                                         <th>Olay</th>
-                                                        <th>Önem</th>
+                                                        {/* <th>Önem</th> */}
                                                         <th>Açiklanan</th>
                                                         <th className="tar">
                                                             Beklenti
@@ -116,7 +167,7 @@ const GoldPricesNews = () => {
                                                         </th>
                                                     </tr>
                                                 </thead>
-                                                <tbody>
+                                                {/* <tbody>
                                                     <tr>
                                                         <td data-label="Zaman">
                                                             10d
@@ -389,7 +440,8 @@ const GoldPricesNews = () => {
                                                             0,20%
                                                         </td>
                                                     </tr>
-                                                </tbody>
+                                                </tbody> */}
+                                                <tbody>{CalendarData}</tbody>
                                             </table>
                                         </div>
                                     </div>
