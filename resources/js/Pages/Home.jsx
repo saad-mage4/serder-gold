@@ -7,7 +7,7 @@ import React from 'react'
 export default function Home() {
   return (
     <>
-      <MainContent/>
+      <MainContent page="home_main"/>
       <GoldGuide />
       <GoldPricesNews />
       <NewsSection/>
