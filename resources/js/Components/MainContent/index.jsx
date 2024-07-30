@@ -3,6 +3,8 @@ import "./MainContent.scss";
 import { AdsBig, AdsLarge } from "@/images";
 import axios from "axios";
 import useGet from "@/hooks/useGet";
+import Chart from "../Chart";
+import LineDemo from "../Chart/demo";
 
 function MainContent({ page }) {
     const [CenterAd, setCenterAd] = useState("");
@@ -26,7 +28,8 @@ function MainContent({ page }) {
 
     const {data: taha123, loader, error} = useGet('https://www.nosyapi.com/apiv2/service/economy/live-exchange-rates?apiKey=LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF');
 
-    console.log("Saad Bhai", taha123);
+    // console.log("Saad Bhai", taha123);
+
 
 
 
@@ -78,7 +81,7 @@ function MainContent({ page }) {
                         },
                     }
                 );
-                console.log("taha", response?.data?.data?.histories);
+                console.log("taha", response?.data?.data);
                 // console.log(response.data.data.histories);
                 setHistorical(response.data.data.histories);
             } catch (error) {
@@ -93,7 +96,7 @@ function MainContent({ page }) {
     }, [Currency]);
 
     const taha = Object.entries(historical)?.map(([key, value])=>{
-        return value?.date 
+        return value?.date
     });
 
     const showChangeRight = () => {
@@ -204,7 +207,7 @@ function MainContent({ page }) {
             </>
         );
     });
-    if(loader) return <h1>tahahaaa</h1>
+    if (loader) return <h1>loading...</h1>
 
     return (
         <>
@@ -337,7 +340,7 @@ function MainContent({ page }) {
                                     </tbody>
                                 </table>
 
-                                <div className="row mt-4">
+                                <div className="mt-4 row">
                                     <div className="col-lg-7 col-sm-6 col-sm-12 black-box-col">
                                         <div className="black-inn-wrap">
                                             <h3 className="black-bg-head">
@@ -438,8 +441,8 @@ function MainContent({ page }) {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="col-lg-5 col-sm-12 col-md-6 my-5 my-md-0 my-lg-0">
-                                        <h3 className="black-bg-head mb-4">
+                                    <div className="my-5 col-lg-5 col-sm-12 col-md-6 my-md-0 my-lg-0">
+                                        <h3 className="mb-4 black-bg-head">
                                             DOVIZ
                                         </h3>
 
@@ -454,7 +457,7 @@ function MainContent({ page }) {
                                 </div>
                             </>
                         ) : (
-                            <>Chart</>
+                                <Chart />
                         )}
                     </div>
                     <div className="col-lg-2 col-md-4">
