@@ -31,7 +31,6 @@ const Chart = () => {
 
     if (response?.data?.currencyConversion) {
         Object.entries(response?.data?.currencyConversion)?.map(([key, item]) => {
-            // console.log("taha", Object.entries(item)?.map(([key, value]) => key));
             Object.entries(item)?.map(([key, value]) => {
                 labels.push(key);
                 exchangeRates.push(value?.reverseExchangeRate);
