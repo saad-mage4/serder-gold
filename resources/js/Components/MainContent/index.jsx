@@ -26,11 +26,7 @@ function MainContent({ page }) {
 
     // const {data} = useGet('https://www.nosyapi.com/apiv2/service/economy/live-exchange-rates?apiKey=LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF');
 
-    const {data: taha123, loader, error} = useGet('https://www.nosyapi.com/apiv2/service/economy/live-exchange-rates?apiKey=LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF');
-
-    // console.log("Saad Bhai", taha123);
-
-
+    const {data, loader, error} = useGet('https://www.nosyapi.com/apiv2/service/economy/live-exchange-rates?apiKey=LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF');
 
 
     useEffect(() => {
@@ -81,7 +77,6 @@ function MainContent({ page }) {
                         },
                     }
                 );
-                console.log("taha", response?.data?.data);
                 // console.log(response.data.data.histories);
                 setHistorical(response.data.data.histories);
             } catch (error) {
@@ -94,10 +89,6 @@ function MainContent({ page }) {
         }, 15000);
         return () => clearTimeout(timer);
     }, [Currency]);
-
-    const taha = Object.entries(historical)?.map(([key, value])=>{
-        return value?.date
-    });
 
     const showChangeRight = () => {
         var valueRight = document.getElementById("val-right").value;
