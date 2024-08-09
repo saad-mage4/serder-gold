@@ -80,6 +80,7 @@ const GoldPricesNews = () => {
     // setInterval(displayTime, 1000);
 
     const getIndex = (event) => {
+        event.preventDefault();
         const index = event.target.getAttribute("data-index");
         const tabs = document.querySelectorAll(".tabs .tab");
         tabs.forEach((tab) => tab.classList.remove("active"));

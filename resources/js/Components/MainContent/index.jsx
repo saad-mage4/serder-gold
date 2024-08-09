@@ -16,18 +16,18 @@ function MainContent({ page }) {
         CenterAd: "",
         LeftAd: "",
         RightAd: "",
-        valLeft: ""
+        valLeft: "",
     });
     const [Currency, setCurrency] = useState([]);
     const [historical, setHistorical] = useState([]);
     const [Label, setLabel] = useState([]);
     const [ExchangeRates, setExchangeRates] = useState([]);
 
-
     // const {data} = useGet('https://www.nosyapi.com/apiv2/service/economy/live-exchange-rates?apiKey=LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF');
 
-    const {data, loader, error} = useGet('https://www.nosyapi.com/apiv2/service/economy/live-exchange-rates?apiKey=LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF');
-
+    const { data, loader, error } = useGet(
+        "https://www.nosyapi.com/apiv2/service/economy/live-exchange-rates?apiKey=LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF"
+    );
 
     useEffect(() => {
         axios
@@ -40,7 +40,7 @@ function MainContent({ page }) {
                 setBanners({
                     CenterAd: res.data.home_center,
                     LeftAd: res.data.home_left,
-                    RightAd: res.data.home_right
+                    RightAd: res.data.home_right,
                 });
             })
             .catch((err) => {
@@ -103,69 +103,69 @@ function MainContent({ page }) {
     const default_list = (
         <>
             <li>
-                <div class="est-left">
-                    <span class="country">USDTRY</span>
-                    <span class="currency">TRY</span>
+                <div className="est-left">
+                    <span className="country">USDTRY</span>
+                    <span className="currency">TRY</span>
                 </div>
-                <div class="est-right">
-                    <span class="rate-disabled">00.00</span>
-                    <span class="rate-current">00.00</span>
-                    <span class="rate-percentage rate-green">%-0.00</span>
-                </div>
-            </li>
-            <li>
-                <div class="est-left">
-                    <span class="country">USDTRY</span>
-                    <span class="currency">TRY</span>
-                </div>
-                <div class="est-right">
-                    <span class="rate-disabled">00.00</span>
-                    <span class="rate-current">00.00</span>
-                    <span class="rate-percentage rate-green">%-0.00</span>
+                <div className="est-right">
+                    <span className="rate-disabled">00.00</span>
+                    <span className="rate-current">00.00</span>
+                    <span className="rate-percentage rate-green">%-0.00</span>
                 </div>
             </li>
             <li>
-                <div class="est-left">
-                    <span class="country">USDTRY</span>
-                    <span class="currency">TRY</span>
+                <div className="est-left">
+                    <span className="country">USDTRY</span>
+                    <span className="currency">TRY</span>
                 </div>
-                <div class="est-right">
-                    <span class="rate-disabled">00.00</span>
-                    <span class="rate-current">00.00</span>
-                    <span class="rate-percentage rate-green">%-0.00</span>
-                </div>
-            </li>
-            <li>
-                <div class="est-left">
-                    <span class="country">USDTRY</span>
-                    <span class="currency">TRY</span>
-                </div>
-                <div class="est-right">
-                    <span class="rate-disabled">00.00</span>
-                    <span class="rate-current">00.00</span>
-                    <span class="rate-percentage rate-green">%-0.00</span>
+                <div className="est-right">
+                    <span className="rate-disabled">00.00</span>
+                    <span className="rate-current">00.00</span>
+                    <span className="rate-percentage rate-green">%-0.00</span>
                 </div>
             </li>
             <li>
-                <div class="est-left">
-                    <span class="country">USDTRY</span>
-                    <span class="currency">TRY</span>
+                <div className="est-left">
+                    <span className="country">USDTRY</span>
+                    <span className="currency">TRY</span>
                 </div>
-                <div class="est-right">
-                    <span class="rate-disabled">00.00</span>
-                    <span class="rate-current">00.00</span>
-                    <span class="rate-percentage rate-green">%-0.00</span>
+                <div className="est-right">
+                    <span className="rate-disabled">00.00</span>
+                    <span className="rate-current">00.00</span>
+                    <span className="rate-percentage rate-green">%-0.00</span>
                 </div>
             </li>
             <li>
-                <div class="est-left">
-                    <span class="country">USDTRY</span>
-                    <span class="currency">TRY</span>
+                <div className="est-left">
+                    <span className="country">USDTRY</span>
+                    <span className="currency">TRY</span>
                 </div>
-                <div class="est-right">
-                    <span class="rate-disabled">00.00</span>
-                    <span class="rate-current">00.00</span>
-                    <span class="rate-percentage rate-green">%-0.00</span>
+                <div className="est-right">
+                    <span className="rate-disabled">00.00</span>
+                    <span className="rate-current">00.00</span>
+                    <span className="rate-percentage rate-green">%-0.00</span>
+                </div>
+            </li>
+            <li>
+                <div className="est-left">
+                    <span className="country">USDTRY</span>
+                    <span className="currency">TRY</span>
+                </div>
+                <div className="est-right">
+                    <span className="rate-disabled">00.00</span>
+                    <span className="rate-current">00.00</span>
+                    <span className="rate-percentage rate-green">%-0.00</span>
+                </div>
+            </li>
+            <li>
+                <div className="est-left">
+                    <span className="country">USDTRY</span>
+                    <span className="currency">TRY</span>
+                </div>
+                <div className="est-right">
+                    <span className="rate-disabled">00.00</span>
+                    <span className="rate-current">00.00</span>
+                    <span className="rate-percentage rate-green">%-0.00</span>
                 </div>
             </li>
         </>
@@ -198,17 +198,30 @@ function MainContent({ page }) {
             </>
         );
     });
-    if (loader) return <h1>loading...</h1>
+    if (loader) return <div className="loading-wrapper"></div>;
 
     return (
         <>
             <div className="container addsTable-main-wrapper">
                 <div className="row">
                     <div className="col-lg-2 col-md-4">
-                    <img src={banners?.LeftAd ?? "https://dummyimage.com/216x500/000/f0b90b"} alt="" className="ad-side" />
+                        <img
+                            src={
+                                banners?.LeftAd ??
+                                "https://dummyimage.com/216x500/000/f0b90b"
+                            }
+                            alt=""
+                            className="ad-side"
+                        />
                     </div>
                     <div className="col-lg-8 col-md-8 middle-col">
-                    <img src={banners?.CenterAd ?? "https://dummyimage.com/936x240/000/f0b90b"} alt="" />
+                        <img
+                            src={
+                                banners?.CenterAd ??
+                                "https://dummyimage.com/936x240/000/f0b90b"
+                            }
+                            alt=""
+                        />
                         {page == "home_main" ? (
                             <>
                                 <table className="table">
@@ -448,12 +461,16 @@ function MainContent({ page }) {
                                 </div>
                             </>
                         ) : (
-                                <Chart />
+                            <Chart />
                         )}
                     </div>
                     <div className="col-lg-2 col-md-4">
                         {banners?.RightAd != null ? (
-                            <img src={banners?.RightAd} alt="" className="ad-side" />
+                            <img
+                                src={banners?.RightAd}
+                                alt=""
+                                className="ad-side"
+                            />
                         ) : (
                             <img
                                 src="https://dummyimage.com/216x500/000/f0b90b"
