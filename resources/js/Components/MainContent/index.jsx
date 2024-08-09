@@ -84,14 +84,14 @@ function MainContent({ page }) {
             }
         };
 
-        const timerH = setTimeout(() => {
-            Historical_();
-        }, 5000);
+        Historical_();
+        // const timerH = setTimeout(() => {
+        // }, 5000);
         const timer = setTimeout(() => {
             Cur_Response();
         }, 15000);
-        return () => clearTimeout(timerH, timer);
-    }, [Currency, historical]);
+        return () => clearTimeout(timer);
+    }, [Currency]);
 
     const showChangeRight = () => {
         var valueRight = document.getElementById("val-right").value;
