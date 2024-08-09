@@ -83,12 +83,15 @@ function MainContent({ page }) {
                 console.log(error);
             }
         };
-        Historical_();
+
+        const timerH = setTimeout(() => {
+            Historical_();
+        }, 5000);
         const timer = setTimeout(() => {
             Cur_Response();
         }, 15000);
-        return () => clearTimeout(timer);
-    }, [Currency]);
+        return () => clearTimeout(timerH, timer);
+    }, [Currency, historical]);
 
     const showChangeRight = () => {
         var valueRight = document.getElementById("val-right").value;
@@ -224,9 +227,9 @@ function MainContent({ page }) {
                         />
                         {page == "home_main" ? (
                             <>
-                            <div className="my-3">
-                                <Chart />
-                            </div>
+                                <div className="my-3">
+                                    <Chart />
+                                </div>
                                 <table className="table d-none">
                                     <thead>
                                         <tr>
