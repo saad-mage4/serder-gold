@@ -224,7 +224,10 @@ function MainContent({ page }) {
                         />
                         {page == "home_main" ? (
                             <>
-                                <table className="table">
+                            <div className="my-3">
+                                <Chart />
+                            </div>
+                                <table className="table d-none">
                                     <thead>
                                         <tr>
                                             <th scope="col"></th>
