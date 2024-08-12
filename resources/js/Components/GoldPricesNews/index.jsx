@@ -1,6 +1,6 @@
 import "./goldPricesNews.scss";
 import { side_banner } from "@/images";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import LiveClockUpdate from "../Clock";
 const GoldPricesNews = () => {
@@ -16,6 +16,7 @@ const GoldPricesNews = () => {
                     {
                         params: {
                             apiKey: "LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF",
+                            date: "next-week",
                         },
                     }
                 );
@@ -41,7 +42,7 @@ const GoldPricesNews = () => {
         return () => clearTimeout(timer);
     }, []);
 
-    const CalendarData = Calendar.data?.slice(0, 8).map((item, index) => {
+    const CalendarData = Calendar?.data?.slice(0, 8)?.map((item, index) => {
         let random = Math.floor(Math.random() * 20);
         return (
             <>
@@ -78,6 +79,75 @@ const GoldPricesNews = () => {
     //   document.querySelector(".mints").innerHTML = min;
     // }
     // setInterval(displayTime, 1000);
+
+    console.log(Calendar?.data);
+
+    const calendar_old_data = () => {
+        return (
+            <>
+                <tr>
+                    <td>10d</td>
+                    <td>🇪🇺 EUR</td>
+                    <td>AMB'den Lane Konuşma Yapacak</td>
+                    <td>
+                        <div className="stars">
+                            <i className="fa-solid fa-star"></i>
+                            <i className="fa-solid fa-star"></i>
+                            <i className="fa-solid fa-star light"></i>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td className="tar">0,20%</td>
+                    <td className="tar">0,10%</td>
+                </tr>
+                <tr>
+                    <td>20s 40d</td>
+                    <td>🇨🇭 CHF</td>
+                    <td>Üretici Fiyat Endeksi (ÜFE)</td>
+                    <td>
+                        <div className="stars">
+                            <i className="fa-solid fa-star"></i>
+                            <i className="fa-solid fa-star"></i>
+                            <i className="fa-solid fa-star light"></i>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td className="tar">0,51%</td>
+                    <td className="tar">0,20%</td>
+                </tr>
+                <tr>
+                    <td>10d</td>
+                    <td>🇪🇺 EUR</td>
+                    <td>AMB'den Lane Konuşma Yapacak</td>
+                    <td>
+                        <div className="stars">
+                            <i className="fa-solid fa-star"></i>
+                            <i className="fa-solid fa-star"></i>
+                            <i className="fa-solid fa-star light"></i>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td className="tar">0,20%</td>
+                    <td className="tar">0,10%</td>
+                </tr>
+                <tr>
+                    <td>20s 40d</td>
+                    <td>🇨🇭 CHF</td>
+                    <td>Üretici Fiyat Endeksi (ÜFE)</td>
+                    <td>
+                        <div className="stars">
+                            <i className="fa-solid fa-star"></i>
+                            <i className="fa-solid fa-star"></i>
+                            <i className="fa-solid fa-star light"></i>
+                        </div>
+                    </td>
+                    <td></td>
+                    <td className="tar">0,51%</td>
+                    <td className="tar">0,20%</td>
+                </tr>
+            </>
+        );
+    };
 
     const getIndex = (event) => {
         event.preventDefault();
@@ -442,7 +512,11 @@ const GoldPricesNews = () => {
                                                         </td>
                                                     </tr>
                                                 </tbody> */}
-                                                <tbody>{CalendarData}</tbody>
+                                                <tbody>
+                                                    {Calendar?.data?.length > 0
+                                                        ? CalendarData
+                                                        : calendar_old_data()}
+                                                </tbody>
                                             </table>
                                         </div>
                                     </div>

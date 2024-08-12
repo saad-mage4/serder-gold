@@ -186,7 +186,6 @@ const TabsSection = () => {
                             <div className="tabs-content d-grid gap-5">
                                 {/* items start */}
                                 {Gold?.length == 0 ? show_items : GoldData}
-                                {/* {GoldData} */}
                                 {/* {show_items} */}
                                 {/* items end */}
                             </div>
@@ -194,8 +193,9 @@ const TabsSection = () => {
                         <div className="col-12 d-none">
                             <div className="tabs-content d-grid gap-5">
                                 {/* items start */}
-                                {show_itmes_2}
+                                {/* {show_itmes_2} */}
                                 {/* items end */}
+                                
                             </div>
                         </div>
                     </div>
