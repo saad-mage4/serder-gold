@@ -83,6 +83,9 @@
         }
         &.second-tab {
             grid-template-columns: 1.5fr 2fr 1fr;
+            @media (max-width: 768px) {
+                grid-template-columns: 1fr;
+            }
             .item {
                 color: #e8ebee;
                 a {
@@ -92,6 +95,9 @@
                 .text {
                     position: relative;
                     padding: 10px 40px 10px 10px;
+                    @media (max-width: 768px) {
+                        padding: 10px;
+                    }
                     &::after {
                         content: "";
                         position: absolute;
@@ -100,6 +106,14 @@
                         background-color: #848e9c;
                         height: 100%;
                         width: 2px;
+                        @media (max-width: 768px) {
+                            left: 0;
+                            bottom: 0;
+                            top: auto;
+                            right: auto;
+                            height: 2px;
+                            width: 100%;
+                        }
                     }
                     h3 {
                         color: #e2e2e2;
@@ -118,7 +132,13 @@
                 .grid-three {
                     grid-template-columns: repeat(3, 1fr);
                     gap: 10px;
+                    @media (max-width: 768px) {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
                     .list {
+                        .gold-link {
+                            text-decoration: none;
+                        }
                         a {
                             display: flex;
                             align-items: center;
@@ -133,6 +153,9 @@
                     background-color: #0c0c0c;
                     border-radius: 7px;
                     padding-inline: 10px;
+                    @media (max-width: 768px) {
+                        padding: 10px;
+                    }
                     .price {
                         display: flex;
                         align-items: center;

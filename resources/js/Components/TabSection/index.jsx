@@ -224,7 +224,9 @@ const TabsSection = () => {
                                                     alt="gold-coin"
                                                 />
                                             </div>
-                                            <span>Gram Altin</span>
+                                            <a className="gold-link" href="#!">
+                                                <span>Gram Altin</span>
+                                            </a>
                                         </div>
                                         <div className="list flex items-center gap-2">
                                             <div className="coin-img">
@@ -233,7 +235,9 @@ const TabsSection = () => {
                                                     alt="gold-coin"
                                                 />
                                             </div>
-                                            <span>Ceyrek Altin</span>
+                                            <a href="#!" className="gold-link">
+                                                <span>Ceyrek Altin</span>
+                                            </a>
                                         </div>
                                         <div className="list flex items-center gap-2">
                                             <div className="coin-img">
@@ -242,7 +246,9 @@ const TabsSection = () => {
                                                     alt="gold-coin"
                                                 />
                                             </div>
-                                            <span>Yarim Altin</span>
+                                            <a href="#!" className="gold-link">
+                                                <span>Yarim Altin</span>
+                                            </a>
                                         </div>
                                         <div className="list flex items-center gap-2">
                                             <div className="coin-img">
@@ -251,7 +257,9 @@ const TabsSection = () => {
                                                     alt="gold-coin"
                                                 />
                                             </div>
-                                            <span>Tam Altin</span>
+                                            <a href="#!" className="gold-link">
+                                                <span>Tam Altin</span>
+                                            </a>
                                         </div>
                                         <div className="list flex items-center gap-2">
                                             <div className="coin-img">
@@ -260,7 +268,9 @@ const TabsSection = () => {
                                                     alt="gold-coin"
                                                 />
                                             </div>
-                                            <span>Gram Altin</span>
+                                            <a href="#!" className="gold-link">
+                                                <span>Gram Altin</span>
+                                            </a>
                                         </div>
                                         <div className="list flex items-center gap-2">
                                             <div className="coin-img">
@@ -269,7 +279,9 @@ const TabsSection = () => {
                                                     alt="gold-coin"
                                                 />
                                             </div>
-                                            <span>Ceyrek Altin</span>
+                                            <a href="#!" className="gold-link">
+                                                <span>Ceyrek Altin</span>
+                                            </a>
                                         </div>
                                         <div className="list flex items-center gap-2">
                                             <div className="coin-img">
@@ -278,7 +290,9 @@ const TabsSection = () => {
                                                     alt="gold-coin"
                                                 />
                                             </div>
-                                            <span>Yarim Altin</span>
+                                            <a href="#!" className="gold-link">
+                                                <span>Yarim Altin</span>
+                                            </a>
                                         </div>
                                         <div className="list flex items-center gap-2">
                                             <div className="coin-img">
@@ -287,7 +301,9 @@ const TabsSection = () => {
                                                     alt="gold-coin"
                                                 />
                                             </div>
-                                            <span>Tam Altin</span>
+                                            <a href="#!" className="gold-link">
+                                                <span>Tam Altin</span>
+                                            </a>
                                         </div>
                                         <div className="list flex items-center gap-2">
                                             <div className="coin-img">
@@ -296,7 +312,9 @@ const TabsSection = () => {
                                                     alt="gold-coin"
                                                 />
                                             </div>
-                                            <span>Gram Altin</span>
+                                            <a href="#!" className="gold-link">
+                                                <span>Gram Altin</span>
+                                            </a>
                                         </div>
                                         <div className="list flex items-center gap-2">
                                             <div className="coin-img">
@@ -305,7 +323,9 @@ const TabsSection = () => {
                                                     alt="gold-coin"
                                                 />
                                             </div>
-                                            <span>Ceyrek Altin</span>
+                                            <a href="#!" className="gold-link">
+                                                <span>Ceyrek Altin</span>
+                                            </a>
                                         </div>
                                         <div className="list flex items-center gap-2">
                                             <div className="coin-img">
@@ -314,7 +334,9 @@ const TabsSection = () => {
                                                     alt="gold-coin"
                                                 />
                                             </div>
-                                            <span>Yarim Altin</span>
+                                            <a href="#!" className="gold-link">
+                                                <span>Yarim Altin</span>
+                                            </a>
                                         </div>
                                         <div className="list flex items-center gap-2">
                                             <a href="#!">
