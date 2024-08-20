@@ -10,7 +10,9 @@ import {
     Legend,
 } from "chart.js";
 import { Line } from "react-chartjs-2";
-import useGet from "@/hooks/useGet";
+// import { Chart as PrimeChart } from 'primereact/chart';
+import { useApiQuery } from "@/hooks/useApi";
+import { Loader } from "../UI";
 
 ChartJS.register(
     CategoryScale,
@@ -23,9 +25,7 @@ ChartJS.register(
 );
 
 const Chart = () => {
-    const { data: response, error } = useGet(
-        "https://www.nosyapi.com/apiv2/service/economy/historical-data/currency-conversion?apiKey=LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF&date=2023-07-30&code=TRY"
-    );
+    const { data: response, isLoading } = useApiQuery('charts', "https://www.nosyapi.com/apiv2/service/economy/historical-data/currency-conversion?apiKey=LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF&date=2023-07-30&code=TRY");
 
     let labels = [];
     let exchangeRates = [];
@@ -55,14 +55,31 @@ const Chart = () => {
                   .getDatasetMeta(ctx.datasetIndex)
                   .data[ctx.index - 1].getProps(["y"], true).y;
 
+    const documentStyle = getComputedStyle(document.documentElement);
+    const borderColor = documentStyle.getPropertyValue('--teal-500');
+    const textColor = documentStyle.getPropertyValue('--text-color');
+    const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
+    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
     const data = {
         labels,
         datasets: [
             {
+                borderColor:
+                    "rgb(8, 197, 81)"
+                // borderColor
+                ,
                 label: "Exchange Rate",
                 data: exchangeRates,
-                borderColor: "rgba(75, 192, 192, 1)",
-                backgroundColor: "rgba(75, 192, 192, 0.2)",
+                // borderColor: "rgba(75, 192, 192, 1)",
+                // backgroundColor: "rgba(75, 192, 192, 0.2)",
+                // backgroundColor: "rgb(124, 214, 160)",
+                backgroundColor: (context) => {
+                    const ctx = context.chart.ctx;
+                    const gradient = ctx.createLinearGradient(0, 0, 0, ctx.canvas.height);
+                    gradient.addColorStop(0, "rgba(124, 214, 160, 0.5)");
+                    gradient.addColorStop(1, "rgba(124, 214, 160, 0)");
+                    return gradient;
+                },
                 fill: true,
                 tension: 0.4,
             },
@@ -73,7 +90,7 @@ const Chart = () => {
         responsive: true,
         plugins: {
             legend: {
-                position: "top",
+                position: "bottom",
             },
             tooltip: {
                 callbacks: {
@@ -83,60 +100,82 @@ const Chart = () => {
                 },
             },
         },
+        // scales: {
+        //     x: {
+        //         title: {
+        //             display: false,
+        //             text: "Date",
+        //         },
+        //         ticks: {
+        //             color: checkTheme_ ? "#fff" : "#000",
+        //         },
+        //     },
+        //     y: {
+        //         title: {
+        //             display: false,
+        //             text: "Exchange Rate",
+        //         },
+        //         ticks: {
+        //             color: checkTheme_ ? "#fff" : "#000",
+        //         },
+        //     },
+        // },
         scales: {
             x: {
-                title: {
-                    display: false,
-                    text: "Date",
-                },
                 ticks: {
                     color: checkTheme_ ? "#fff" : "#000",
                 },
+                grid: {
+                    color: surfaceBorder
+                }
             },
             y: {
-                title: {
-                    display: false,
-                    text: "Exchange Rate",
-                },
                 ticks: {
                     color: checkTheme_ ? "#fff" : "#000",
                 },
-            },
+                grid: {
+                    color: surfaceBorder
+                }
+            }
         },
-        animation: {
-            x: {
-                type: "number",
-                easing: "linear",
-                duration: delayBetweenPoints,
-                from: NaN,
-                delay(ctx) {
-                    if (ctx.type !== "data" || ctx.xStarted) {
-                        return 0;
-                    }
-                    ctx.xStarted = true;
-                    return ctx.index * delayBetweenPoints;
-                },
-            },
-            y: {
-                type: "number",
-                easing: "linear",
-                duration: delayBetweenPoints,
-                from: previousY,
-                delay(ctx) {
-                    if (ctx.type !== "data" || ctx.yStarted) {
-                        return 0;
-                    }
-                    ctx.yStarted = true;
-                    return ctx.index * delayBetweenPoints;
-                },
-            },
-        },
+        // animation: {
+        //     x: {
+        //         type: "number",
+        //         easing: "linear",
+        //         duration: delayBetweenPoints,
+        //         from: NaN,
+        //         delay(ctx) {
+        //             if (ctx.type !== "data" || ctx.xStarted) {
+        //                 return 0;
+        //             }
+        //             ctx.xStarted = true;
+        //             return ctx.index * delayBetweenPoints;
+        //         },
+        //     },
+        //     y: {
+        //         type: "number",
+        //         easing: "linear",
+        //         duration: delayBetweenPoints,
+        //         from: previousY,
+        //         delay(ctx) {
+        //             if (ctx.type !== "data" || ctx.yStarted) {
+        //                 return 0;
+        //             }
+        //             ctx.yStarted = true;
+        //             return ctx.index * delayBetweenPoints;
+        //         },
+        //     },
+        // },
     };
 
+    if (isLoading) return <Loader />
     return (
         <div className="chartjs-wrapper">
             <Line data={data} options={options} />
         </div>
+        // <div className="card">
+        //     <PrimeChart type="line" data={data} options={options} />
+        // </div>
     );
 };
 

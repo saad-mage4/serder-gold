@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: laravel-react-app
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: laravel-react-app
+  template:
+    metadata:
+      labels:
+        app: laravel-react-app
+    spec:
+      containers:
+      - name: laravel-react-app
+        image: laravel-react-app:latest
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DB_HOST
+          value: mysql
+        - name: DB_DATABASE
+          value: laravel
+        - name: DB_USERNAME
+          value: laravel
+        - name: DB_PASSWORD
+          value: secret
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: laravel-react-service
+spec:
+  selector:
+    app: laravel-react-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8000
+  type: LoadBalancer

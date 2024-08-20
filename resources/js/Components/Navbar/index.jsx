@@ -5,6 +5,8 @@ import { Link } from "@inertiajs/react";
 import Dropdown from "../Dropdown";
 import axios from "axios";
 import LiveClockUpdate from "../Clock";
+import { useApiQuery } from "@/hooks/useApi";
+import Image from "../UI/Image";
 
 function Navbar({ userID, userName }) {
     const [HeaderLogo, setHeaderLogo] = useState("");
@@ -44,16 +46,19 @@ function Navbar({ userID, userName }) {
         }
     };
 
+    const { data: images, isLoading: imagesLoader } = useApiQuery('images', "/get-images");
+
+
     useEffect(() => {
-        axios
-            .get("/get-images")
-            .then((res) => {
-                // console.log(res.data);
-                setHeaderLogo(res.data.logo_header);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        // axios
+        //     .get("/get-images")
+        //     .then((res) => {
+        //         // console.log(res.data);
+        //         setHeaderLogo(res.data.logo_header);
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     });
 
         const sectionTop = document.querySelector("#navbar");
         window.addEventListener("scroll", function () {
@@ -78,16 +83,17 @@ function Navbar({ userID, userName }) {
                     <div className="row">
                         <div className="col-lg-3 col-4 col-md-3 d-flex align-items-center col-logo">
                             <Link href="/">
-                                {HeaderLogo != null ? (
+                                {/* {HeaderLogo != null ? (
 
                                     <img src={`../${HeaderLogo}`} alt="Logo" />
 
                                 ) : (
-                                    <img
-                                        src="https://dummyimage.com/148x35/000/f0b90b"
-                                        alt="left-img"
-                                    />
-                                )}
+                                )} */}
+                                {/* <img
+                                    src={"https://dummyimage.com/148x35/000/f0b90b"}
+                                    alt="left-img"
+                                /> */}
+                                <Image value={images?.logo_header} defaultSrc="https://dummyimage.com/148x35/000/f0b90b" />
                             </Link>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12">
@@ -110,26 +116,26 @@ function Navbar({ userID, userName }) {
                                             <Dropdown.Trigger>
                                                 <a
                                                     href="#!"
-                                                    className="text-white text-lg font-bold no-underline"
+                                                    className="text-lg font-bold text-white no-underline"
                                                 >
                                                     {userName}
                                                 </a>
                                             </Dropdown.Trigger>
                                             <Dropdown.Content>
                                                 {/* <Link
-                                                    className="d-block m-1 pl-2 text-black no-underline"
+                                                    className="pl-2 m-1 text-black no-underline d-block"
                                                     href={route("dashboard")}
                                                 >
                                                     Dashboard
                                                 </Link> */}
                                                 <a
                                                     href="/dashboard"
-                                                    className="d-block m-1 pl-2 text-black no-underline"
+                                                    className="pl-2 m-1 text-black no-underline d-block"
                                                 >
                                                     Dashboard
                                                 </a>
                                                 <Link
-                                                    className="d-block m-1 pl-2 text-black no-underline"
+                                                    className="pl-2 m-1 text-black no-underline d-block"
                                                     method="post"
                                                     href={route("logout")}
                                                 >
@@ -189,7 +195,7 @@ function Navbar({ userID, userName }) {
                                                             </label>
                                                         </div>
 
-                                                        <div className="checkbox mb-3">
+                                                        <div className="mb-3 checkbox">
                                                             <label>
                                                                 <input
                                                                     type="checkbox"
