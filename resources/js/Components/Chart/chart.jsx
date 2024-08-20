@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -13,6 +13,7 @@ import { Line } from "react-chartjs-2";
 // import { Chart as PrimeChart } from 'primereact/chart';
 import { useApiQuery } from "@/hooks/useApi";
 import { Loader } from "../UI";
+import { useTheme } from "@/context/ThemeContext";
 
 ChartJS.register(
     CategoryScale,
@@ -27,12 +28,20 @@ ChartJS.register(
 const Chart = () => {
     const { data: response, isLoading } = useApiQuery('charts', "https://www.nosyapi.com/apiv2/service/economy/historical-data/currency-conversion?apiKey=LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF&date=2023-07-30&code=TRY");
 
+    const { theme } = useTheme();
+
+    useEffect(() => {
+        document.body.className = theme === "dark" ? "dark_theme" : "";
+    }, [theme]);
+
+
+    // let checkTheme_ = document
+    //     .querySelector("body")
+    //     .classList.contains("dark_theme");
+
     let labels = [];
     let exchangeRates = [];
 
-    let checkTheme_ = document
-        .querySelector("body")
-        .classList.contains("dark_theme");
 
     if (response?.data?.currencyConversion) {
         Object.entries(response?.data?.currencyConversion)?.map(
@@ -57,9 +66,12 @@ const Chart = () => {
 
     const documentStyle = getComputedStyle(document.documentElement);
     const borderColor = documentStyle.getPropertyValue('--teal-500');
-    const textColor = documentStyle.getPropertyValue('--text-color');
+    // const textColor = documentStyle.getPropertyValue('--text-color');
     const textColorSecondary = documentStyle.getPropertyValue('--text-color-secondary');
-    const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+    // const surfaceBorder = documentStyle.getPropertyValue('--surface-border');
+    const surfaceBorder = theme === "dark" ? "#444" : "#ccc";
+    const textColor = theme === "dark" ? "#fff" : "#000";
+
     const data = {
         labels,
         datasets: [
@@ -123,7 +135,8 @@ const Chart = () => {
         scales: {
             x: {
                 ticks: {
-                    color: checkTheme_ ? "#fff" : "#000",
+                    // color: checkTheme_ ? "#fff" : "#000",
+                    color: textColor
                 },
                 grid: {
                     color: surfaceBorder
@@ -131,7 +144,8 @@ const Chart = () => {
             },
             y: {
                 ticks: {
-                    color: checkTheme_ ? "#fff" : "#000",
+                    // color: checkTheme_ ? "#fff" : "#000",
+                    color: textColor
                 },
                 grid: {
                     color: surfaceBorder

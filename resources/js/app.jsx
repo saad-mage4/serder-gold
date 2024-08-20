@@ -1,6 +1,7 @@
 import './bootstrap';
-import '../css/app.css';
-import '../css/custom.css'
+import '../css/app.scss';
+// import '../css/custom.css'
+// import '../css/custom.scss'
 
 import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';
@@ -9,12 +10,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 
 import {
-    useQuery,
-    useMutation,
-    useQueryClient,
     QueryClient,
     QueryClientProvider,
-} from '@tanstack/react-query'
+} from '@tanstack/react-query';
+
 
 // Create a client
 const queryClient = new QueryClient()

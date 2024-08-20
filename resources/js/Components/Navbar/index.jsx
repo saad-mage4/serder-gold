@@ -7,92 +7,63 @@ import axios from "axios";
 import LiveClockUpdate from "../Clock";
 import { useApiQuery } from "@/hooks/useApi";
 import Image from "../UI/Image";
+import { useTheme } from "@/context/ThemeContext";
 
 function Navbar({ userID, userName }) {
-    const [HeaderLogo, setHeaderLogo] = useState("");
+    // const [myStyle, setMyyStyle] = useState({
+    //     color: "#fff",
+    // });
 
-    // function displayTime() {
-    //     var currentTime = new Date();
-    //     var hrs = currentTime.getHours();
-    //     var min =
-    //         (currentTime.getMinutes() < 10 ? "0" : "") +
-    //         currentTime.getMinutes();
-    //     var sec =
-    //         (currentTime.getSeconds() < 10 ? "0" : "") +
-    //         currentTime.getSeconds();
+    // var element = document.querySelector("body");
+    // const toggleSwitch = () => {
+    //     if (myStyle.color === "#fff") {
+    //         element.classList.add("dark_theme");
+    //         setMyyStyle({
+    //             color: "#000",
+    //         });
+    //     } else {
+    //         element.classList.remove("dark_theme");
+    //         setMyyStyle({
+    //             color: "#fff",
+    //         });
+    //     }
+    // };
 
-    //     document.getElementById("hrs").innerHTML = hrs;
-    //     document.getElementById("min").innerHTML = min;
-    //     document.getElementById("sec").innerHTML = sec;
-    // }
-    // setInterval(displayTime, 1000);
-
-    const [myStyle, setMyyStyle] = useState({
-        color: "#fff",
-    });
-
-    var element = document.querySelector("body");
-    const toggleSwitch = () => {
-        if (myStyle.color === "#fff") {
-            element.classList.add("dark_theme");
-            setMyyStyle({
-                color: "#000",
-            });
-        } else {
-            element.classList.remove("dark_theme");
-            setMyyStyle({
-                color: "#fff",
-            });
-        }
-    };
-
+    const { theme, toggleTheme } = useTheme();
     const { data: images, isLoading: imagesLoader } = useApiQuery('images', "/get-images");
 
-
     useEffect(() => {
-        // axios
-        //     .get("/get-images")
-        //     .then((res) => {
-        //         // console.log(res.data);
-        //         setHeaderLogo(res.data.logo_header);
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     });
+        document.body.className = theme === "dark" ? "dark_theme" : "";
+    }, [theme]);
 
-        const sectionTop = document.querySelector("#navbar");
-        window.addEventListener("scroll", function () {
-            if (window.scrollY >= 80) {
-                // console.log('okc');
-                sectionTop.classList.add("active_nav");
-            } else {
-                // console.log('lsdjkfljasd');
-                sectionTop.classList.remove("active_nav");
-            }
-        });
-    }, []);
+
+    // useEffect(() => {
+    //     const sectionTop = document.querySelector("#navbar");
+    //     window.addEventListener("scroll", function () {
+    //         if (window.scrollY >= 80) {
+    //             sectionTop.classList.add("active_nav");
+    //         } else {
+    //             sectionTop.classList.remove("active_nav");
+    //         }
+    //     });
+    // }, []);
 
     return (
         <>
-            <div
+            {/* <div
                 className="container-fluid main-nav bg-custom-dark"
                 id="navbar"
                 style={myStyle}
+            > */}
+            <div
+                className={`container-fluid main-nav bg-custom-dark ${theme === "dark" ? "dark_theme" : ""}`}
+                id="navbar"
             >
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-4 col-md-3 d-flex align-items-center col-logo">
                             <Link href="/">
-                                {/* {HeaderLogo != null ? (
-
-                                    <img src={`../${HeaderLogo}`} alt="Logo" />
-
-                                ) : (
-                                )} */}
-                                {/* <img
-                                    src={"https://dummyimage.com/148x35/000/f0b90b"}
-                                    alt="left-img"
-                                /> */}
+                                {/* src={`../${HeaderLogo}`} */}
                                 <Image value={images?.logo_header} defaultSrc="https://dummyimage.com/148x35/000/f0b90b" />
                             </Link>
                         </div>
@@ -231,16 +202,21 @@ function Navbar({ userID, userName }) {
                                         </div>
                                     </div>
                                     <button
-                                        onClick={toggleSwitch}
+                                        // onClick={toggleSwitch}
+                                        onClick={toggleTheme}
                                         className="dark-mode"
                                     >
-                                        <img
+                                        {/* <img
                                             src={
                                                 myStyle.color === "#fff"
                                                     ? Mode
                                                     : LightMode
                                             }
                                             alt=""
+                                        /> */}
+                                        <img
+                                            src={theme === "light" ? Mode : LightMode}
+                                            alt={theme === "light" ? "Light Mode" : "Dark Mode"}
                                         />
                                     </button>
                                 </div>
