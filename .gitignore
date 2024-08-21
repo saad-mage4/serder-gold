@@ -19,9 +19,16 @@ yarn-error.log
 /.idea
 /.vscode
 
+# Kubernetes files and directories
 /k8s
 /k8s/*
+
+# NX files
 /.nx
+
+# Docker files
 docker*
 Dockerfile
+
+# GitHub Actions
 /.github/*
