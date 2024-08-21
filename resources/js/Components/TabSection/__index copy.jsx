@@ -1,7 +1,7 @@
 import "./TabsSection.scss";
 import { arrow_green, arrow_red } from "@/images";
 import { useEffect, useMemo, useState } from "react";
-import { tabs_data, tabs_data_2 } from "./TabSection.config";
+import { tabs_data, tabs_data_2 } from "../../utils/TabSection.config";
 import axios from "axios";
 import { Link } from "@inertiajs/react";
 const TabsSection = () => {
@@ -62,7 +62,7 @@ const TabsSection = () => {
             }
         });
     }, []);
-    
+
     // const show_itmes = tabs_data.map((value, index) => {
     //     return (
     //         <div
@@ -111,10 +111,10 @@ const TabsSection = () => {
                                 <span className="number__">{value.number ?? "11,25"}</span>
                             </div>
                         </div>
-                    </div>  
+            </div>
         )
     }))
-    
+
     const show_itmes_2 = tabs_data_2.map((value, index) => {
         return (
             <div

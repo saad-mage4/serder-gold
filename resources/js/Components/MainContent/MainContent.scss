@@ -38,7 +38,7 @@
                   color: #57b263;
                 }
               }
-    
+
               tr {
                 vertical-align: middle;
                 border-color: #f1f0f7 !important;
@@ -127,7 +127,7 @@
                     width: 100%;
                     margin-bottom: 10px;
                   }
-                  span.selected-val {
+                  input.selected-val {
                     position: relative;
                     width: 75px;
                     white-space: nowrap;
@@ -163,6 +163,22 @@
                 }
               }
             }
+
+            input.selected-val {
+                    position: relative;
+                    width: 75px;
+                    white-space: nowrap;
+                    &::after {
+                      content: "";
+                      position: absolute;
+                      right: -20px;
+                      top: 50%;
+                      transform: translateY(-50%);
+                      height: 25px;
+                      width: 2px;
+                      background-color: #848e9c;
+                    }
+                  }
             .country-est-list {
               ul {
                 padding: 0;
@@ -237,7 +253,7 @@
         }
       }
     }
-    
+
     @media (max-width: 768px) {
       .addsTable-main-wrapper {
         .row {
@@ -258,7 +274,7 @@
                 margin-bottom: 0.625em;
                 height: auto;
               }
-    
+
               td {
                 display: block !important;
                 height: auto !important;
@@ -280,4 +296,3 @@
         }
       }
     }
-    

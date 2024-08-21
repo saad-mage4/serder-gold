@@ -80,3 +80,30 @@
 //         });
 //     }
 // }, [])
+
+
+
+// const show_itmes_2 = tabs_data_2.map((value, index) => {
+//     return (
+//         <div
+//             key={index}
+//             className="item d-flex align-items-center justify-content-center"
+//         >
+//             <div className="gap-2 content d-flex flex-column">
+//                 <span className="title">{value.title}</span>
+//                 <span className="value">{value.rates}</span>
+//                 <div
+//                     className={`ratio__ ${value.status == "up" ? "green" : "red"
+//                         } d-flex align-items-center gap-2`}
+//                 >
+//                     <img
+//                         src={value.status == "up" ? arrow_green : arrow_red}
+//                         alt={"arrow-" + value.status}
+//                     />
+//                     <span className="percent__">{value.percent}</span>
+//                     <span className="number__">{value.number}</span>
+//                 </div>
+//             </div>
+//         </div>
+//     );
+// });

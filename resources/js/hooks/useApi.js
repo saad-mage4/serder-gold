@@ -3,9 +3,13 @@ import axios from 'axios';
 
 // Function to handle API requests
 const fetchData = async ({ queryKey }) => {
-    const [_key, url, params] = queryKey;
-    const { data } = await axios.get(url, { params });
-    return data;
+    try {
+        const [_key, url, params] = queryKey;
+        const { data } = await axios.get(url, { params });
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
 };
 
 export function useApiQuery(key, url, params = {}, options = {}) {

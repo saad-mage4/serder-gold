@@ -26,7 +26,18 @@ ChartJS.register(
 );
 
 const Chart = () => {
-    const { data: response, isLoading } = useApiQuery('charts', "https://www.nosyapi.com/apiv2/service/economy/historical-data/currency-conversion?apiKey=LFSxbMAeJFUfFCNPVFmEBebhMFmQE7Ldwu2lfCSwyvAuEboUVCKw3bzuDhCF&date=2023-07-30&code=TRY");
+    const currentDate = new Date();
+    const formattedDate = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}-${String(currentDate.getDate()).padStart(2, '0')}`;
+    const { data: response, isLoading } = useApiQuery(
+        'charts',
+        "https://www.nosyapi.com/apiv2/service/economy/historical-data/currency-conversion",
+        {
+            date: '2024-04-19',
+            code: "TRY",
+            apiKey: import.meta.env.VITE_NOSY_TOKEN,
+        }
+    );
+
 
     const { theme } = useTheme();
 

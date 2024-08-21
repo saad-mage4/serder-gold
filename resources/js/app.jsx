@@ -1,7 +1,7 @@
 import './bootstrap';
 import '../css/app.scss';
 // import '../css/custom.css'
-// import '../css/custom.scss'
+import '../css/custom.scss'
 
 import { createRoot } from 'react-dom/client';
 import { createInertiaApp } from '@inertiajs/react';

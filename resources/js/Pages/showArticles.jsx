@@ -17,14 +17,14 @@ const showArticles = ({ auth }) => {
     const show = articles?.map((item, index) => {
         //   let len = articles.length;
         return (
-            <div key={index} className="col-12 col-md-4 col-lg-3 mb-3">
-                <div className="content d-flex gap-3 flex-column p-2">
+            <div key={index} className="mb-3 col-12 col-md-4 col-lg-3">
+                <div className="gap-3 p-2 content d-flex flex-column">
                     <div className="img">
                         <img src={item.banner} alt={`img-${index}`} />
                     </div>
-                    <div className="text px-2">
+                    <div className="px-2 text">
                         <a
-                            className="article-link text-decoration-none text-black"
+                            className="text-black article-link text-decoration-none"
                             data-id={item.id}
                             href={`/ArticleDetails/${item.id}`}
                         >
@@ -43,10 +43,10 @@ const showArticles = ({ auth }) => {
         <Layout user={auth.user}>
             <div className="container show_articles">
                 <div className="row">
-                    <div className="col-12 my-3">
-                        <h1 className="text-center">Articles List</h1>
+                    <div className="my-3 col-12">
+                        <h1 className="text-center black-bg-head">Articles List</h1>
                     </div>
-                    {show?.length == 0 ? <h3 className="text-center">No Record Found!</h3> : show}
+                    {show?.length > 0 ? show : <h3 className="text-center black-bg-head">No Record Found!</h3>}
                 </div>
             </div>
         </Layout>
