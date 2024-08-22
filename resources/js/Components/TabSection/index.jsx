@@ -3,14 +3,9 @@ import { useState } from "react";
 import { Link } from "@inertiajs/react";
 import { RealTimePrice, GoldData } from "../Gold";
 import TabFooter from "./TabFooter";
+import { useThemeTab } from "@/context/ThemeTabContext";
 const TabsSection = () => {
-
-    const [activeTab, setActiveTab] = useState("tab1");
-
-    const handleTab = (tabName) => (e) => {
-        e.preventDefault();
-        setActiveTab(tabName);
-    };
+    const { activeTab, handleTab } = useThemeTab();
 
     const getClassNames = (tabName) => `tab-link ${activeTab === tabName ? "active" : ""}`;
 

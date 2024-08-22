@@ -1,23 +1,21 @@
+import { useThemeTab } from '@/context/ThemeTabContext';
 import { Chart } from '.'
 import { GoldPriceCalculation, Table } from './Gold';
-import { useApiQuery } from '@/hooks/useApi';
 
 const HomeContent = () => {
-    const { data: ExchangeRates } = useApiQuery(
-        'currency-exchange-rate',
-        "https://www.nosyapi.com/apiv2/service/economy/currency/exchange-rate",
-        {
-            type: "gold",
-            apiKey: import.meta.env.VITE_NOSY_TOKEN,
-        }
-    );
+    const { activeTab } = useThemeTab();
     return (
         <>
             <div className="my-3">
-                <Chart />
+                {activeTab == "tab2" ?
+                    <Table />
+                    :
+                    <>
+                        <Chart />
+                        <GoldPriceCalculation />
+                    </>
+                }
             </div>
-            <GoldPriceCalculation ExchangeRates={ExchangeRates} />
-            <Table ExchangeRates={ExchangeRates} />
 
         </>
     )

@@ -1,22 +1,71 @@
 
+import ButtonLoader from '@/Components/UI/ButtonLoader';
+import { useThemeTab } from '@/context/ThemeTabContext';
 import { formatDate } from '@/lib/formatDate';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-const Table = ({ ExchangeRates }) => {
+const Table = () => {
+    const { ExchangeRates, isLoading } = useThemeTab();
     const [search, setSearch] = useState("")
+    const [page, setPage] = useState(1);
+    const [visibleData, setVisibleData] = useState([]);
+    const [allData, setAllData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const rowsPerPage = 10;
+
+    useEffect(() => {
+        if (ExchangeRates) {
+            setAllData(ExchangeRates?.data);
+            setPage(2);
+            loadInitialData(ExchangeRates?.data);
+        }
+    }, [ExchangeRates]);
+
+    const loadInitialData = (data) => {
+        const initialData = data.slice(0, rowsPerPage);
+        setVisibleData(initialData);
+    };
 
     const handleSearch = (e) => {
-        setSearch(e.target.value);
-    }
+        const query = e.target.value;
+        setSearch(query);
+        const filtered = allData.filter((item) =>
+            item.ShortName.toLowerCase().includes(query.toLowerCase()) ||
+            item.FullName.toLowerCase().includes(query.toLowerCase())
+        );
+        setPage(1);
+        setVisibleData(filtered.slice(0, rowsPerPage));
+    };
 
+    // const filteredData = ExchangeRates?.data?.filter((item) =>
+    //     item.ShortName.toLowerCase().includes(search.toLowerCase()) ||
+    //     item.FullName.toLowerCase().includes(search.toLowerCase())
+    // );
 
-    const filteredData = ExchangeRates?.data?.filter((item) =>
+    const filteredData = allData.filter((item) =>
         item.ShortName.toLowerCase().includes(search.toLowerCase()) ||
         item.FullName.toLowerCase().includes(search.toLowerCase())
     );
+    const handleLoadMore = () => {
+        if (filteredData) {
+            setLoading(true);
+            setTimeout(() => {
+                const startIndex = (page - 1) * rowsPerPage;
+                const endIndex = startIndex + rowsPerPage;
+                setVisibleData(prevData => [
+                    ...prevData,
+                    ...filteredData.slice(startIndex, endIndex)
+                ]);
+                setPage(prevPage => prevPage + 1);
+                setLoading(false);
+            }, 2000);
+        }
+    };
 
+    if (isLoading) return <h1>tahaa</h1>
     return (
-        <table className="table d-none">
+        <>
+            <table className="table ">
             <thead>
                 <tr>
                     <th scope="col">
@@ -30,7 +79,7 @@ const Table = ({ ExchangeRates }) => {
                 </tr>
             </thead>
             <tbody>
-                {filteredData?.length > 0 ? filteredData?.map((item, index) => (
+                    {visibleData?.length > 0 ? visibleData?.map((item, index) => (
                     <tr
                         key={index}
                     // className={
@@ -71,6 +120,19 @@ const Table = ({ ExchangeRates }) => {
                 )}
             </tbody>
         </table>
+            {filteredData?.length > visibleData?.length && (
+                <div className="flex flex-col items-center my-5">
+                    <button
+                        onClick={handleLoadMore}
+                        className="px-4 py-2 text-white bg-gray-800 border-none rounded cursor-pointer hover:bg-gray-700"
+                    >
+                        {loading ? <ButtonLoader /> : "Load More"}
+
+                    </button>
+                </div>
+            )}
+        </>
+
     )
 }
 

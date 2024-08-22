@@ -1,12 +1,16 @@
 import CurrencyList from '@/Components/CurrencyList';
+import { useThemeTab } from '@/context/ThemeTabContext';
 import { useApiQuery } from '@/hooks/useApi';
 import React, { useEffect, useState } from 'react'
 
-const GoldPriceCalculation = ({ ExchangeRates }) => {
+const GoldPriceCalculation = () => {
+    const { ExchangeRates } = useThemeTab();
     const [goldValue, setGoldValue] = useState('');
     const [currencyValue, setCurrencyValue] = useState('');
     const [selectedGold, setSelectedGold] = useState('');
     const [selectedCurrency, setSelectedCurrency] = useState('');
+    const [error, setError] = useState('');
+    // const [error_currency, setErrorCurrency] = useState('');
 
     const { data: currency_list } = useApiQuery(
         'currency-list',
@@ -24,8 +28,6 @@ const GoldPriceCalculation = ({ ExchangeRates }) => {
                 }
             });
             const data = await response.json();
-
-            console.log("New fetch data", data?.data);
             return data?.data?.[0]?.latest;
         } catch (error) {
             console.error("Failed to fetch currency rate:", error);
@@ -35,15 +37,21 @@ const GoldPriceCalculation = ({ ExchangeRates }) => {
     const handleGoldChange = async (e) => {
         const value = e.target.value;
         setGoldValue(value);
+        if (!value || !selectedGold) {
+            setError("Please enter a gold value and select a gold type.");
+            return;
+        } else {
+            setError('');
+        }
         if (value && selectedGold && selectedCurrency) {
             const goldRate = ExchangeRates?.data.find(item => item.code === selectedGold)?.latest;
-            console.log(goldRate);
 
             const currencyRate = await fetchCurrencyRate(selectedCurrency);
 
             if (goldRate && currencyRate) {
-                const convertedCurrency = (value * goldRate) / currencyRate;
-                setCurrencyValue(convertedCurrency);
+                // const convertedCurrency = (value * goldRate) / currencyRate;
+                const convertedCurrency = (parseFloat(value) * parseFloat(goldRate)) / parseFloat(currencyRate);
+                setCurrencyValue(convertedCurrency.toFixed(2));
             }
         }
     };
@@ -51,13 +59,20 @@ const GoldPriceCalculation = ({ ExchangeRates }) => {
     const handleCurrencyChange = async (e) => {
         const value = e.target.value;
         setCurrencyValue(value);
-
+        // if (!value || !selectedCurrency) {
+        //     setErrorCurrency("Please enter a currency value and select a currency type.");
+        //     return;
+        // } else {
+        //     setErrorCurrency('');
+        // }
         if (value && selectedGold && selectedCurrency) {
             const goldRate = ExchangeRates?.data.find(item => item.code === selectedGold)?.latest;
+
             const currencyRate = await fetchCurrencyRate(selectedCurrency);
 
             if (goldRate && currencyRate) {
-                const convertedGold = (value * currencyRate) / goldRate;
+                // const convertedGold = (value * currencyRate) / goldRate;
+                const convertedGold = (parseFloat(value) * parseFloat(currencyRate)) / parseFloat(goldRate);
                 setGoldValue(convertedGold.toFixed(2));
             }
         }
@@ -74,11 +89,6 @@ const GoldPriceCalculation = ({ ExchangeRates }) => {
         setGoldValue('');
         setCurrencyValue('');
     };
-
-
-
-    console.log(currencyValue);
-    console.log(goldValue);
 
     return (
         <div className="mt-4 row">
@@ -135,6 +145,9 @@ const GoldPriceCalculation = ({ ExchangeRates }) => {
                             </select>
                         </div>
                     </div>
+                    {error && <div className="error-message" style={{ color: 'red', marginTop: '10px' }}>{error}</div>}
+                    {/* {error_currency && <div className="error-message" style={{ color: 'red', marginTop: '10px' }}>{error_currency}</div>} */}
+
                 </div>
             </div>
             <div className="my-5 col-lg-5 col-sm-12 col-md-6 my-md-0 my-lg-0">

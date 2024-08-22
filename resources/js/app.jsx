@@ -8,6 +8,8 @@ import { createInertiaApp } from '@inertiajs/react';
 import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
+import 'react-loading-skeleton/dist/skeleton.css';
+
 
 import {
     QueryClient,

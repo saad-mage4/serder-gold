@@ -14,6 +14,7 @@ import { Line } from "react-chartjs-2";
 import { useApiQuery } from "@/hooks/useApi";
 import { Loader } from "../UI";
 import { useTheme } from "@/context/ThemeContext";
+import Skeleton from "react-loading-skeleton";
 
 ChartJS.register(
     CategoryScale,
@@ -193,7 +194,7 @@ const Chart = () => {
         // },
     };
 
-    if (isLoading) return <Loader />
+    if (isLoading) return <Skeleton height={300} />
     return (
         <div className="chartjs-wrapper">
             <Line data={data} options={options} />

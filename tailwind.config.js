@@ -18,6 +18,19 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            keyframes: {
+                spin: {
+                    '0%': { transform: 'rotate(0deg)' },
+                    '100%': { transform: 'rotate(360deg)' },
+                },
+            },
+            animation: {
+                spin: 'spin 1s linear infinite',
+            },
+            colors: {
+                'blue-500': '#007bff',
+                'blue-700': '#0056b3',
+            },
         },
     },
 
