@@ -23,18 +23,7 @@ const GoldData = () => {
         }
     );
 
-    const { activeTab } = useThemeTab();
-
-    const [showLoader, setShowLoader] = useState(false);
-
-    useEffect(() => {
-        setShowLoader(true);
-        const timer = setTimeout(() => {
-            setShowLoader(false);
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, [activeTab]);
-
+    const { showLoader } = useThemeTab();
 
     // const GoldData = Gold?.data?.slice(0, 7)?.map((item, index) => {
     //     let random = Math.floor(Math.random() * 5);

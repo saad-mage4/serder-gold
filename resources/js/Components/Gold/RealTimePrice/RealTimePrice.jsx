@@ -10,17 +10,8 @@ import { useThemeTab } from '@/context/ThemeTabContext';
 
 
 const RealTimePrice = () => {
-    const { ExchangeRates, isLoading, activeTab } = useThemeTab();
+    const { ExchangeRates, isLoading, showLoader } = useThemeTab();
     const [selectedItem, setSelectedItem] = useState(null);
-    const [showLoader, setShowLoader] = useState(false);
-
-    useEffect(() => {
-        setShowLoader(true);
-        const timer = setTimeout(() => {
-            setShowLoader(false);
-        }, 1000);
-        return () => clearTimeout(timer);
-    }, [activeTab]);
 
 
     useEffect(() => {
