@@ -106,7 +106,8 @@ const GoldPriceCalculation = () => {
                                 type="number"
                                 value={goldValue}
                                 onChange={handleGoldChange}
-                                placeholder="Enter gold value" />
+                            // placeholder="Enter gold value"
+                            />
                             <select
                                 name="gold"
                                 onChange={handleGoldSelect}
@@ -128,7 +129,8 @@ const GoldPriceCalculation = () => {
                                 type="number"
                                 value={currencyValue}
                                 onChange={handleCurrencyChange}
-                                placeholder="Enter currency value" />
+                            // placeholder="Enter currency value"
+                            />
                             <select
                                 name="currency"
                                 onChange={handleCurrencySelect}
