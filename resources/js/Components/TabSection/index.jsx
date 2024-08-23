@@ -45,7 +45,7 @@ const TabsSection = () => {
                                         {tab?.name}
                                     </a>
                                 ))}
-                                <Link href="/showArticles">Articles</Link>
+                                <Link href="/showarticles">Articles</Link>
                             </div>
                         </div>
                     </div>

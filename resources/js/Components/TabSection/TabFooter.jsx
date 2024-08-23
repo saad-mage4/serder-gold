@@ -1,3 +1,4 @@
+import { Link } from '@inertiajs/react'
 import React from 'react'
 
 const TabFooter = () => {
@@ -10,9 +11,7 @@ const TabFooter = () => {
                 </div>
             </div>
             <div className="col-lg-6 col-md-6 col-sm-12 right-info">
-                <a href="#!" className="all-news">
-                    Tüm Haberler
-                </a>
+                <Link href="/showarticles" className="more-news">TUM HABERLER</Link>
             </div>
         </div>
     )

@@ -1,43 +1,32 @@
+import { useApiQuery } from "@/hooks/useApi";
 import Layout from "@/Layouts/Layout";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import { Link } from '@inertiajs/react';
 
 const showArticles = ({ auth }) => {
-    const [articles, getArticles] = useState([]);
 
-    useEffect(() => {
-        axios
-            .get("/get-articles")
-            .then((res) => {
-                getArticles(res.data);
-            })
-            .catch((error) => console.log(error));
-    }, []);
+    const { data: articles } = useApiQuery('get-articles', "/get-articles");
 
-    const show = articles?.map((item, index) => {
-        //   let len = articles.length;
+    const show = articles?.map((item) => {
         return (
-            <div key={index} className="mb-3 col-12 col-md-4 col-lg-3">
+            <div key={item?.id} className="mb-3 col-12 col-md-4 col-lg-3">
                 <div className="gap-3 p-2 content d-flex flex-column">
                     <div className="img">
-                        <img src={item.banner} alt={`img-${index}`} />
+                        <img src={item?.banner} alt={`img-${item?.id}`} />
                     </div>
                     <div className="px-2 text">
-                        <a
+                        <Link
                             className="text-black article-link text-decoration-none"
-                            data-id={item.id}
-                            href={`/ArticleDetails/${item.id}`}
+                            // data-id={item.id}
+                            href={`/articledetails/${item.id}`}
                         >
                             <h3 className="fs-4">{item.title}</h3>
-                        </a>
+                        </Link>
                         <p className="fs-5">{item.description}</p>
                     </div>
                 </div>
             </div>
         );
     });
-
-    console.log(show);
 
     return (
         <Layout user={auth.user}>

@@ -32,7 +32,10 @@ export function useApiMutation(method, url, options = {}) {
             });
             return data;
         },
-        onSuccess: () => {
+        onSuccess: (data) => {
+            if (options.onSuccess) {
+                options.onSuccess(data);
+            }
             // Invalidate and refetch if applicable
             if (options.invalidateKey) {
                 queryClient.invalidateQueries({ queryKey: options.invalidateKey });

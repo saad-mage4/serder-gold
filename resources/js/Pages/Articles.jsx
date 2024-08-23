@@ -9,25 +9,22 @@ import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import axios from "axios";
 import { InputText } from "primereact/inputtext";
 import NavLink from "@/Components/NavLink";
+import { useApiMutation, useApiQuery } from "@/hooks/useApi";
 
 const Articles = ({ auth }) => {
-    // const [articles, setArticles] = useState([]);
+    const { data } = useApiQuery('get-articles-admin', "/get-articles-admin");
     const [products, setProducts] = useState([]);
     const [article_status] = useState(["active", "deactivate"]);
+
     useEffect(() => {
-        axios
-            .get("/get-articles-admin")
-            .then((res) => {
-                setProducts(res?.data);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, []);
+        if (data) {
+            setProducts(data);
+        }
+    }, [data]);
 
     const BannerTemplate = (banner) => {
         return (
-            <div className="flex align-items-center gap-2">
+            <div className="flex gap-2 align-items-center">
                 <img alt={banner.name} src={`${banner.banner}`} width={32} />
             </div>
         );
@@ -63,6 +60,13 @@ const Articles = ({ auth }) => {
         );
     };
 
+    const postMutation = useApiMutation('post', '/update-articles', {
+        invalidateKey: ['update-articles'],
+        onSuccess: (data) => alert(data),
+    });
+
+
+
     const onRowEditComplete = async (e) => {
         let _products = [...products];
         let { newData, index } = e;
@@ -77,17 +81,18 @@ const Articles = ({ auth }) => {
         }
 
         try {
-            const response = await axios
-                .post("/update-articles", formData, {
-                    headers: {
-                        "Content-Type": "multipart/form-data",
-                    },
-                })
-                .then((res) => {
-                    console.log(res);
-                });
+            // const response = await axios
+            //     .post("/update-articles", formData, {
+            //         headers: {
+            //             "Content-Type": "multipart/form-data",
+            //         },
+            //     })
+            //     .then((res) => {
+            //         console.log(res?.data);
+            //     });
+            await postMutation.mutateAsync(formData);
         } catch (error) {
-            console.log(error.message);
+            console.log(error?.message);
         }
     };
 
@@ -100,7 +105,7 @@ const Articles = ({ auth }) => {
             <AuthenticatedLayout
                 user={auth.user}
                 header={
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                    <h2 className="text-xl font-semibold leading-tight text-gray-800">
                         Articles
                     </h2>
                 }
@@ -108,8 +113,8 @@ const Articles = ({ auth }) => {
                 <Head title="Articles Page | " />
 
                 <div className="py-12">
-                    <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                        <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                        <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg">
                             <div className="p-6 text-gray-900">
                                 <section className="articles-section">
                                     <header className="relative">
