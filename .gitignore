@@ -18,3 +18,18 @@ yarn-error.log
 /.fleet
 /.idea
 /.vscode
+
+# Kubernetes files and directories
+/.k8s
+/.k8s/*
+
+# NX files
+/.nx
+
+# Docker files
+docker*
+Dockerfile
+.dockerignore
+
+# GitHub Actions
+/.github/*

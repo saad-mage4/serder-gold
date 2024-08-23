@@ -24,12 +24,12 @@ Route::get('/home2', function () {
     return Inertia::render('Home2');
 });
 
-Route::get('/showArticles', function () {
-    return Inertia::render('showArticles');
+Route::get('/showarticles', function () {
+    return Inertia::render('showarticles');
 });
 
-Route::get('/ArticleDetails/{id}', function ($id) {
-    return Inertia::render('ArticleDetails', ['id' => $id]);
+Route::get('/articledetails/{id}', function ($id) {
+    return Inertia::render('articledetails', ['id' => $id]);
 });
 
 Route::middleware('auth')->group(function () {
@@ -72,12 +72,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('add-users');
     Route::get('/get-users', [UserController::class, 'getUsers'])->name('get-users');
     Route::post('/save-users', [UserController::class, 'saveUser'])->name('save-users');
-    // Route::post('/update-users', [UserController::class, 'updateUsers'])->name('update-users');
+    Route::post('/update-users', [UserController::class, 'updateUsers'])->name('update-users');
 });
 Route::get('/get-articles', [ArticlesController::class, 'getArticles'])->name('get-articles');
-Route::get('/showArticles', function () {
-    return Inertia::render('showArticles');
-})->name('showArticles');
+Route::get('/showarticles', function () {
+    return Inertia::render('showarticles');
+})->name('showarticles');
 Route::get('/get-images', [ImageController::class, 'getImages'])->name('get-images');
 Route::get('/get-records', [StockRecordsController::class, 'getRecords'])->name('get-records');
 

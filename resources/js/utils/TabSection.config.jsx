@@ -1,4 +1,4 @@
-const tabs_data = [
+export const tabs_data = [
     {
         title: "ALTIN ONS",
         rates: "2.492,87",
@@ -50,7 +50,7 @@ const tabs_data = [
     },
 ];
 
-const tabs_data_2 = [
+export const tabs_data_2 = [
     {
         title: "TEST TAB 2",
         rates: "2.492,87",
@@ -102,4 +102,3 @@ const tabs_data_2 = [
     },
 ];
 
-export { tabs_data, tabs_data_2 };

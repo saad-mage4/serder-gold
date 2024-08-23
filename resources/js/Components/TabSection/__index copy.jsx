@@ -1,7 +1,7 @@
 import "./TabsSection.scss";
 import { arrow_green, arrow_red } from "@/images";
 import { useEffect, useMemo, useState } from "react";
-import { tabs_data, tabs_data_2 } from "./TabSection.config";
+import { tabs_data, tabs_data_2 } from "../../utils/TabSection.config";
 import axios from "axios";
 import { Link } from "@inertiajs/react";
 const TabsSection = () => {
@@ -62,14 +62,14 @@ const TabsSection = () => {
             }
         });
     }, []);
-    
+
     // const show_itmes = tabs_data.map((value, index) => {
     //     return (
     //         <div
     //             key={index}
     //             className="item d-flex align-items-center justify-content-center"
     //         >
-    //             <div className="content d-flex flex-column gap-2">
+    //             <div className="gap-2 content d-flex flex-column">
     //                 <span className="title">{value.title}</span>
     //                 <span className="value">{value.rates}</span>
     //                 <div
@@ -95,7 +95,7 @@ const TabsSection = () => {
                         key={key}
                         className="item d-flex align-items-center justify-content-center"
                     >
-                        <div className="content d-flex flex-column gap-2">
+                <div className="gap-2 content d-flex flex-column">
                             <span className="title">{key}</span>
                             <span className="value">{value.toFixed(4)}</span>
                             <div
@@ -111,17 +111,17 @@ const TabsSection = () => {
                                 <span className="number__">{value.number ?? "11,25"}</span>
                             </div>
                         </div>
-                    </div>  
+            </div>
         )
     }))
-    
+
     const show_itmes_2 = tabs_data_2.map((value, index) => {
         return (
             <div
                 key={index}
                 className="item d-flex align-items-center justify-content-center"
             >
-                <div className="content d-flex flex-column gap-2">
+                <div className="gap-2 content d-flex flex-column">
                     <span className="title">{value.title}</span>
                     <span className="value">{value.rates}</span>
                     <div
@@ -143,11 +143,11 @@ const TabsSection = () => {
 
     return (
         <>
-            <div className="tabs-wrapper bg-custom-dark py-5">
+            <div className="py-5 tabs-wrapper bg-custom-dark">
                 <div className="container">
                     <div className="row">
                         <div className="col-12">
-                            <div className="tabs-links d-flex gap-5 pb-2">
+                            <div className="gap-5 pb-2 tabs-links d-flex">
                                 <a data-id="1" href="#!" className="active">
                                     Ana sayfa
                                 </a>
@@ -169,38 +169,36 @@ const TabsSection = () => {
                                 <a data-id="7" href="#!">
                                     Community
                                 </a>
-                                {/* <a href={route('showArticles')}> */}
-                                <Link href="/showArticles">Articles</Link>
+                                {/* <a href={route('showarticles')}> */}
+                                <Link href="/showarticles">Articles</Link>
                             </div>
                         </div>
                     </div>
-                    <div className="row mt-4 stock-tabs">
+                    <div className="mt-4 row stock-tabs">
                         <div className="col-12">
-                            <div className="tabs-content d-grid gap-5">
+                            <div className="gap-5 tabs-content d-grid">
                                 {/* items start */}
                                 {show_items}
                                 {/* items end */}
                             </div>
                         </div>
                         <div className="col-12 d-none">
-                            <div className="tabs-content d-grid gap-5">
+                            <div className="gap-5 tabs-content d-grid">
                                 {/* items start */}
                                 {show_itmes_2}
                                 {/* items end */}
                             </div>
                         </div>
                     </div>
-                    <div className="row mt-4">
+                    <div className="mt-4 row">
                         <div className="col-lg-6 col-md-6 col-sm-12">
-                            <div className="left-info d-flex align-items-center gap-5">
+                            <div className="gap-5 left-info d-flex align-items-center">
                                 <h5 className="info-title">SON HABERLER</h5>
                                 <p>JPMorgan gelirlerini yüzde 9 artirdi</p>
                             </div>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12 right-info">
-                            <a href="#!" className="all-news">
-                                Tüm Haberler
-                            </a>
+                            <Link href="/showarticles" className="more-news">TUM HABERLER</Link>
                         </div>
                     </div>
                 </div>

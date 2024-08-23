@@ -10,12 +10,14 @@
     }
     .tabs-links {
         border-bottom: 1px solid #848e9c;
+        cursor: pointer;
         a {
             text-decoration: none;
             font-size: 18px;
             color: #fff;
             position: relative;
             white-space: nowrap;
+            cursor: pointer;
             &::after {
                 content: "";
                 position: absolute;
@@ -175,7 +177,7 @@
                         span {
                             color: #848e9c;
                             text-transform: uppercase;
-                            text-align: right;
+                            // text-align: right;
                         }
                     }
                     .price_value {

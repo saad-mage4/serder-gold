@@ -5,89 +5,67 @@ import { Link } from "@inertiajs/react";
 import Dropdown from "../Dropdown";
 import axios from "axios";
 import LiveClockUpdate from "../Clock";
+import { useApiQuery } from "@/hooks/useApi";
+import Image from "../UI/Image";
+import { useTheme } from "@/context/ThemeContext";
+import Modal from "../Modal";
 
 function Navbar({ userID, userName }) {
-    const [HeaderLogo, setHeaderLogo] = useState("");
+    // const [myStyle, setMyyStyle] = useState({
+    //     color: "#fff",
+    // });
 
-    // function displayTime() {
-    //     var currentTime = new Date();
-    //     var hrs = currentTime.getHours();
-    //     var min =
-    //         (currentTime.getMinutes() < 10 ? "0" : "") +
-    //         currentTime.getMinutes();
-    //     var sec =
-    //         (currentTime.getSeconds() < 10 ? "0" : "") +
-    //         currentTime.getSeconds();
+    // var element = document.querySelector("body");
+    // const toggleSwitch = () => {
+    //     if (myStyle.color === "#fff") {
+    //         element.classList.add("dark_theme");
+    //         setMyyStyle({
+    //             color: "#000",
+    //         });
+    //     } else {
+    //         element.classList.remove("dark_theme");
+    //         setMyyStyle({
+    //             color: "#fff",
+    //         });
+    //     }
+    // };
 
-    //     document.getElementById("hrs").innerHTML = hrs;
-    //     document.getElementById("min").innerHTML = min;
-    //     document.getElementById("sec").innerHTML = sec;
-    // }
-    // setInterval(displayTime, 1000);
-
-    const [myStyle, setMyyStyle] = useState({
-        color: "#fff",
-    });
-
-    var element = document.querySelector("body");
-    const toggleSwitch = () => {
-        if (myStyle.color === "#fff") {
-            element.classList.add("dark_theme");
-            setMyyStyle({
-                color: "#000",
-            });
-        } else {
-            element.classList.remove("dark_theme");
-            setMyyStyle({
-                color: "#fff",
-            });
-        }
-    };
+    const { theme, toggleTheme } = useTheme();
+    const { data: images, isLoading: imagesLoader } = useApiQuery('images', "/get-images");
 
     useEffect(() => {
-        axios
-            .get("/get-images")
-            .then((res) => {
-                // console.log(res.data);
-                setHeaderLogo(res.data.logo_header);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        document.body.className = theme === "dark" ? "dark_theme" : "";
+    }, [theme]);
 
-        const sectionTop = document.querySelector("#navbar");
-        window.addEventListener("scroll", function () {
-            if (window.scrollY >= 80) {
-                // console.log('okc');
-                sectionTop.classList.add("active_nav");
-            } else {
-                // console.log('lsdjkfljasd');
-                sectionTop.classList.remove("active_nav");
-            }
-        });
-    }, []);
+
+    // useEffect(() => {
+    //     const sectionTop = document.querySelector("#navbar");
+    //     window.addEventListener("scroll", function () {
+    //         if (window.scrollY >= 80) {
+    //             sectionTop.classList.add("active_nav");
+    //         } else {
+    //             sectionTop.classList.remove("active_nav");
+    //         }
+    //     });
+    // }, []);
 
     return (
         <>
-            <div
+            {/* <div
                 className="container-fluid main-nav bg-custom-dark"
                 id="navbar"
                 style={myStyle}
+            > */}
+            <div
+                className={`container-fluid main-nav bg-custom-dark ${theme === "dark" ? "dark_theme" : ""}`}
+                id="navbar"
             >
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-3 col-4 col-md-3 d-flex align-items-center col-logo">
                             <Link href="/">
-                                {HeaderLogo != null ? (
-
-                                    <img src={`../${HeaderLogo}`} alt="Logo" />
-
-                                ) : (
-                                    <img
-                                        src="https://dummyimage.com/148x35/000/f0b90b"
-                                        alt="left-img"
-                                    />
-                                )}
+                                {/* src={`../${HeaderLogo}`} */}
+                                <Image value={images?.logo_header} defaultSrc="https://dummyimage.com/148x35/000/f0b90b" />
                             </Link>
                         </div>
                         <div className="col-lg-6 col-md-6 col-sm-12">
@@ -110,26 +88,26 @@ function Navbar({ userID, userName }) {
                                             <Dropdown.Trigger>
                                                 <a
                                                     href="#!"
-                                                    className="text-white text-lg font-bold no-underline"
+                                                    className="text-lg font-bold text-white no-underline"
                                                 >
                                                     {userName}
                                                 </a>
                                             </Dropdown.Trigger>
                                             <Dropdown.Content>
                                                 {/* <Link
-                                                    className="d-block m-1 pl-2 text-black no-underline"
+                                                    className="pl-2 m-1 text-black no-underline d-block"
                                                     href={route("dashboard")}
                                                 >
                                                     Dashboard
                                                 </Link> */}
                                                 <a
                                                     href="/dashboard"
-                                                    className="d-block m-1 pl-2 text-black no-underline"
+                                                    className="pl-2 m-1 text-black no-underline d-block"
                                                 >
                                                     Dashboard
                                                 </a>
                                                 <Link
-                                                    className="d-block m-1 pl-2 text-black no-underline"
+                                                    className="pl-2 m-1 text-black no-underline d-block"
                                                     method="post"
                                                     href={route("logout")}
                                                 >
@@ -143,98 +121,23 @@ function Navbar({ userID, userName }) {
                                         </a>
                                     )}
                                     {/* <!-- Modal --> */}
-                                    <div
-                                        className="modal fade"
-                                        id="exampleModal"
-                                        tabIndex="-1"
-                                        aria-labelledby="exampleModalLabel"
-                                        aria-hidden="true"
-                                    >
-                                        <div className="modal-dialog">
-                                            <div className="modal-content">
-                                                <div className="modal-header">
-                                                    <h5
-                                                        className="modal-title"
-                                                        id="exampleModalLabel"
-                                                    >
-                                                        Please sign in
-                                                    </h5>
-                                                    <button
-                                                        type="button"
-                                                        className="btn-close"
-                                                        data-bs-dismiss="modal"
-                                                        aria-label="Close"
-                                                    ></button>
-                                                </div>
-                                                <div className="modal-body">
-                                                    <form className="form-signin">
-                                                        <div className="form-floating">
-                                                            <input
-                                                                type="email"
-                                                                className="form-control"
-                                                                id="floatingInput"
-                                                            />
-                                                            <label htmlFor="floatingInput">
-                                                                Email address
-                                                            </label>
-                                                        </div>
-                                                        <div className="form-floating">
-                                                            <input
-                                                                type="password"
-                                                                className="form-control"
-                                                                id="floatingPassword"
-                                                            />
-                                                            <label htmlFor="floatingPassword">
-                                                                Password
-                                                            </label>
-                                                        </div>
-
-                                                        <div className="checkbox mb-3">
-                                                            <label>
-                                                                <input
-                                                                    type="checkbox"
-                                                                    value="remember-me"
-                                                                />{" "}
-                                                                Remember me
-                                                            </label>
-                                                        </div>
-                                                        <button
-                                                            className="w-100 btn btn-lg btn-primary"
-                                                            type="submit"
-                                                        >
-                                                            Sign in
-                                                        </button>
-                                                    </form>
-                                                </div>
-                                                <div className="modal-footer">
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-secondary"
-                                                        data-bs-dismiss="modal"
-                                                    >
-                                                        Close
-                                                    </button>
-                                                    <button
-                                                        type="button"
-                                                        className="btn btn-primary"
-                                                    >
-                                                        Save changes
-                                                    </button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    {/* <Modal /> */}
                                     <button
-                                        onClick={toggleSwitch}
+                                        // onClick={toggleSwitch}
+                                        onClick={toggleTheme}
                                         className="dark-mode"
                                     >
-                                        <img
+                                        {/* <img
                                             src={
                                                 myStyle.color === "#fff"
                                                     ? Mode
                                                     : LightMode
                                             }
                                             alt=""
+                                        /> */}
+                                        <img
+                                            src={theme === "light" ? Mode : LightMode}
+                                            alt={theme === "light" ? "Light Mode" : "Dark Mode"}
                                         />
                                     </button>
                                 </div>
