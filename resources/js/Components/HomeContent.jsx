@@ -12,6 +12,7 @@ const HomeContent = () => {
                     :
                     <>
                         <Chart />
+                        <Table />
                         <GoldPriceCalculation />
                     </>
                 }
