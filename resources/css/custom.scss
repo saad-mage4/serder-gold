@@ -223,3 +223,42 @@ body.dark_theme {
 
 
 
+/* Google Translate CSS */
+#google_translate_element {
+//   margin-top: 20px;
+//   text-align: center;
+//   display: flex;
+}
+
+.skiptranslate {
+    font-size: 0 !important;
+}
+
+.goog-te-gadget-simple {
+     background-color: #FFF;
+    /* border-left: 1px solid #D5D5D5; */
+    /* border-top: 1px solid #9B9B9B; */
+    /* border-bottom: 1px solid #E8E8E8; */
+    /* border-right: 1px solid #D5D5D5; */
+    font-size: 1.125rem;
+    /* padding-top: 1px; */
+    /* padding-bottom: 2px; */
+    cursor: pointer;
+    display: flex;
+}
+
+.goog-te-gadget-simple .VIpgJd-ZVi9od-xl07Ob-lTBxed {
+    color: #000;
+    display: flex;
+    padding: 5px;
+}
+
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+visibility: hidden !important;
+}
+
+/* Hide the "Powered by Google Translate" text */
+.VIpgJd-ZVi9od-l4eHX-hSRGPd, .VIpgJd-ZVi9od-l4eHX-hSRGPd:link, .VIpgJd-ZVi9od-l4eHX-hSRGPd:visited, .VIpgJd-ZVi9od-l4eHX-hSRGPd:hover, .VIpgJd-ZVi9od-l4eHX-hSRGPd:active {
+    display: none !important;
+}
+
