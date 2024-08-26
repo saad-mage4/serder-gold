@@ -15,6 +15,8 @@ import {
     QueryClient,
     QueryClientProvider,
 } from '@tanstack/react-query';
+import { ThemeProvider } from './context/ThemeContext';
+import { ThemeTabProvider } from './context/ThemeTabContext';
 
 
 // Create a client
@@ -30,8 +32,13 @@ createInertiaApp({
 
         root.render(
             <QueryClientProvider client={queryClient}>
+                <ThemeProvider>
+                    <ThemeTabProvider>
                 <App {...props} />
-            </QueryClientProvider>);
+                    </ThemeTabProvider>
+                </ThemeProvider>
+            </QueryClientProvider>
+        );
     },
     progress: {
         color: '#4B5563',

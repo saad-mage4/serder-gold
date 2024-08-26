@@ -1,53 +1,41 @@
+import { useApiQuery } from "@/hooks/useApi";
 import Layout from "@/Layouts/Layout";
-import axios from "axios";
-import { useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 export default function ArticleDetails({ auth, id }) {
-    const [title, getTitle] = useState("");
-    const [desc, getDesc] = useState("");
-    const [banner, getBanner] = useState("");
-
-    // function pattern(n){
-    //     for (let i = 1; i <= n; i++) {
-    //         let pat = "";
-    //         for (let j = 1; j < i; j++) {
-    //             pat += "*";
-    //         }
-    //         pat += i;
-    //         console.log(pat);
-    //     }
-    // }
-    // pattern(5);
-
-    useEffect(() => {
-        axios
-            .get(`/get-articles-details/${id}`)
-            .then((res) => {
-                getTitle(res.data.title);
-                getBanner(res.data.banner);
-                getDesc(res.data.description);
-            })
-            .catch((error) => console.log(error));
-    }, []);
+    const { data: articles, isLoading } = useApiQuery('get-articles-details', `/get-articles-details/${id}`);
     return (
         <>
             <Layout user={auth.user}>
-                <div className="container">
+                {isLoading ? <div className="container my-3 text-center ">
                     <div className="row">
                         <div className="col-12">
-                            <h1 className="text-center my-3">Article Detail</h1>
+                            <Skeleton width={150} enableAnimation={true} />
                         </div>
-                        <div className="col-12 text-center">
-                            <img
-                                className="d-block mx-auto my-2"
-                                src={`../${banner}`}
-                                alt={title}
-                            />
-                            <h2 className="mb-3">{title}</h2>
-                            <p>{desc}</p>
+                        <div className="col-12">
+                            <Skeleton width={500} height={200} enableAnimation={true} />
+                            <Skeleton width={150} enableAnimation={true} />
+                            <Skeleton count={3} width={300} enableAnimation={true} />
                         </div>
                     </div>
-                </div>
+                </div> :
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-12">
+                                <h1 className="my-3 text-center black-bg-head">Article Detail</h1>
+                            </div>
+                            <div className="text-center col-12">
+                                <img
+                                    className="mx-auto my-2 d-block"
+                                    src={`../${articles?.banner}`}
+                                    alt={articles?.title}
+                                />
+                                <h2 className="mb-3 black-bg-head">{articles?.title}</h2>
+                                <p className="black-bg-head">{articles?.description}</p>
+                            </div>
+                        </div>
+                    </div>
+                }
             </Layout>
         </>
     );
