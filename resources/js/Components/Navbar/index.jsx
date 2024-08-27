@@ -8,7 +8,7 @@ import LiveClockUpdate from "../Clock";
 import { useApiQuery } from "@/hooks/useApi";
 import Image from "../UI/Image";
 import { useTheme } from "@/context/ThemeContext";
-import TranslateWidget from "../GoogleTranslate";
+import GoogleTranslate from "../GoogleTranslate";
 
 function Navbar({ userID, userName }) {
     const { theme, toggleTheme } = useTheme();
@@ -43,7 +43,7 @@ function Navbar({ userID, userName }) {
                             </form>
                         </div>
                         <div className="col-lg-3 col-md-4 col-sm-12">
-                            <TranslateWidget />
+                            <GoogleTranslate />
                         </div>
 
                         <div className="col-lg-2 col-md-3 col-8 d-flex align-items-center justify-content-center col-right">
