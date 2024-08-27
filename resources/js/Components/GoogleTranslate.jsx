@@ -3,6 +3,7 @@ import Skeleton from "react-loading-skeleton";
 const GoogleTranslate = () => {
     const googleTranslateRef = useRef(null);
     const [loading, setLoading] = useState(true);
+    const [active, setActive] = useState(false);
 
     //! Initialize Google Translate Widget
     const initGoogleTranslate = useCallback(() => {
@@ -34,6 +35,31 @@ const GoogleTranslate = () => {
             script.onload = () => setLoading(false);
         };
 
+        setTimeout(() => {
+            const selectTrans = document.querySelector(
+                'select[class="goog-te-combo"]'
+            );
+            selectTrans.addEventListener("change", function (e) {
+                let lang = e.target.value;
+
+                if (lang == "en") {
+                    document
+                        .querySelector('span[class^="en"]')
+                        .classList.add("active");
+                    document
+                        .querySelector('span[class^="tr"]')
+                        .classList.remove("active");
+                } else {
+                    document
+                        .querySelector('span[class^="tr"]')
+                        .classList.add("active");
+                    document
+                        .querySelector('span[class^="en"]')
+                        .classList.remove("active");
+                }
+            });
+        }, 1500);
+
         //! Check if script already exists to prevent multiple script injections
         const existingScript = document.querySelector(
             `script[src="//translate.google.com/translate_a/element.js?cb=initGoogleTranslate"]`
@@ -62,8 +88,8 @@ const GoogleTranslate = () => {
             ) : (
                 <div id="google-translate">
                     <div className="translate-flag">
-                        <span>🇺🇸</span>
-                        <span>🇹🇷</span>
+                        <span className="en">🇺🇸</span>
+                        <span className="tr">🇹🇷</span>
                     </div>
                     <div
                         className="google-trans-select"
