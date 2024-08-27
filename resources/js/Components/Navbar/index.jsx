@@ -12,7 +12,10 @@ import GoogleTranslate from "../GoogleTranslate";
 
 function Navbar({ userID, userName }) {
     const { theme, toggleTheme } = useTheme();
-    const { data: images, isLoading: imagesLoader } = useApiQuery('images', "/get-images");
+    const { data: images, isLoading: imagesLoader } = useApiQuery(
+        "images",
+        "/get-images"
+    );
 
     useEffect(() => {
         document.body.className = theme === "dark" ? "dark_theme" : "";
@@ -20,7 +23,9 @@ function Navbar({ userID, userName }) {
     return (
         <>
             <div
-                className={`container-fluid main-nav bg-custom-dark ${theme === "dark" ? "dark_theme" : ""}`}
+                className={`container-fluid main-nav bg-custom-dark ${
+                    theme === "dark" ? "dark_theme" : ""
+                }`}
                 id="navbar"
             >
                 <div className="container">
@@ -28,7 +33,10 @@ function Navbar({ userID, userName }) {
                         <div className="col-lg-2 col-4 col-md-3 d-flex align-items-center col-logo">
                             <Link href="/">
                                 {/* src={`../${HeaderLogo}`} */}
-                                <Image value={images?.logo_header} defaultSrc="https://dummyimage.com/148x35/000/f0b90b" />
+                                <Image
+                                    value={images?.logo_header}
+                                    defaultSrc="https://dummyimage.com/148x35/000/f0b90b"
+                                />
                             </Link>
                         </div>
                         <div className="col-lg-5 col-md-6 col-sm-12">
@@ -103,8 +111,16 @@ function Navbar({ userID, userName }) {
                                             alt=""
                                         /> */}
                                         <img
-                                            src={theme === "light" ? Mode : LightMode}
-                                            alt={theme === "light" ? "Light Mode" : "Dark Mode"}
+                                            src={
+                                                theme === "light"
+                                                    ? Mode
+                                                    : LightMode
+                                            }
+                                            alt={
+                                                theme === "light"
+                                                    ? "Light Mode"
+                                                    : "Dark Mode"
+                                            }
                                         />
                                     </button>
                                 </div>
