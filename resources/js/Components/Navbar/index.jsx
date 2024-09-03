@@ -30,16 +30,16 @@ function Navbar({ userID, userName }) {
             >
                 <div className="container">
                     <div className="row">
-                        <div className="col-lg-2 col-4 col-md-3 d-flex align-items-center col-logo">
+                        <div className="col-lg-3 col-4 col-md-3 d-flex align-items-center col-logo">
                             <Link href="/">
                                 {/* src={`../${HeaderLogo}`} */}
                                 <Image
-                                    value={images?.logo_header}
+                                    value={`../${images?.logo_header}`}
                                     defaultSrc="https://dummyimage.com/148x35/000/f0b90b"
                                 />
                             </Link>
                         </div>
-                        <div className="col-lg-5 col-md-6 col-sm-12">
+                        <div className="col-lg-6 col-md-6 col-sm-12">
                             <form className="d-flex" role="search">
                                 <input
                                     className="form-control me-2"
@@ -50,11 +50,11 @@ function Navbar({ userID, userName }) {
                                 {/* <button className="btn btn-outline-success" type="submit">Search</button> */}
                             </form>
                         </div>
-                        <div className="col-lg-3 col-md-4 col-sm-12">
+                        {/* <div className="col-lg-3 col-md-4 col-sm-12">
                             <GoogleTranslate />
-                        </div>
+                        </div> */}
 
-                        <div className="col-lg-2 col-md-3 col-8 d-flex align-items-center justify-content-center col-right">
+                        <div className="col-lg-3 col-md-3 col-8 d-flex align-items-center justify-content-center col-right">
                             <div className="nav-right-col">
                                 <div className="nav-acc-info">
                                     {/* <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal"> */}

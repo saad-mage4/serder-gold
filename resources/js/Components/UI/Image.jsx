@@ -1,5 +1,4 @@
-import React from 'react'
-
+import React from "react";
 
 const getOptimizedImage = (imagePath) => {
     try {
@@ -9,20 +8,22 @@ const getOptimizedImage = (imagePath) => {
     }
 };
 
-
-const Image = ({ value, alt = "", defaultSrc = "https://dummyimage.com/216x500/000/f0b90b", className = "" }) => {
+const Image = ({
+    value,
+    alt = "",
+    defaultSrc = "https://dummyimage.com/216x500/000/f0b90b",
+    className = "",
+}) => {
     const optimizedSrc = value ? getOptimizedImage(value) : defaultSrc;
+
     return (
-        < img
-            src={
-                value ||
-                defaultSrc
-            }
+        <img
+            src={value || defaultSrc}
             alt={alt}
-            loading='lazy'
+            loading="lazy"
             className={className}
         />
-    )
-}
+    );
+};
 
-export default Image
+export default Image;

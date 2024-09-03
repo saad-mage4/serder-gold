@@ -96,7 +96,7 @@ class ArticlesController extends Controller
      */
     public function getArticles(): Collection
     {
-        return DB::table('articles')->where('status', 'active')->get();
+        return DB::table('articles')->where('status', 'active')->orderBy('created_at', 'desc')->get();
     }
 
     public function getArticleDetails($id)

@@ -24,6 +24,12 @@ Route::get('/home2', function () {
     return Inertia::render('Home2');
 });
 
+Route::get('/goldprices', function () {
+    return Inertia::render('goldprices');
+});
+
+
+
 Route::get('/showarticles', function () {
     return Inertia::render('showarticles');
 });
