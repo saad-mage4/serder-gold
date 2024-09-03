@@ -21,7 +21,7 @@ const addArticles = ({ auth }) => {
 
     const getName = (e) => {
         let fileName = document.querySelector(".show-file-name");
-        fileName.innerHTML = e.target.files[0].name;
+        fileName.innerHTML = e.target.files[0]?.name;
         setData("banner", e.target.files[0]);
     };
 
