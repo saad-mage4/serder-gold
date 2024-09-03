@@ -1,19 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from "react";
 import {
     euro_flag,
     gold_coin_2,
     usd_dollar,
-    gold_coin, arrow_3
+    gold_coin,
+    arrow_3,
 } from "@/images";
-import SkelentonEffect from './SkelentonEffect';
-import { useThemeTab } from '@/context/ThemeTabContext';
-
+import SkelentonEffect from "./SkelentonEffect";
+import { useThemeTab } from "@/context/ThemeTabContext";
 
 const RealTimePrice = () => {
-    const { ExchangeRates, isLoading, showLoader } = useThemeTab();
+    const { ExchangeRates, isLoading } = useThemeTab();
     const [selectedItem, setSelectedItem] = useState(null);
-
-
     useEffect(() => {
         if (ExchangeRates?.data?.length > 0) {
             setSelectedItem(ExchangeRates.data[0]);
@@ -50,8 +48,6 @@ const RealTimePrice = () => {
         setSelectedItem(item);
     };
 
-
-
     return (
         <div className="col-12">
             <div className="gap-5 tabs-content second-tab d-grid">
@@ -60,29 +56,35 @@ const RealTimePrice = () => {
                 {/* items end */}
                 <div className="item">
                     <div className="text">
-                        <h3>
-                            Find the real time prices of gold
-                            anytime .
-                        </h3>
+                        <h3>Find the real time prices of gold anytime .</h3>
                         <p>
-                            Monitor capitalization, price, daily
-                            volume, and price changes of any
-                            gold in real time!
+                            Monitor capitalization, price, daily volume, and
+                            price changes of any gold in real time!
                         </p>
                     </div>
                 </div>
                 <div className="item">
                     <div className="grid-three d-grid">
-                        {showLoader || isLoading || ExchangeRates?.data.length == 0 ? <SkelentonEffect length={11} width={120} /> : ExchangeRates?.data?.slice(0, 11)?.map((item) => (
-                            <div key={item?.code} className="flex items-center gap-2 cursor-pointer list">
-                                <div className="coin-img">
-                                    <img src={gold_coin} alt="gold-coin" />
+                        {isLoading || ExchangeRates?.data.length == 0 ? (
+                            <SkelentonEffect length={11} width={120} />
+                        ) : (
+                            ExchangeRates?.data?.slice(0, 11)?.map((item) => (
+                                <div
+                                    key={item?.code}
+                                    className="flex items-center gap-2 cursor-pointer list"
+                                >
+                                    <div className="coin-img">
+                                        <img src={gold_coin} alt="gold-coin" />
+                                    </div>
+                                    <a
+                                        className="gold-link"
+                                        onClick={(e) => handleClick(e, item)}
+                                    >
+                                        <span>{item?.FullName}</span>
+                                    </a>
                                 </div>
-                                <a className="gold-link" onClick={(e) => handleClick(e, item)}>
-                                    <span>{item?.FullName}</span>
-                                </a>
-                            </div>
-                        ))}
+                            ))
+                        )}
                         <div className="flex items-center gap-2 list">
                             <a href="#!">
                                 Tum altinlar
@@ -92,20 +94,38 @@ const RealTimePrice = () => {
                     </div>
                 </div>
                 <div className="item prices">
-                    {showLoader || isLoading || ExchangeRates?.data.length == 0 ? <SkelentonEffect length={3} width={220} /> :
+                    {isLoading || ExchangeRates?.data.length == 0 ? (
+                        <SkelentonEffect length={3} width={220} />
+                    ) : (
                         <>
                             <div className="price gold">
                                 <div className="icon-text">
                                     <div className="coin-img">
-                                        <img src={gold_coin_2} alt="gold-coin" />
+                                        <img
+                                            src={gold_coin_2}
+                                            alt="gold-coin"
+                                        />
                                     </div>
                                     <span>{selectedItem?.FullName}</span>
                                 </div>
                                 <div className="price_value">
-                                    <h5 className="mb-0">{selectedItem?.buying?.toFixed(2)}</h5>
+                                    <h5 className="mb-0">
+                                        {selectedItem?.buying?.toFixed(2)}
+                                    </h5>
                                 </div>
-                                <div className={`change-ratio ${selectedItem?.changeRate >= 0 ? 'green' : 'red'}`}>
-                                    <span>{(selectedItem?.changeRate * 100)?.toFixed(2)}%</span>
+                                <div
+                                    className={`change-ratio ${
+                                        selectedItem?.changeRate >= 0
+                                            ? "green"
+                                            : "red"
+                                    }`}
+                                >
+                                    <span>
+                                        {(
+                                            selectedItem?.changeRate * 100
+                                        )?.toFixed(2)}
+                                        %
+                                    </span>
                                 </div>
                             </div>
                             <div className="price euro">
@@ -137,12 +157,11 @@ const RealTimePrice = () => {
                                 </div>
                             </div>
                         </>
-                    }
+                    )}
                 </div>
             </div>
         </div>
-    )
+    );
+};
 
-}
-
-export default RealTimePrice
+export default RealTimePrice;
