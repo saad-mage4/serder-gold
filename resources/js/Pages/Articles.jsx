@@ -5,14 +5,14 @@ import { Head } from "@inertiajs/react";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
 import { Dropdown } from "primereact/dropdown";
-import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
+// import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import axios from "axios";
 import { InputText } from "primereact/inputtext";
 import NavLink from "@/Components/NavLink";
 import { useApiMutation, useApiQuery } from "@/hooks/useApi";
 
 const Articles = ({ auth }) => {
-    const { data } = useApiQuery('get-articles-admin', "/get-articles-admin");
+    const { data } = useApiQuery("get-articles-admin", "/get-articles-admin");
     const [products, setProducts] = useState([]);
     const [article_status] = useState(["active", "deactivate"]);
 
@@ -60,12 +60,10 @@ const Articles = ({ auth }) => {
         );
     };
 
-    const postMutation = useApiMutation('post', '/update-articles', {
-        invalidateKey: ['update-articles'],
+    const postMutation = useApiMutation("post", "/update-articles", {
+        invalidateKey: ["update-articles"],
         onSuccess: (data) => alert(data),
     });
-
-
 
     const onRowEditComplete = async (e) => {
         let _products = [...products];

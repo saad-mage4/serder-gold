@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 const Modal = () => {
     return (
@@ -12,10 +12,7 @@ const Modal = () => {
             <div className="modal-dialog">
                 <div className="modal-content">
                     <div className="modal-header">
-                        <h5
-                            className="modal-title"
-                            id="exampleModalLabel"
-                        >
+                        <h5 className="modal-title" id="exampleModalLabel">
                             Please sign in
                         </h5>
                         <button
@@ -73,17 +70,14 @@ const Modal = () => {
                         >
                             Close
                         </button>
-                        <button
-                            type="button"
-                            className="btn btn-primary"
-                        >
+                        <button type="button" className="btn btn-primary">
                             Save changes
                         </button>
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Modal
+export default Modal;

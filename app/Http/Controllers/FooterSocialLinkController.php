@@ -2,63 +2,65 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
+
+use App\Http\Requests\StoreFooterSocialLinksRequest;
 use App\Models\FooterSocialLink;
+use Illuminate\Http\Request;
+use Inertia\Inertia;
 
 class FooterSocialLinkController extends Controller
 {
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:admin');
-    // }
-
     public function index()
     {
         $links = FooterSocialLink::all();
-        return view('admin.footer_social_link', compact('links'));
+        return Inertia::render('admin/FooterSocialLink', ['footersociallink' => $links]);
     }
 
     public function store(Request $request)
     {
         $rules = [
             'link' => 'required',
-            'icon' => 'required',
+            'icon' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
         $customMessages = [
-            'link.required' => trans('admin_validation.Link is required'),
-            'icon.required' => trans('admin_validation.Icon is required'),
+            'link.required' => trans('Link is required'),
+            'icon.image' => trans('Icon is required'),
         ];
-        $this->validate($request, $rules, $customMessages);
 
+        $request->validate($rules, $customMessages);
         $link = new FooterSocialLink();
         $link->link = $request->link;
-        $link->icon = $request->icon;
+        // $link->icon = $request->icon;
         $link->save();
 
-        $notification = trans('admin_validation.Create Successfully');
-        $notification = array('messege' => $notification, 'alert-type' => 'success');
+        if ($request->hasFile('icon')) {
+            $card_image = $request->file('icon');
+            $card_image_Name = time() . '_' . $card_image->getClientOriginalName();
+            $card_image->move(public_path('images'), $card_image_Name);
+            $link->icon = 'images/' . $card_image_Name;
+            $link->save();
+        }
+
+        $notification = trans('Create Successfully');
+        // $notification = array('messege' => $notification, 'alert-type' => 'success');
         return redirect()->back()->with($notification);
     }
 
     public function update(Request $request, $id)
     {
-        $rules = [
-            'link' => 'required',
-            'icon' => 'required',
-        ];
-        $customMessages = [
-            'link.required' => trans('admin_validation.Link is required'),
-            'icon.required' => trans('admin_validation.Icon is required'),
-        ];
-        $this->validate($request, $rules, $customMessages);
-
         $link = FooterSocialLink::find($id);
         $link->link = $request->link;
-        $link->icon = $request->icon;
-        $link->save();
+        if ($request->hasFile('icon')) {
+            $card_image = $request->file('icon');
+            $card_image_Name = time() . '_' . $card_image->getClientOriginalName();
+            $card_image->move(public_path('images'), $card_image_Name);
+            $link->icon = 'images/' . $card_image_Name;
+        }
 
-        $notification = trans('admin_validation.Update Successfully');
-        $notification = array('messege' => $notification, 'alert-type' => 'success');
+        $link->update();
+
+        $notification = trans('Update Successfully');
         return redirect()->back()->with($notification);
     }
 
@@ -66,8 +68,7 @@ class FooterSocialLinkController extends Controller
     {
         $link = FooterSocialLink::find($id);
         $link->delete();
-        $notification = trans('admin_validation.Delete Successfully');
-        $notification = array('messege' => $notification, 'alert-type' => 'success');
+        $notification = trans('Delete Successfully');
         return redirect()->back()->with($notification);
     }
 }

@@ -4,14 +4,14 @@ import { useEffect, useState } from "react";
 import { PrimeReactProvider } from "primereact/api";
 import { DataTable } from "primereact/datatable";
 import { Column } from "primereact/column";
-import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
+// import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import NavLink from "@/Components/NavLink";
 import { useApiMutation, useApiQuery } from "@/hooks/useApi";
 
 const Users = ({ auth }) => {
-    const { data: users } = useApiQuery('get-users', "/get-users");
+    const { data: users } = useApiQuery("get-users", "/get-users");
     const [products, setProducts] = useState([]);
     const [user_status] = useState(["admin", "user"]);
     useEffect(() => {
@@ -62,14 +62,13 @@ const Users = ({ auth }) => {
         );
     };
 
-    const postMutation = useApiMutation('post', '/update-users', {
-        invalidateKey: ['update-users'],
+    const postMutation = useApiMutation("post", "/update-users", {
+        invalidateKey: ["update-users"],
         onSuccess: (data) => alert(data),
     });
     const onRowEditComplete = async (e) => {
         let _products = [...products];
         let { newData, index } = e;
-
 
         _products[index] = newData;
 
@@ -80,15 +79,13 @@ const Users = ({ auth }) => {
             formData.append(key, newData[key]);
         }
 
-
-
         try {
             // const response = await axios.post("/update-users", formData, {
             //     headers: {
             //         "Content-Type": "multipart/form-data",
             //     },
             // });
-            await postMutation.mutateAsync(formData)
+            await postMutation.mutateAsync(formData);
         } catch (error) {
             console.log(error.message);
         }
