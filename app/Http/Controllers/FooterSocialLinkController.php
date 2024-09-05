@@ -26,27 +26,27 @@ class FooterSocialLinkController extends Controller
     public function store(Request $request)
     {
         $rules = [
+            'icon' => 'required', //|image|mimes:jpeg,png,jpg,gif|max:2048
             'link' => 'required',
-            'icon' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
         $customMessages = [
+            'icon.required' => trans('Icon is required'), //image
             'link.required' => trans('Link is required'),
-            'icon.image' => trans('Icon is required'),
         ];
 
         $request->validate($rules, $customMessages);
         $link = new FooterSocialLink();
         $link->link = $request->link;
-        // $link->icon = $request->icon;
+        $link->icon = $request->icon;
         $link->save();
 
-        if ($request->hasFile('icon')) {
-            $card_image = $request->file('icon');
-            $card_image_Name = time() . '_' . $card_image->getClientOriginalName();
-            $card_image->move(public_path('images'), $card_image_Name);
-            $link->icon = 'images/' . $card_image_Name;
-            $link->save();
-        }
+        // if ($request->hasFile('icon')) {
+        //     $card_image = $request->file('icon');
+        //     $card_image_Name = time() . '_' . $card_image->getClientOriginalName();
+        //     $card_image->move(public_path('images'), $card_image_Name);
+        //     $link->icon = 'images/' . $card_image_Name;
+        //     $link->save();
+        // }
 
         $notification = trans('Create Successfully');
         // $notification = array('messege' => $notification, 'alert-type' => 'success');
@@ -57,12 +57,13 @@ class FooterSocialLinkController extends Controller
     {
         $link = FooterSocialLink::find($id);
         $link->link = $request->link;
-        if ($request->hasFile('icon')) {
-            $card_image = $request->file('icon');
-            $card_image_Name = time() . '_' . $card_image->getClientOriginalName();
-            $card_image->move(public_path('images'), $card_image_Name);
-            $link->icon = 'images/' . $card_image_Name;
-        }
+        $link->icon = $request->icon;
+        // if ($request->hasFile('icon')) {
+        //     $card_image = $request->file('icon');
+        //     $card_image_Name = time() . '_' . $card_image->getClientOriginalName();
+        //     $card_image->move(public_path('images'), $card_image_Name);
+        //     $link->icon = 'images/' . $card_image_Name;
+        // }
 
         $link->update();
 

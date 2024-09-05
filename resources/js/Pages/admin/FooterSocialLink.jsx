@@ -7,7 +7,7 @@ import DeleteConfirmationModal from "@/Components/Admin/Footer/SocialLinks/Delet
 import SocialLinkTable from "@/Components/Admin/Footer/SocialLinks/SocialLinkTable";
 import { useForm } from "@inertiajs/react";
 import axios from "axios";
-import EditSocialForm from "@/Components/Admin/Footer/SocialLinks/EditSocialForm";
+// import IconPicker from "react-icons-picker";
 
 const FooterSocialLink = ({ auth, footersociallink }) => {
     const [products, setProducts] = useState([]);
@@ -16,6 +16,7 @@ const FooterSocialLink = ({ auth, footersociallink }) => {
     const [deleteId, setDeleteId] = useState(null);
     const [editModal, setEditModal] = useState(false);
     const [selectedLink, setSelectedLink] = useState(null);
+    const [value, setValue] = useState("");
 
     useEffect(() => {
         if (footersociallink) {
@@ -146,6 +147,12 @@ const FooterSocialLink = ({ auth, footersociallink }) => {
                 <p className="mt-1 text-sm text-gray-600">
                     List of all Social Links.
                 </p>
+                {/* <IconPicker
+                    value={value}
+                    onChange={(v) => setValue(v)}
+                    size={24}
+                    color="#000"
+                /> */}
                 <PrimaryButton
                     onClick={() => setModal(true)}
                     className="absolute top-2/4 right-0 -translate-y-2/4"

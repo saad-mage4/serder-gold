@@ -5,6 +5,7 @@ import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
 import Image from "@/Components/UI/Image";
+import IconPicker from "@/Components/UI/IconPicker";
 
 const SocialLinkTable = ({
     products,
@@ -33,6 +34,17 @@ const SocialLinkTable = ({
                 type="text"
                 value={options?.value}
                 onChange={(e) => options.editorCallback(e.target.value)}
+            />
+        );
+    };
+
+    const iconEditor = (options) => {
+        if (!options) return null;
+        return (
+            <IconPicker
+                value={options?.value || ""}
+                onChange={(icon) => options.editorCallback(icon)}
+                placeholder="Select an icon"
             />
         );
     };
@@ -102,11 +114,16 @@ const SocialLinkTable = ({
                 header="Link"
                 editor={(options) => textEditor(options)}
             ></Column>
-            <Column
+            {/* <Column
                 field="icon"
                 header="Icon"
                 body={BannerTemplate}
                 editor={(options) => imgEditor(options)}
+            ></Column> */}
+            <Column
+                field="icon"
+                header="Icon"
+                editor={(options) => iconEditor(options)}
             ></Column>
             <Column
                 header="Edit"
