@@ -193,7 +193,7 @@ const SecondColumnLink = ({ auth, footer_link }) => {
                         <TextInput
                             id="name"
                             name="name"
-                            value={data.name}
+                            // value={data.name}
                             onChange={(e) => setData("name", e.target.value)}
                             className="mt-1 block w-full"
                         />
@@ -208,7 +208,7 @@ const SecondColumnLink = ({ auth, footer_link }) => {
                         <TextInput
                             id="link"
                             name="link"
-                            value={data.link}
+                            // value={data.link}
                             onChange={(e) => setData("link", e.target.value)}
                             className="mt-1 block w-full"
                         />
