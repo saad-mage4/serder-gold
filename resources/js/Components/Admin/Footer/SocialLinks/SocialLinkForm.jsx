@@ -4,15 +4,21 @@ import TextInput from "@/Components/TextInput";
 import SecondaryButton from "@/Components/SecondaryButton";
 import PrimaryButton from "@/Components/PrimaryButton";
 import { useForm } from "@inertiajs/react";
+import IconPicker from "@/Components/UI/IconPicker";
+// import IconPicker from "react-icons-picker";
 
 const SocialLinkForm = ({ setModal }) => {
     const { data, setData, post, processing, errors, progress } = useForm({
         icon: null,
         link: "",
     });
+
     const [validationError, setValidationError] = useState("");
 
     const handleImageChange = (e) => setData("icon", e.target.files[0]);
+    const handleIconChange = (selectedIcon) => {
+        setData("icon", selectedIcon); // Update the icon data dynamically
+    };
 
     const validateUrl = (url) => {
         if (!url) return true; // No URL provided, no validation needed
@@ -47,17 +53,29 @@ const SocialLinkForm = ({ setModal }) => {
             </h2>
             <div className="mt-6">
                 <InputLabel htmlFor="icon" value="Icon" />
-                <TextInput
+                {/* <TextInput
                     id="icon"
                     type="file"
                     name="icon"
                     onChange={handleImageChange}
                     className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100"
+                /> */}
+                <IconPicker
+                    value={data?.icon}
+                    onChange={handleIconChange}
+                    placeholder="Select an icon"
                 />
                 {errors.icon && (
                     <p className="text-red-600 mt-2">{errors.icon}</p>
                 )}
             </div>
+
+            {/* <IconPicker
+                value={value}
+                onChange={(v) => setValue(v)}
+                size={24}
+                color="#000"
+            /> */}
 
             <div className="mt-6">
                 <InputLabel htmlFor="link" value="Link" />

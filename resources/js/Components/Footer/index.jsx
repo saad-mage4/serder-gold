@@ -57,49 +57,16 @@ function Footer() {
                                             target="_blank"
                                             rel="noopener noreferrer"
                                         >
-                                            <Image
+                                            {/* <Image
                                                 value={`../${links.icon}`}
                                                 alt="Social Images"
                                                 width={40}
                                                 height={40}
-                                            />
+                                            /> */}
+                                            <i className={links?.icon}></i>
                                         </a>
                                     );
                                 })}
-                                <a href="#">
-                                    <i className="fa-solid fa-ellipsis"></i>
-                                </a>
-                                {/* <a href="">
-                                    <i className="fa-brands fa-telegram"></i>
-                                </a> */}
-                                {/* <a href="">
-                                    <i className="fa-brands fa-discord"></i>
-                                </a>
-
-                                <a href="">
-                                    <i className="fa-brands fa-tiktok"></i>
-                                </a>
-                                <a href="">
-                                    <i className="fa-brands fa-facebook"></i>
-                                </a>
-                                <a href="">
-                                    <i className="fa-brands fa-x-twitter"></i>
-                                </a>
-                                <a href="">
-                                    <i className="fa-brands fa-discord"></i>
-                                </a>
-                                <a href="">
-                                    <i className="fa-brands fa-instagram"></i>
-                                </a>
-                                <a href="">
-                                    <i className="fa-brands fa-discord"></i>
-                                </a>
-                                <a href="">
-                                    <i className="fa-brands fa-youtube"></i>
-                                </a>
-                                <a href="">
-                                    <i className="fa-solid fa-ellipsis"></i>
-                                </a> */}
                             </div>
                         </div>
                         <div className="col-lg-2 col-md-6 col-6 foot-links-col">

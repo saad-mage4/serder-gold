@@ -158,9 +158,14 @@ const FooterLink = ({ auth, footer_link }) => {
             </div>
 
             <DataTable
+                lazy
+                stripedRows
+                rows={4}
+                scrollable
+                scrollHeight="450px"
+                tableStyle={{ minWidth: "50rem" }}
                 value={socialLinks}
                 paginator
-                rows={10}
                 className="p-datatable-sm"
             >
                 <Column
