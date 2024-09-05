@@ -15,7 +15,7 @@ class FooterLinkController extends Controller
         $column = 1;
         $title = trans('First Column Link');
         $footer = Footer::first();
-        $columnTitle = $footer->first_column;
+        $columnTitle = $footer->first_column ?? $title;
         return Inertia::render('admin/FooterLink', [
             'footer_link' => [
                 'links' => $links,
@@ -45,7 +45,7 @@ class FooterLinkController extends Controller
         $column = 2;
         $title = trans('Second Column Link');
         $footer = Footer::first();
-        $columnTitle = $footer->second_column;
+        $columnTitle = $footer->second_column ?? $title;
         return Inertia::render('admin/SecondColumnLink', [
             'footer_link' => [
                 'links' => $links,
@@ -63,7 +63,7 @@ class FooterLinkController extends Controller
         $column = 3;
         $title = trans('Third Column Link');
         $footer = Footer::first();
-        $columnTitle = $footer->third_column;
+        $columnTitle = $footer->third_column ?? $title;
         // return view('admin.footer_link', compact('links', 'column', 'title', 'columnTitle'));
         return Inertia::render('admin/ThirdColumnLink', [
             'footer_link' => [
