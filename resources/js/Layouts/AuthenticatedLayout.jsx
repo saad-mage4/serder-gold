@@ -3,12 +3,17 @@ import { useState } from "react";
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
-import { Link } from "@inertiajs/react";
+import { Link, usePage } from "@inertiajs/react";
 import { Logo } from "@/images";
+import Image from "@/Components/UI/Image";
 
 export default function Authenticated({ user, header, children }) {
+    console.log("sdsd", user);
+
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
+
+    const { url, component } = usePage();
 
     return (
         <div className="min-h-screen bg-gray-100 logged-in">
@@ -24,7 +29,6 @@ export default function Authenticated({ user, header, children }) {
                                         <img src={Logo} alt="test" />
                                     </Link>
                                 </div>
-
                                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                     <NavLink
                                         href={route("dashboard")}
@@ -33,11 +37,10 @@ export default function Authenticated({ user, header, children }) {
                                         Dashboard
                                     </NavLink>
                                 </div>
-
                                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                     <NavLink
                                         href="/admin/footer"
-                                        // active="/admin/footer"
+                                        active={url === "/admin/footer" && true}
                                     >
                                         Footer
                                     </NavLink>
@@ -45,11 +48,71 @@ export default function Authenticated({ user, header, children }) {
                                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                     <NavLink
                                         href="/admin/social-link"
-                                        // active="/admin/footer"
+                                        active={
+                                            url === "/admin/social-link" && true
+                                        }
                                     >
                                         Footer Social Links
                                     </NavLink>
                                 </div>
+                                <div className="hidden sm:flex sm:items-center sm:ms-6">
+                                    <div className="ms-3 relative">
+                                        <Dropdown>
+                                            <Dropdown.Trigger>
+                                                <a
+                                                    className="text-sm font-medium leading-5 transition duration-150 ease-in-out text-decoration-none focus:outline-none
+                                                cursor-pointer text-gray-500 no-underline"
+                                                >
+                                                    Footer Column
+                                                </a>
+                                            </Dropdown.Trigger>
+                                            <Dropdown.Content>
+                                                <Dropdown.Link
+                                                    href="/admin/footer-link"
+                                                    className="no-underline"
+                                                    active={
+                                                        url ===
+                                                            "/admin/footer-link" &&
+                                                        true
+                                                    }
+                                                >
+                                                    First Column Link
+                                                </Dropdown.Link>
+                                                <Dropdown.Link
+                                                    href="/admin/second-col-footer-link"
+                                                    active={
+                                                        url ===
+                                                            "/admin/second-col-footer-link" &&
+                                                        true
+                                                    }
+                                                    className="no-underline"
+                                                >
+                                                    Second Column Link
+                                                </Dropdown.Link>
+                                                <Dropdown.Link
+                                                    href="/admin/third-col-footer-link"
+                                                    active={
+                                                        url ===
+                                                            "/admin/third-col-footer-link" &&
+                                                        true
+                                                    }
+                                                    className="no-underline"
+                                                >
+                                                    Third Column Link
+                                                </Dropdown.Link>
+                                            </Dropdown.Content>
+                                        </Dropdown>
+                                    </div>
+                                </div>
+                                {/* <NavLink
+                                        href="/admin/footer-link"
+                                        active={
+                                            url === "/admin/footer-link" && true
+                                        }
+                                    >
+                                        First Column Link
+                                    </NavLink> */}
+                                {/* </div> */}
                                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                                     <NavLink
                                         href={route("updateImages")}
@@ -81,12 +144,13 @@ export default function Authenticated({ user, header, children }) {
                                     <Dropdown>
                                         <Dropdown.Trigger>
                                             <span className="inline-flex rounded-md">
-                                                <img
-                                                    src={user?.avatar}
-                                                    alt=""
-                                                    className="profile-img-main"
+                                                <Image
+                                                    value={`../${user?.avatar}`}
+                                                    alt={user?.name}
+                                                    defaultSrc="https://dummyimage.com/216x500/000/f0b90b"
+                                                    className="profile-img-main cursor-pointer"
                                                 />
-                                                <button
+                                                {/* <button
                                                     type="button"
                                                     className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                                 >
@@ -104,7 +168,7 @@ export default function Authenticated({ user, header, children }) {
                                                             clipRule="evenodd"
                                                         />
                                                     </svg>
-                                                </button>
+                                                </button> */}
                                             </span>
                                         </Dropdown.Trigger>
 

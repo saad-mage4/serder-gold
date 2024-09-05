@@ -6,6 +6,7 @@ use App\Http\Requests\StoreFooterRequest;
 use App\Models\Footer;
 use Inertia\Inertia;
 
+use function Pest\Laravel\json;
 
 class FooterController extends Controller
 {
@@ -13,6 +14,12 @@ class FooterController extends Controller
     {
         $footer = Footer::first();
         return Inertia::render('admin/Footer', ['footer' => $footer]);
+    }
+
+    public function getdata()
+    {
+        $footer = Footer::first();
+        return response()->json($footer);
     }
 
     public function store(StoreFooterRequest $request)

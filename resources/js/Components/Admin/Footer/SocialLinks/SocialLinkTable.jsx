@@ -4,20 +4,25 @@ import { Column } from "primereact/column";
 import { InputText } from "primereact/inputtext";
 import { Dropdown } from "primereact/dropdown";
 import { Button } from "primereact/button";
-import { Chip } from "primereact/chip";
+import Image from "@/Components/UI/Image";
 
 const SocialLinkTable = ({
     products,
     setProducts,
     onRowEditComplete,
     handleVisibility,
+    openEditModal,
 }) => {
     const article_status = ["active", "deactivate"];
 
     const BannerTemplate = (banner) => {
         return (
             <div className="flex gap-2 align-items-center">
-                <img alt={banner.name} src={`${banner.banner}`} width={32} />
+                <Image
+                    value={`../${banner?.icon}`}
+                    alt={banner.id}
+                    width={40}
+                />
             </div>
         );
     };
@@ -26,7 +31,7 @@ const SocialLinkTable = ({
         return (
             <InputText
                 type="text"
-                value={options.value}
+                value={options?.value}
                 onChange={(e) => options.editorCallback(e.target.value)}
             />
         );
@@ -53,8 +58,26 @@ const SocialLinkTable = ({
     };
 
     const allowEdit = (rowData) => {
-        return rowData.name !== "Blue Band";
+        return rowData?.id;
     };
+    const actionsTemplate = (rowData) => (
+        <div className="flex space-x-2">
+            <Button
+                icon="pi pi-pencil"
+                onClick={() => openEditModal(rowData)}
+                className="p-button-success p-button-sm"
+            />
+            <Button
+                icon="pi pi-trash"
+                onClick={() => handleVisibility(rowData?.id)}
+                // onClick={() => {
+                //     setSelectedLink(rowData);
+                //     setDeleteModal(true);
+                // }}
+                className="p-button-danger p-button-sm"
+            />
+        </div>
+    );
 
     return (
         <DataTable
@@ -69,7 +92,11 @@ const SocialLinkTable = ({
             tableStyle={{ minWidth: "50rem" }}
             onRowEditComplete={onRowEditComplete}
         >
-            <Column field="id" header="ID"></Column>
+            <Column
+                field="id"
+                header="ID"
+                body={(rowData, props) => props.rowIndex + 1}
+            ></Column>
             <Column
                 field="link"
                 header="Link"
@@ -83,33 +110,29 @@ const SocialLinkTable = ({
             ></Column>
             <Column
                 header="Edit"
-                //  body={(rowData) => (
-                //      <div>
-                //          {/* <Chip label="edit" removable /> */}
-                //          <Button rowEditor={allowEdit(rowData)}>edit</Button>
-                //          <br />
-                //          <Button onClick={() => handleVisibility(rowData?.id)}>
-                //              Delete
-                //          </Button>
-                //      </div>
-                //  )}
                 rowEditor={allowEdit}
                 headerStyle={{ width: "10%", minWidth: "8rem" }}
                 bodyStyle={{ textAlign: "center" }}
             ></Column>
             <Column
                 header="Delete"
+                headerStyle={{ width: "10%", minWidth: "8rem" }}
+                bodyStyle={{ textAlign: "center" }}
                 body={(rowData) => (
-                    <Button onClick={() => handleVisibility(rowData?.id)}>
-                        <i
-                            className="pi-trash"
-                            style={{ fontSize: "2.5rem" }}
-                        ></i>
-                        {/* <FontAwesomeIcon icon="fa-solid fa-trash" /> */}
-                        Delete
-                    </Button>
+                    <Button
+                        icon="pi pi-trash"
+                        onClick={() => handleVisibility(rowData?.id)}
+                        style={{ fontSize: "2.5rem" }}
+                        className="p-button-danger p-button-sm"
+                    />
                 )}
             ></Column>
+            {/* <Column
+                body={actionsTemplate}
+                header="Action"
+                headerStyle={{ width: "10%", minWidth: "8rem" }}
+                bodyStyle={{ textAlign: "center" }}
+            /> */}
         </DataTable>
     );
 };

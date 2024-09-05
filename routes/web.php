@@ -89,32 +89,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('admin')->group(function () {
         // Footers
         Route::resource('footer', FooterController::class);
+        Route::get('/get-footer', [FooterController::class, 'getdata'])->name('get-footer');
         Route::resource('social-link', FooterSocialLinkController::class);
+        Route::get('/get-social-link', [FooterSocialLinkController::class, 'getdata'])->name('get-social-link');
         Route::post('social-link-update/{id}', [FooterSocialLinkController::class, 'update'])->name('update_social-link');
-        // Route::get('social-link', [FooterSocialLinkController::class, 'index'])->name('social-link');
-        // Route::post('social-link-store', [FooterSocialLinkController::class, 'store'])->name('social-link-store');
-        // Route::put('social-link-update/{id}', [FooterSocialLinkController::class, 'update'])->name('social-link-update');
-
         Route::resource('footer-link', FooterLinkController::class);
+        Route::get('/get-footer-links', [FooterLinkController::class, 'getdata'])->name('get-footer-links');
         Route::get('second-col-footer-link', [FooterLinkController::class, 'secondColFooterLink'])->name('second-col-footer-link');
         Route::get('third-col-footer-link', [FooterLinkController::class, 'thirdColFooterLink'])->name('third-col-footer-link');
+        Route::put('update-col-title/{id}', [FooterLinkController::class, 'updateColTitle'])->name('update-col-title');
     });
-
-
-    // Route::resource('social-link', FooterSocialLinkController::class);
-
-
-    Route::put('update-col-title/{id}', [FooterLinkController::class, 'updateColTitle'])->name('update-col-title');
 });
-
-
-// Route::middleware(['auth'])->prefix('admin')->group(function () {
-//     Route::resource('footer', FooterController::class);
-//     Route::resource('footersociallink', FooterSocialLinkController::class);
-//     Route::resource('footer-link', FooterLinkController::class);
-// });
-
-
 
 Route::get('/get-articles', [ArticlesController::class, 'getArticles'])->name('get-articles');
 Route::get('/showarticles', function () {

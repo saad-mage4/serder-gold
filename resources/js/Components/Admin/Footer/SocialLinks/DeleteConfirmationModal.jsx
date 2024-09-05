@@ -5,10 +5,10 @@ import DangerButton from "@/Components/DangerButton";
 const DeleteConfirmationModal = ({ visible, setVisible, handleDelete }) => {
     return (
         <div className="p-6">
-            <p className="m-0">
-                Are you sure you want to delete this item? This action cannot be
-                undone.
-            </p>
+            <h2 className="text-xl font-bold text-gray-900">
+                Item Delete Confirmation
+            </h2>
+            <p className="m-0">Are You sure delete this item ?</p>
             <div className="mt-6 flex justify-end">
                 <SecondaryButton onClick={() => setVisible(false)}>
                     No

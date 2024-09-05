@@ -17,6 +17,12 @@ class FooterSocialLinkController extends Controller
         return Inertia::render('admin/FooterSocialLink', ['footersociallink' => $links]);
     }
 
+    public function getdata()
+    {
+        $links = FooterSocialLink::all();
+        return response()->json($links);
+    }
+
     public function store(Request $request)
     {
         $rules = [

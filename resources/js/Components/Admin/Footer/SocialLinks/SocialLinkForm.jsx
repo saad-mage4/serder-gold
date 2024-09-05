@@ -6,15 +6,34 @@ import PrimaryButton from "@/Components/PrimaryButton";
 import { useForm } from "@inertiajs/react";
 
 const SocialLinkForm = ({ setModal }) => {
-    const { data, setData, post, processing, errors } = useForm({
+    const { data, setData, post, processing, errors, progress } = useForm({
         icon: null,
         link: "",
     });
+    const [validationError, setValidationError] = useState("");
 
     const handleImageChange = (e) => setData("icon", e.target.files[0]);
 
+    const validateUrl = (url) => {
+        if (!url) return true; // No URL provided, no validation needed
+
+        // Check if the URL starts with 'http' or 'https'
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            setValidationError(
+                "The link must start with 'http://' or 'https://'."
+            );
+            return false;
+        }
+        setValidationError(""); // Clear error if validation passes
+        return true;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        // Validate the URL before submitting
+        if (!validateUrl(data?.link)) {
+            return;
+        }
         post(route("social-link.store"), {
             preserveScroll: true,
             onSuccess: () => setModal(false),
@@ -53,8 +72,16 @@ const SocialLinkForm = ({ setModal }) => {
                 {errors.link && (
                     <p className="text-red-600 mt-2">{errors.link}</p>
                 )}
+                {validationError && (
+                    <p className="text-red-600 mt-2">{validationError}</p>
+                )}
             </div>
 
+            {progress && (
+                <progress value={progress.percentage} max="100">
+                    {progress.percentage}%
+                </progress>
+            )}
             <div className="mt-6 flex justify-end">
                 <SecondaryButton onClick={() => setModal(false)}>
                     Cancel
