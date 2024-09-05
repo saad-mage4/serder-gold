@@ -3,9 +3,7 @@ import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head, useForm, usePage } from "@inertiajs/react";
 import { PhotoIcon } from "@heroicons/react/24/solid";
 
-
 const addUsers = ({ auth }) => {
-
     const { data, setData, post, errors, processing, recentlySuccessful } =
         useForm({
             name: "",
@@ -18,7 +16,7 @@ const addUsers = ({ auth }) => {
         e.preventDefault();
         post(route("save-users"), {
             preserveScroll: true,
-            onSuccess: () => { },
+            onSuccess: () => {},
         });
     };
 
@@ -28,9 +26,7 @@ const addUsers = ({ auth }) => {
         setData("avatar", e.target.files[0]);
     };
 
-
     return (
-
         <>
             <AuthenticatedLayout
                 user={auth.user}
@@ -164,9 +160,7 @@ const addUsers = ({ auth }) => {
                 </div>
             </AuthenticatedLayout>
         </>
-
-    )
-}
-
+    );
+};
 
 export default addUsers;

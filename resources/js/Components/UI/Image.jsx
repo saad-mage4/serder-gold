@@ -13,11 +13,13 @@ const Image = ({
     alt = "",
     defaultSrc = "https://dummyimage.com/216x500/000/f0b90b",
     className = "",
+    ...props
 }) => {
     const optimizedSrc = value ? getOptimizedImage(value) : defaultSrc;
 
     return (
         <img
+            {...props}
             src={value || defaultSrc}
             alt={alt}
             loading="lazy"
