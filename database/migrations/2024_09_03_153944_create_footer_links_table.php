@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('footer_links', function (Blueprint $table) {
             $table->id();
-            $table->string('column')->nullable();
-            $table->string('link')->nullable();
-            $table->string('title')->nullable();
+            $table->string('column')->default('');
+            $table->string('link')->default('');
+            $table->string('title')->default('');
             $table->timestamps();
         });
     }
