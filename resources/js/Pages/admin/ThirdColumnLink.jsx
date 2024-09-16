@@ -75,14 +75,28 @@ const ThirdColumnLink = ({ auth, footer_link }) => {
         e.preventDefault();
         post(route("footer-link.store"), {
             preserveScroll: true,
-            onSuccess: () => setModal(false),
+            onSuccess: () => {
+                setData({
+                    name: "",
+                    link: "",
+                    column: column,
+                });
+                setModal(false);
+            },
         });
     };
 
     const handleEditSubmit = (e) => {
         e.preventDefault();
         put(route("footer-link.update", selectedLink?.id), {
-            onSuccess: () => setEditModal(false),
+            onSuccess: () => {
+                setData({
+                    name: "",
+                    link: "",
+                    column: column,
+                });
+                setEditModal(false);
+            },
         });
     };
 

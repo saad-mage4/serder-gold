@@ -24,6 +24,8 @@
     </head>
     <body class="font-sans antialiased">
         @inertia
+        {{-- Google Ads  --}}
+       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"  crossorigin="anonymous"></script>
           <!-- Google Translate Script -->
   {{-- <script type="text/javascript">
     function googleTranslateElementInit() {

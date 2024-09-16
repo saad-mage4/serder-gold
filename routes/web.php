@@ -89,17 +89,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('admin')->group(function () {
         // Footers
         Route::resource('footer', FooterController::class);
-        Route::get('/get-footer', [FooterController::class, 'getdata'])->name('get-footer');
         Route::resource('social-link', FooterSocialLinkController::class);
-        Route::get('/get-social-link', [FooterSocialLinkController::class, 'getdata'])->name('get-social-link');
         Route::post('social-link-update/{id}', [FooterSocialLinkController::class, 'update'])->name('update_social-link');
         Route::resource('footer-link', FooterLinkController::class);
-        Route::get('/get-footer-links', [FooterLinkController::class, 'getdata'])->name('get-footer-links');
         Route::get('second-col-footer-link', [FooterLinkController::class, 'secondColFooterLink'])->name('second-col-footer-link');
         Route::get('third-col-footer-link', [FooterLinkController::class, 'thirdColFooterLink'])->name('third-col-footer-link');
         Route::put('update-col-title/{id}', [FooterLinkController::class, 'updateColTitle'])->name('update-col-title');
     });
 });
+
+// footer public routes
+Route::get('/get-footer', [FooterController::class, 'getdata'])->name('get-footer');
+Route::get('/get-social-link', [FooterSocialLinkController::class, 'getdata'])->name('get-social-link');
+Route::get('/get-footer-links', [FooterLinkController::class, 'getdata'])->name('get-footer-links');
 
 Route::get('/get-articles', [ArticlesController::class, 'getArticles'])->name('get-articles');
 Route::get('/showarticles', function () {

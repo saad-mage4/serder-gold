@@ -2,40 +2,25 @@ import { LogoWhite, Sabah, Obilet, Spotify, appStore } from "@/images";
 import { useApiQuery } from "@/hooks/useApi";
 import Image from "../UI/Image";
 import "./Footer.scss";
+import Skeleton from "react-loading-skeleton";
+import { formatUrl, getFullUrl } from "@/utils/formatUrl";
 
 function Footer() {
     const { data: images } = useApiQuery("images", "/get-images");
-    const { data: footer } = useApiQuery(
-        "admin-get-footer",
-        "/admin/get-footer"
-    );
-    const { data: social_links } = useApiQuery(
-        "admin-get-social-link",
-        "/admin/get-social-link"
+    const { data: footer, isLoading: footerLoader } = useApiQuery(
+        "get-footer",
+        "/get-footer"
     );
 
-    const { data: footerlinks } = useApiQuery(
-        "admin-get-footer-links",
-        "/admin/get-footer-links"
+    const { data: social_links, isLoading } = useApiQuery(
+        "get-social-link",
+        "/get-social-link"
     );
 
-    const formatUrl = (url) => {
-        if (!url) return "#"; // Return a placeholder URL if none is provided
-
-        // Check if the URL starts with 'http' or 'https'
-        if (!url.startsWith("http://") && !url.startsWith("https://")) {
-            return `http://${url}`; // Prepend 'http://' if missing
-        }
-        return url;
-    };
-    const baseUrl = import.meta.env.VITE_APP_URL;
-    const getFullUrl = (url) => {
-        // Check if the URL starts with 'http' or 'https'
-        if (url.startsWith("http://") || url.startsWith("https://")) {
-            return url;
-        }
-        return `${baseUrl}${url}`;
-    };
+    const { data: footerlinks, isLoading: footerlinksloader } = useApiQuery(
+        "get-footer-links",
+        "/get-footer-links"
+    );
 
     return (
         <>
@@ -49,159 +34,125 @@ function Footer() {
                                 defaultSrc="https://dummyimage.com/192x44/fff/000"
                             />
                             <div className="foot-icons-wrap">
-                                {social_links?.map((links) => {
-                                    return (
-                                        <a
-                                            key={links?.id}
-                                            href={formatUrl(links?.link)}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                        >
-                                            {/* <Image
-                                                value={`../${links.icon}`}
-                                                alt="Social Images"
-                                                width={40}
-                                                height={40}
-                                            /> */}
-                                            <i className={links?.icon}></i>
-                                        </a>
-                                    );
-                                })}
+                                {isLoading ? (
+                                    <Skeleton
+                                        width={500}
+                                        height={200}
+                                        className="mb-2"
+                                    />
+                                ) : (
+                                    social_links?.map((links) => {
+                                        return (
+                                            <a
+                                                key={links?.id}
+                                                href={formatUrl(links?.link)}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                            >
+                                                <i className={links?.icon}></i>
+                                            </a>
+                                        );
+                                    })
+                                )}
                             </div>
                         </div>
                         <div className="col-lg-2 col-md-6 col-6 foot-links-col">
                             <h2 className="foot-head">
-                                {footer?.first_column}
+                                {footerLoader ? (
+                                    <Skeleton width={100} />
+                                ) : (
+                                    footer?.first_column
+                                )}
                             </h2>
                             <ul className="foot-links">
-                                {footerlinks?.column1Links?.map((link) => {
-                                    return (
-                                        <li key={link?.id}>
-                                            <a href={getFullUrl(link?.link)}>
-                                                {link?.title}
-                                            </a>
-                                        </li>
-                                    );
-                                })}
-                                {/* <li>
-                                    <a href="">About</a>
-                                </li>
-                                <li>
-                                    <a href="">Careers</a>
-                                </li>
-                                <li>
-                                    <a href="">Announcements</a>
-                                </li>
-                                <li>
-                                    <a href="">News</a>
-                                </li>
-                                <li>
-                                    <a href="">Press</a>
-                                </li>
-                                <li>
-                                    <a href="">Legal</a>
-                                </li>
-                                <li>
-                                    <a href="">Terms</a>
-                                </li>
-                                <li>
-                                    <a href="">Privacy</a>
-                                </li>
-                                <li>
-                                    <a href="">Building Trust</a>
-                                </li>
-                                <li>
-                                    <a href="">Blog</a>
-                                </li>
-                                <li>
-                                    <a href="">Community</a>
-                                </li>
-                                <li>
-                                    <a href="">Sitemap</a>
-                                </li>
-                                <li>
-                                    <a href="">Risk Warning</a>
-                                </li>
-                                <li>
-                                    <a href="">Notices</a>
-                                </li>
-                                <li>
-                                    <a href="">Downloads</a>
-                                </li>
-                                <li>
-                                    <a href="">Desktop Application</a>
-                                </li> */}
+                                {footerlinksloader
+                                    ? Array.from({ length: 5 })?.map(
+                                          (_, index) => (
+                                              <Skeleton
+                                                  width={100}
+                                                  key={index}
+                                              />
+                                          )
+                                      )
+                                    : footerlinks?.column1Links?.map((link) => {
+                                          return (
+                                              <li key={link?.id}>
+                                                  <a
+                                                      href={getFullUrl(
+                                                          link?.link
+                                                      )}
+                                                  >
+                                                      {link?.title}
+                                                  </a>
+                                              </li>
+                                          );
+                                      })}
                             </ul>
                         </div>
                         <div className="col-lg-2 col-md-6 col-6 foot-links-col">
                             <h2 className="foot-head">
-                                {footer?.second_column}
+                                {footerLoader ? (
+                                    <Skeleton width={100} />
+                                ) : (
+                                    footer?.second_column
+                                )}
                             </h2>
                             <ul className="foot-links">
-                                {footerlinks?.column2Links?.map((link) => {
-                                    return (
-                                        <li key={link?.id}>
-                                            <a href={getFullUrl(link?.link)}>
-                                                {link?.title}
-                                            </a>
-                                        </li>
-                                    );
-                                })}
-                                {/* <li>
-                                    <a href="">Altin fiyatlari</a>
-                                </li>
-                                <li>
-                                    <a href="">Haberler</a>
-                                </li>
-                                <li>
-                                    <a href="">Haberler</a>
-                                </li>
-                                <li>
-                                    <a href="">Doviz</a>
-                                </li>
-                                <li>
-                                    <a href="">Kripto</a>
-                                </li> */}
+                                {footerlinksloader
+                                    ? Array.from({ length: 5 })?.map(
+                                          (_, index) => (
+                                              <Skeleton
+                                                  width={100}
+                                                  key={index}
+                                              />
+                                          )
+                                      )
+                                    : footerlinks?.column2Links?.map((link) => {
+                                          return (
+                                              <li key={link?.id}>
+                                                  <a
+                                                      href={getFullUrl(
+                                                          link?.link
+                                                      )}
+                                                  >
+                                                      {link?.title}
+                                                  </a>
+                                              </li>
+                                          );
+                                      })}
                             </ul>
                         </div>
                         <div className="col-lg-2 col-md-6 col-6 foot-links-col">
                             <h2 className="foot-head">
-                                {footer?.third_column}
+                                {footerLoader ? (
+                                    <Skeleton width={100} />
+                                ) : (
+                                    footer?.third_column
+                                )}
                             </h2>
                             <ul className="foot-links">
-                                {footerlinks?.column3Links?.map((link) => {
-                                    return (
-                                        <li key={link?.id}>
-                                            <a href={getFullUrl(link?.link)}>
-                                                {link?.title}
-                                            </a>
-                                        </li>
-                                    );
-                                })}
-                                {/* <li>
-                                    <a href="">Hesaplama</a>
-                                </li>
-                                <li>
-                                    <a href="">Altin tahminleri</a>
-                                </li>
-                                <li>
-                                    <a href="">Çeyrek altin fiyati</a>
-                                </li>
-                                <li>
-                                    <a href="">Gram altin ne kadar?</a>
-                                </li>
-                                <li>
-                                    <a href="">Dolar ne kadar?</a>
-                                </li>
-                                <li>
-                                    <a href="">Mazot, benzin fiyati</a>
-                                </li>
-                                <li>
-                                    <a href="">Euro kaç lira?</a>
-                                </li>
-                                <li>
-                                    <a href="">En çok kazandiran hisseler</a>
-                                </li> */}
+                                {footerlinksloader
+                                    ? Array.from({ length: 5 })?.map(
+                                          (_, index) => (
+                                              <Skeleton
+                                                  width={100}
+                                                  key={index}
+                                              />
+                                          )
+                                      )
+                                    : footerlinks?.column3Links?.map((link) => {
+                                          return (
+                                              <li key={link?.id}>
+                                                  <a
+                                                      href={getFullUrl(
+                                                          link?.link
+                                                      )}
+                                                  >
+                                                      {link?.title}
+                                                  </a>
+                                              </li>
+                                          );
+                                      })}
                             </ul>
                         </div>
                         {/* <div className="col-lg-2 col-md-6 col-6 foot-links-col">

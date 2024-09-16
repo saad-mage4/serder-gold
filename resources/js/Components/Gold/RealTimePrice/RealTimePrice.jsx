@@ -18,31 +18,6 @@ const RealTimePrice = () => {
         }
     }, [ExchangeRates]);
 
-    // const fetchCurrencyRate = async () => {
-    //     try {
-    //         const response = await fetch(`https://www.nosyapi.com/apiv2/service/economy/currency/exchange-rate?code=${selectedItem?.code}`, {
-    //             headers: {
-    //                 'Authorization': `Bearer ${import.meta.env.VITE_NOSY_TOKEN}`
-    //             }
-    //         });
-    //         const data = await response.json();
-    //         console.log("uuu", data?.data?.[0]);
-
-    //         if (data?.data?.length > 0) {
-    //             return setSelectedItem(data.data[0]);
-    //         }
-    //     } catch (error) {
-    //         console.error("Failed to fetch currency rate:", error);
-    //     }
-    // };
-    // useEffect(() => {
-    //     (async () => {
-    //         if (selectedItem?.code) {
-    //             await fetchCurrencyRate();
-    //         }
-    //     })();
-    // }, [selectedItem?.code]);
-
     const handleClick = (e, item) => {
         e.preventDefault();
         setSelectedItem(item);
@@ -64,8 +39,9 @@ const RealTimePrice = () => {
                     </div>
                 </div>
                 <div className="item">
+                    {!ExchangeRates?.data && <h1>No data found</h1>}
                     <div className="grid-three d-grid">
-                        {isLoading || ExchangeRates?.data.length == 0 ? (
+                        {isLoading || ExchangeRates?.data?.length === 0 ? (
                             <SkelentonEffect length={11} width={120} />
                         ) : (
                             ExchangeRates?.data?.slice(0, 11)?.map((item) => (
@@ -106,7 +82,11 @@ const RealTimePrice = () => {
                                             alt="gold-coin"
                                         />
                                     </div>
-                                    <span>{selectedItem?.FullName}</span>
+                                    <span>
+                                        {!selectedItem
+                                            ? "No record found"
+                                            : selectedItem?.FullName}
+                                    </span>
                                 </div>
                                 <div className="price_value">
                                     <h5 className="mb-0">
