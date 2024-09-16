@@ -12,8 +12,6 @@ import { useForm } from "@inertiajs/react";
 import Modal from "@/Components/Modal";
 
 const FooterLink = ({ auth, footer_link }) => {
-    console.log(footer_link);
-
     const { links, column, title, columnTitle } = footer_link;
     const [socialLinks, setSocialLinks] = useState([]);
     const [modal, setModal] = useState(false);

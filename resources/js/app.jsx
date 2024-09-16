@@ -19,11 +19,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ThemeProvider } from "./context/ThemeContext";
 import { ThemeTabProvider } from "./context/ThemeTabContext";
 import { PrimeReactProvider } from "primereact/api";
+import ReactGA from "react-ga4";
 
 // Create a client
 const queryClient = new QueryClient();
 
 const appName = import.meta.env.VITE_APP_NAME || "Laravel";
+ReactGA.initialize(import.meta.env.VITE_G4_TOKEN);
 
 createInertiaApp({
     title: (title) => `${title}${appName}`,
@@ -34,6 +36,8 @@ createInertiaApp({
         ),
     setup({ el, App, props }) {
         const root = createRoot(el);
+        // Track initial page load
+        ReactGA.send({ hitType: "pageview", page: window.location.pathname });
 
         root.render(
             <QueryClientProvider client={queryClient}>
