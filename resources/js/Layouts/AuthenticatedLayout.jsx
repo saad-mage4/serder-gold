@@ -1,15 +1,12 @@
 import { useState } from "react";
-// import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from "@/Components/Dropdown";
 import NavLink from "@/Components/NavLink";
 import ResponsiveNavLink from "@/Components/ResponsiveNavLink";
 import { Link, usePage } from "@inertiajs/react";
-import { Logo } from "@/images";
 import Image from "@/Components/UI/Image";
+import ApplicationLogo from "@/Components/ApplicationLogo";
 
 export default function Authenticated({ user, header, children }) {
-    console.log("sdsd", user);
-
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
 
@@ -25,8 +22,7 @@ export default function Authenticated({ user, header, children }) {
                             <div className="flex">
                                 <div className="shrink-0 flex items-center">
                                     <Link href="/">
-                                        {/* <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" /> */}
-                                        <img src={Logo} alt="test" />
+                                        <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                     </Link>
                                 </div>
                                 <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
@@ -251,10 +247,10 @@ export default function Authenticated({ user, header, children }) {
                         <div className="pt-4 pb-1 border-t border-gray-200">
                             <div className="px-4">
                                 <div className="font-medium text-base text-gray-800">
-                                    {user.name}
+                                    {user?.name}
                                 </div>
                                 <div className="font-medium text-sm text-gray-500">
-                                    {user.email}
+                                    {user?.email}
                                 </div>
                             </div>
 
@@ -281,8 +277,7 @@ export default function Authenticated({ user, header, children }) {
                             <div className="flex">
                                 <div className="shrink-0 flex items-center">
                                     <Link href="/">
-                                        {/* <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" /> */}
-                                        <img src={Logo} alt="test" />
+                                        <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
                                     </Link>
                                 </div>
 
@@ -402,10 +397,10 @@ export default function Authenticated({ user, header, children }) {
                         <div className="pt-4 pb-1 border-t border-gray-200">
                             <div className="px-4">
                                 <div className="font-medium text-base text-gray-800">
-                                    {user.name}
+                                    {user?.name}
                                 </div>
                                 <div className="font-medium text-sm text-gray-500">
-                                    {user.email}
+                                    {user?.email}
                                 </div>
                             </div>
 
