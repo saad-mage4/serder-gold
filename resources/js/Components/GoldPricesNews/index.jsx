@@ -7,16 +7,7 @@ import { useState } from "react";
 import CalendarTable from "./CalendarTable";
 import { OldCalendar } from "@/utils/calendar_old_data";
 const GoldPricesNews = () => {
-    const { data: Calendar, isLoading } = useApiQuery(
-        'calendar',
-        "https://www.nosyapi.com/apiv2/service/economy/calendar",
-        {
-            apiKey: import.meta.env.VITE_NOSY_TOKEN,
-            date: "next-week"
-        }
-    );
-
-    const { data: images } = useApiQuery('images', "/get-images");
+    const { data: images } = useApiQuery("images", "/get-images");
 
     const [activeTab, setActiveTab] = useState("tab1");
 
@@ -25,7 +16,8 @@ const GoldPricesNews = () => {
         setActiveTab(tabName);
     };
 
-    const getClassNames = (tabName) => `tab ${activeTab === tabName ? "active" : ""}`;
+    const getClassNames = (tabName) =>
+        `tab ${activeTab === tabName ? "active" : ""}`;
 
     const tabs = [
         { name: "Ekonomik", id: "tab1" },
@@ -33,11 +25,10 @@ const GoldPricesNews = () => {
     ];
 
     const tabComponents = {
-        tab1: <CalendarTable data={Calendar} />,
+        tab1: <CalendarTable />,
         tab2: <OldCalendar />,
     };
 
-    if (isLoading) return <Loader />
     return (
         <>
             <div className="container mt-5 goldPricesNews">
@@ -70,7 +61,9 @@ const GoldPricesNews = () => {
                                             <a
                                                 key={tab?.id}
                                                 onClick={handleTab(tab?.id)}
-                                                className={getClassNames(tab?.id)}
+                                                className={getClassNames(
+                                                    tab?.id
+                                                )}
                                             >
                                                 {tab?.name}
                                             </a>
@@ -107,13 +100,19 @@ const GoldPricesNews = () => {
                                     </div>
                                 </div>
                                 <div className="col-12 bottom-sec">
-                                    <a className="cursor-pointer">Tüm Olaylari Göster</a>
+                                    <a className="cursor-pointer">
+                                        Tüm Olaylari Göster
+                                    </a>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className="col-12 col-lg-4">
-                        <Image value={images?.bottom_img} alt="right-img" defaultSrc="https://dummyimage.com/411x523/000/f0b90b" />
+                        <Image
+                            value={images?.bottom_img}
+                            alt="right-img"
+                            defaultSrc="https://dummyimage.com/411x523/000/f0b90b"
+                        />
                     </div>
                 </div>
             </div>

@@ -1,7 +1,20 @@
-import { OldCalendar } from '@/utils/calendar_old_data';
-import React from 'react'
+import { useApiQuery } from "@/hooks/useApi";
+import { OldCalendar } from "@/utils/calendar_old_data";
+import React from "react";
+import { Loader } from "../UI";
 
-const CalendarTable = ({ data }) => {
+const CalendarTable = () => {
+    const { data, isLoading, isError, error } = useApiQuery(
+        "economy-calendar",
+        "https://www.nosyapi.com/apiv2/service/economy/calendar",
+        {
+            apiKey: import.meta.env.VITE_NOSY_TOKEN,
+            date: "next-week",
+        }
+    );
+    if (isError) {
+        console.log("Calendar table", error);
+    }
     const CalendarData = data?.data?.slice(0, 8)?.map((item, index) => {
         let random = Math.floor(Math.random() * 20);
         return (
@@ -28,13 +41,8 @@ const CalendarTable = ({ data }) => {
             </>
         );
     });
-    return (
-        <>
-            {data?.data?.length > 0
-                ? CalendarData
-                : <OldCalendar />}
-        </>
-    )
-}
+    if (isLoading) return <Loader />;
+    return <>{data?.data?.length > 0 ? CalendarData : <OldCalendar />}</>;
+};
 
-export default CalendarTable
+export default CalendarTable;

@@ -18,19 +18,23 @@ const MainContent = ({ children }) => {
     const [isAdConfigValid, setIsAdConfigValid] = useState(true);
 
     const checkAdsBlock = () => {
-        const testAd = document.createElement("div");
-        testAd.className = "adsbygoogle";
-        testAd.style = "display:inline-block;width:200px;height:200px;";
-        document.body.appendChild(testAd);
-        if (testAd.offsetHeight === 0) {
-            setIsAdBlocked(true);
+        try {
+            const testAd = document.createElement("div");
+            testAd.className = "adsbygoogle";
+            testAd.style = "display:inline-block;width:200px;height:200px;";
+            document.body.appendChild(testAd);
+            if (testAd.offsetHeight === 0) {
+                setIsAdBlocked(true);
+            }
+            document.body.removeChild(testAd);
+        } catch (error) {
+            console.log("goole adses error", error);
         }
-        document.body.removeChild(testAd);
     };
 
     //! Function to validate if the Ad configuration is present
     const validateAdConfig = () => {
-        if (!client || !slot) {
+        if (!client || client === undefined || !slot || slot === undefined) {
             console.log("Google Ads configuration is missing!");
             setIsAdConfigValid(false);
         }
@@ -42,10 +46,11 @@ const MainContent = ({ children }) => {
                 console.log("Loading images...");
             }
         }, 2000);
-        // Check if Google Ads are blocked
+
+        //! Check if Google Ads are blocked
         checkAdsBlock();
 
-        // Validate Google Ads configuration
+        //! Validate Google Ads configuration
         validateAdConfig();
 
         return () => clearTimeout(timer);

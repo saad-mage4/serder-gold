@@ -8,7 +8,7 @@ const fetchData = async ({ queryKey }) => {
         const { data } = await axios.get(url, { params });
         return data;
     } catch (error) {
-        console.log(error);
+        console.log("custom hook", error);
     }
 };
 
