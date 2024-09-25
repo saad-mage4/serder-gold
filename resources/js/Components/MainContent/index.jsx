@@ -3,7 +3,7 @@ import { useApiQuery } from "@/hooks/useApi";
 import Image from "../UI/Image";
 import Skeleton from "react-loading-skeleton";
 import { useEffect } from "react";
-import ManualAd from "../ManualAd";
+// import ManualAd from "../ManualAd";
 import { useState } from "react";
 import { client, slot } from "@/utils/googleAds";
 
@@ -14,53 +14,53 @@ const MainContent = ({ children }) => {
     );
 
     //! State to track if Google Ads are available
-    const [isAdBlocked, setIsAdBlocked] = useState(false);
-    const [isAdConfigValid, setIsAdConfigValid] = useState(true);
+    // const [isAdBlocked, setIsAdBlocked] = useState(false);
+    // const [isAdConfigValid, setIsAdConfigValid] = useState(true);
 
-    const checkAdsBlock = () => {
-        try {
-            const testAd = document.createElement("div");
-            testAd.className = "adsbygoogle";
-            testAd.style = "display:inline-block;width:200px;height:200px;";
-            document.body.appendChild(testAd);
-            if (testAd.offsetHeight === 0) {
-                setIsAdBlocked(true);
-            }
-            document.body.removeChild(testAd);
-        } catch (error) {
-            console.log("goole adses error", error);
-        }
-    };
+    // const checkAdsBlock = () => {
+    //     try {
+    //         const testAd = document.createElement("div");
+    //         testAd.className = "adsbygoogle";
+    //         testAd.style = "display:inline-block;width:200px;height:200px;";
+    //         document.body.appendChild(testAd);
+    //         if (testAd.offsetHeight === 0) {
+    //             setIsAdBlocked(true);
+    //         }
+    //         document.body.removeChild(testAd);
+    //     } catch (error) {
+    //         console.log("goole adses error", error);
+    //     }
+    // };
 
-    //! Function to validate if the Ad configuration is present
-    const validateAdConfig = () => {
-        if (!client || client === undefined || !slot || slot === undefined) {
-            console.log("Google Ads configuration is missing!");
-            setIsAdConfigValid(false);
-        }
-    };
+    // //! Function to validate if the Ad configuration is present
+    // const validateAdConfig = () => {
+    //     if (!client || client === undefined || !slot || slot === undefined) {
+    //         console.log("Google Ads configuration is missing!");
+    //         setIsAdConfigValid(false);
+    //     }
+    // };
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            if (imagesLoader) {
-                console.log("Loading images...");
-            }
-        }, 2000);
+    // useEffect(() => {
+    //     const timer = setTimeout(() => {
+    //         if (imagesLoader) {
+    //             console.log("Loading images...");
+    //         }
+    //     }, 2000);
 
-        //! Check if Google Ads are blocked
-        checkAdsBlock();
+    //     //! Check if Google Ads are blocked
+    //     checkAdsBlock();
 
-        //! Validate Google Ads configuration
-        validateAdConfig();
+    //     //! Validate Google Ads configuration
+    //     validateAdConfig();
 
-        return () => clearTimeout(timer);
-    }, [imagesLoader]);
+    //     return () => clearTimeout(timer);
+    // }, [imagesLoader]);
     return (
         <>
             <div className="container addsTable-main-wrapper">
                 <div className="row">
                     <div className="col-lg-2 col-md-4">
-                        {/* {imagesLoader ? (
+                        {imagesLoader ? (
                             <Skeleton
                                 width={216}
                                 height={500}
@@ -71,9 +71,8 @@ const MainContent = ({ children }) => {
                                 value={images?.home_left}
                                 className="ad-side"
                             />
-                        )} */}
-
-                        {!isAdBlocked && isAdConfigValid ? (
+                        )}
+                        {/* {!isAdBlocked && isAdConfigValid ? (
                             <ManualAd
                                 isAdBlocked={isAdBlocked}
                                 isAdConfigValid={isAdConfigValid}
@@ -89,16 +88,16 @@ const MainContent = ({ children }) => {
                                 value={images?.home_left}
                                 className="ad-side"
                             /> // Fallback to default banner
-                        )}
+                        )} */}
                     </div>
                     <div className="col-lg-8 col-md-8 middle-col">
-                        {/* {imagesLoader ? (
+                        {imagesLoader ? (
                             <Skeleton height={240} className="mb-2" />
                         ) : (
                             <Image value={images?.home_center} />
-                        )} */}
+                        )}
 
-                        {!isAdBlocked && isAdConfigValid ? (
+                        {/* {!isAdBlocked && isAdConfigValid ? (
                             <ManualAd
                                 isAdBlocked={isAdBlocked}
                                 isAdConfigValid={isAdConfigValid}
@@ -107,11 +106,11 @@ const MainContent = ({ children }) => {
                             <Skeleton height={240} className="mb-2" />
                         ) : (
                             <Image value={images?.home_center} />
-                        )}
+                        )} */}
                         {children}
                     </div>
                     <div className="col-lg-2 col-md-4">
-                        {/* {imagesLoader ? (
+                        {imagesLoader ? (
                             <Skeleton
                                 width={216}
                                 height={500}
@@ -119,8 +118,8 @@ const MainContent = ({ children }) => {
                             />
                         ) : (
                             <Image value={images?.home_right} />
-                        )} */}
-                        {!isAdBlocked && isAdConfigValid ? (
+                        )}
+                        {/* {!isAdBlocked && isAdConfigValid ? (
                             <ManualAd
                                 isAdBlocked={isAdBlocked}
                                 isAdConfigValid={isAdConfigValid}
@@ -133,7 +132,7 @@ const MainContent = ({ children }) => {
                             />
                         ) : (
                             <Image value={images?.home_right} /> // Fallback to default banner
-                        )}
+                        )} */}
                     </div>
                 </div>
             </div>

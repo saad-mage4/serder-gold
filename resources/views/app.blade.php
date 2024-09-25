@@ -22,7 +22,9 @@
         @vite(['resources/js/app.jsx', "resources/js/Pages/{$page['component']}.jsx"])
         @inertiaHead
         {{-- Google Ads  --}}
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"  crossorigin="anonymous"></script>
+        {{-- ca-pub-186-317-0031 --}}
+      <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-186-317-0031"
+        crossorigin="anonymous"></script>
     </head>
     <body class="font-sans antialiased">
         @inertia
