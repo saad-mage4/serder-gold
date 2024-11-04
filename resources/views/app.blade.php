@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="icon" type="image/svg+xml" href="/favIcon.svg" />
+        <link rel="icon" type="image/svg+xml" href="/altin_favicon.png" />
         <title inertia>Altin Fiyatrari</title>
 
         <!-- Fonts -->
