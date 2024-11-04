@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="icon" type="image/svg+xml" href="/favIcon.svg" />
-        <title inertia>Foreks</title>
+        <title inertia>Altin Fiyatrari</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
