@@ -1,10 +1,10 @@
 import { useApiQuery } from "@/hooks/useApi";
 import Layout from "@/Layouts/Layout";
-import { Link } from '@inertiajs/react';
+import { Link } from "@inertiajs/react";
 import { useTheme } from "@/context/ThemeContext";
 
 const showArticles = ({ auth }) => {
-    const { data: articles } = useApiQuery('get-articles', "/get-articles");
+    const { data: articles } = useApiQuery("get-articles", "/get-articles");
     const { theme } = useTheme();
 
     const show = articles?.map((item) => {
@@ -16,7 +16,11 @@ const showArticles = ({ auth }) => {
                     </div>
                     <div className="px-2 text">
                         <Link
-                            className={`${theme === "dark" ? 'black-bg-head ' : 'text-black'} article-link text-decoration-none`}
+                            className={`${
+                                theme === "dark"
+                                    ? "black-bg-head "
+                                    : "text-black"
+                            } article-link text-decoration-none`}
                             // data-id={item.id}
                             href={`/articledetails/${item.id}`}
                         >
@@ -34,9 +38,17 @@ const showArticles = ({ auth }) => {
             <div className="container show_articles">
                 <div className="row">
                     <div className="my-3 col-12">
-                        <h1 className="text-center black-bg-head">Articles List</h1>
+                        <h1 className="text-center black-bg-head">
+                            Articles List
+                        </h1>
                     </div>
-                    {show?.length > 0 ? show : <h3 className="text-center black-bg-head">No Record Found!</h3>}
+                    {show?.length > 0 ? (
+                        show
+                    ) : (
+                        <h3 className="text-center black-bg-head">
+                            No Record Found!
+                        </h3>
+                    )}
                 </div>
             </div>
         </Layout>

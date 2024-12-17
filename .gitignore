@@ -33,3 +33,7 @@ Dockerfile
 
 # GitHub Actions
 /.github/*
+
+**/caddy
+frankenphp
+frankenphp-worker.php
