@@ -144,10 +144,10 @@ class FooterLinkController extends Controller
         if ($id == 1) {
             $footer->first_column = $request->title;
             $footer->save();
-        } else if ($id == 2) {
+        } elseif ($id == 2) {
             $footer->second_column = $request->title;
             $footer->save();
-        } else if ($id == 3) {
+        } elseif ($id == 3) {
             $footer->third_column = $request->title;
             $footer->save();
         }

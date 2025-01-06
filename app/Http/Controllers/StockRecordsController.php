@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 class StockRecordsController extends Controller
 {
 
-    /**
-     * @return array
-     */
     public function getRecords(): array
     {
         $api_key = env('NOISY_API_KEY');

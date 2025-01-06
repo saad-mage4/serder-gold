@@ -41,7 +41,7 @@ Route::get('/articledetails/{id}', function ($id) {
     return Inertia::render('articledetails', ['id' => $id]);
 });
 
-Route::middleware('auth')->group(function () {
+Route::middleware('auth')->group(function (): void {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -53,7 +53,7 @@ Route::get('/get-articles-details/{id}', [ArticlesController::class, 'getArticle
 /* Wrapping up the routes in middleware */
 // Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'verified']], function () {
 // Route::middleware(['auth', 'verified'])->group(function () {
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function (): void {
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
@@ -86,7 +86,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::post('/save-users', [UserController::class, 'saveUser'])->name('save-users');
     Route::post('/update-users', [UserController::class, 'updateUsers'])->name('update-users');
 
-    Route::prefix('admin')->group(function () {
+    Route::prefix('admin')->group(function (): void {
         // Footers
         Route::resource('footer', FooterController::class);
         Route::resource('social-link', FooterSocialLinkController::class);

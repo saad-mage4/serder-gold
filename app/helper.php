@@ -9,7 +9,6 @@ class helper
      * @param $object
      * @param $primaryKey
      * @param $columnsToUpdate
-     * @return string
      */
     public function saveOrUpdateEntity($modelClass, $object, $key, $columnsToUpdate = null): string
     {

@@ -9,10 +9,6 @@ use Illuminate\Support\Facades\{Auth, DB, Redirect};
 
 class ArticlesController extends Controller
 {
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function saveArticle(Request $request): RedirectResponse
     {
 
@@ -51,10 +47,6 @@ class ArticlesController extends Controller
         return Redirect::route('Articles')->with('success', 'Article saved successfully!');
     }
 
-    /**
-     * @param Request $request
-     * @return string
-     */
     public function updateArticles(Request $request): string
     {
         $msg = '';
@@ -83,17 +75,11 @@ class ArticlesController extends Controller
         return $msg;
     }
 
-    /**
-     * @return Collection
-     */
     public function getArticlesAdmin(): Collection
     {
         return DB::table('articles')->get();
     }
 
-    /**
-     * @return Collection
-     */
     public function getArticles(): Collection
     {
         return DB::table('articles')->where('status', 'active')->orderBy('created_at', 'desc')->get();

@@ -9,18 +9,11 @@ use Illuminate\Support\Facades\{Auth, DB, Hash, Redirect};
 
 class UserController extends Controller
 {
-    /**
-     * @return Collection
-     */
     public function getUsers(): Collection
     {
         return DB::table('users')->whereNot('user_role', 'admin')->get();
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
     public function saveUser(Request $request): RedirectResponse
     {
         User::create([
@@ -41,10 +34,6 @@ class UserController extends Controller
     }
 
 
-    /**
-     * @param Request $request
-     * @return string
-     */
     public function updateUsers(Request $request): string
     {
         $msg = "";
